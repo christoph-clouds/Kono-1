@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { ref } from '../../config/constants'
 import './Events.css';
 import {
-  	Redirect
+  	Redirect,
+  	BrowserRouter as Router,
+  	Route,
+  	Link
 } from 'react-router-dom'
 
 
@@ -57,13 +60,10 @@ export default class Events extends Component {
 
 	goToEvent(eventid){
 		console.log(eventid);
-		sessionStorage.curEvent = eventid;
+		sessionStorage.curEvent = eventid; 
 	}
   	
 	render () {
-		if (this.state.redirect) {
-		   return <Redirect push to="/event" />;
-		}
 	    return (
 			<section className="display-item">
 		 		<div className="eventsHosted">
@@ -77,8 +77,10 @@ export default class Events extends Component {
 				        return (
 
 				          <li key={item.id} id={item.id} onClick={handleClick}>
-				            <h3>{item.title}</h3>
-				            <p>{item.date}</p>
+				          	<Link to={`/events/${item.id}`} >
+					          	<h3>{item.title}</h3>
+					            <p>{item.date}</p>
+				          	</Link>
 				          </li>
 				        )
 				      })}
