@@ -82,7 +82,7 @@ export default class CreateEvents extends Component {
 					</div>
 
 					<div className="formelement">
-						<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" value="p" defaultChecked="true" id="pineapple"/>
+						<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" defaultChecked="true" id="pineapple"/>
 						<label htmlFor="pineapple">Pineapple</label>
 						<div className="theme">
 							<div className="p1 themecolors"></div>
@@ -91,7 +91,7 @@ export default class CreateEvents extends Component {
 							<div className="p4 themecolors"></div>
 							<div className="p5 themecolors"></div>
 						</div>
-						<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" value="b" id="beach"/>
+						<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" id="beach"/>
 						<label htmlFor="beach">Beach</label>
 						<div className="theme">
 							<div className="b1 themecolors"></div>
@@ -100,7 +100,7 @@ export default class CreateEvents extends Component {
 							<div className="b4 themecolors"></div>
 							<div className="b5 themecolors"></div>
 						</div>
-						<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" value="t" id="tropic"/>
+						<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" id="tropic"/>
 						<label htmlFor="tropic">Tropic</label>
 						<div className="theme">
 							<div className="t1 themecolors"></div>
