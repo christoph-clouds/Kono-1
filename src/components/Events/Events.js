@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { ref } from '../../config/constants'
 import './Events.css';
+import Arrow from '../../images/icons/arrowright.png'
+import Xicon from '../../images/icons/x.png'
 import {
   	Redirect
 } from 'react-router-dom'
@@ -67,7 +69,7 @@ export default class Events extends Component {
 	    return (
 			<section className="display-item">
 		 		<div className="eventsHosted">
-		 			<h1> Events As Host </h1>
+		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				        const handleClick = ()=> {
@@ -75,29 +77,34 @@ export default class Events extends Component {
 				        	this.goToEvent(item.id);
 				        };
 				        return (
-
-				          <li key={item.id} id={item.id} onClick={handleClick}>
-				            <h3>{item.title}</h3>
-				            <p>{item.date}</p>
+				          <li key={item.id} id={item.id} onClick={handleClick} className="listentry">
+                              <div className="rightalignedList">
+                                  <p>{item.date}</p>
+                                  <h3 className="listheading">{item.title}</h3>
+                              </div>
+                              <img src={Arrow} className="forwardArrow"></img>
 				          </li>
 				        )
 				      })}
 				    </ul>
 		  		</div>
 		  		<div className="eventsGuest">
-		 			<h1> Events As Guest </h1>
+		 			<h1 className="heading listtitle"> Events As Guest </h1>
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				      	const handleClick = ()=> {
 				      		this.setState({redirect: true});
 				        	this.goToEvent(item.id);
 				        };
-				        return (
-				          <li key={item.id} id={item.id} onClick={handleClick}>
-				            <h3>{item.title}</h3>
-				            <p>{item.date}</p>
-				          </li>
-				        )
+                          return (
+                              <li key={item.id} id={item.id} onClick={handleClick} className="listentry">
+                                  <h3 className="listheading">{item.title}</h3>
+                                  <div className="leftalignedList">
+                                      <p>{item.date}</p>
+                                      <img src={Arrow} className="forwardArrow"></img>
+                                  </div>
+                              </li>
+                          )
 				      })}
 				    </ul>
 		  		</div>
