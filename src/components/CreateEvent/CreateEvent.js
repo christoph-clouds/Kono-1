@@ -65,19 +65,19 @@ export default class CreateEvents extends Component {
 			<div className="heading eventform">
 				<form id="createEventForm" onSubmit={this.handleSubmit}>
 
-					<input name="title" className="formelement" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="Lukas Birthday Party" />
+					<input name="title" className="formelement" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" />
 
 					<textarea name="description" className="formelement" placeholder="tell your guests what your party is about" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
 					<div className="formelement_icon">
-						<img src={Location} className="formicon"></img>
+						<img src={Location} className="formicon" alt="location icon"></img>
 						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" id="newEventLocation" placeholder="location" />
 					</div>
 					<div className="formelement_icon">
-						<img src={Calendar} className="formicon"></img>
+						<img src={Calendar} className="formicon" alt="calendar icon"></img>
 						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" id="newEventDate" />
 					</div>
 					<div className="formelement_icon">
-						<img src={Time} className="formicon"></img>
+						<img src={Time} className="formicon" alt="time icon"></img>
 						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" id="newEventTime" />
 					</div>
 

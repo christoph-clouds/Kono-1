@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ref } from '../../config/constants'
 import './Events.css';
+import Arrow from '../../images/icons/arrowright.png'
 import {
   	Redirect,
   	BrowserRouter as Router,
@@ -67,7 +68,7 @@ export default class Events extends Component {
 	    return (
 			<section className="display-item">
 		 		<div className="eventsHosted">
-		 			<h1> Events As Host </h1>
+		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				        const handleClick = ()=> {
@@ -76,31 +77,37 @@ export default class Events extends Component {
 				        };
 				        return (
 
-				          <li key={item.id} id={item.id} onClick={handleClick}>
-				          	<Link to={`/events/${item.id}`} >
-					          	<h3>{item.title}</h3>
-					            <p>{item.date}</p>
-				          	</Link>
-				          </li>
+						<Link className="No-Link" to={`/events/${item.id}`} >
+				          	<li className="listentry" key={item.id} id={item.id} >
+				          		<div className="rightalignedList">
+                                  	<p>{item.date}</p>
+                                  	<h3 className="listheading">{item.title}</h3>
+                              	</div>
+					            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
+					        </li>
+				        </Link>
 				        )
 				      })}
 				    </ul>
 		  		</div>
 		  		<div className="eventsGuest">
-		 			<h1> Events As Guest </h1>
+		 			<h1 className="heading listtitle"> Events As Guest </h1>
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				      	const handleClick = ()=> {
 				      		this.setState({redirect: true});
 				        	this.goToEvent(item.id);
 				        };
-				        return (
-				          <li key={item.id} id={item.id} onClick={handleClick}>
-				            <h3>{item.title}</h3>
-				            <p>{item.date}</p>
-				          </li>
-				        )
-				      })}
+                          return (
+                              <li key={item.id} id={item.id} onClick={handleClick} className="listentry">
+                                  <div className="rightalignedList">
+                                      <p>{item.date}</p>
+                                      <h3 className="listheading">{item.title}</h3>
+                                  </div>
+                                  <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
+                              </li>
+                          )
+                      })}
 				    </ul>
 		  		</div>
 			</section> 

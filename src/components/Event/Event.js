@@ -11,10 +11,6 @@ export default class Event extends Component {
     	this.state = {
 			title: ""
 		};
-
-		this.goToDetails = this.goToDetails.bind(this)
-		this.goToInventory = this.goToInventory.bind(this)
-		this.goToGuests = this.goToGuests.bind(this)
   	}
 
   	componentDidMount() {
@@ -29,35 +25,8 @@ export default class Event extends Component {
 		});	
   	}
 
-  	goToDetails() {
-		this.props.history.push('event/details')
-	}
-
-
-  	goToInventory() {
-		this.props.history.push('event/inventory')
-	}
-
-
-  	goToGuests() {
-		this.props.history.push('event/guests')
-	}
-
-	/*getTitle() { 
-		var eventTitle = "BDAYYYY";
-		let eventRef = firebaseApp.database().ref('events/' + sessionStorage.curEvent); 
-		eventRef.on("value", function(snapshot){
-			console.log("title " + snapshot.val().title);
-			var eventTitle = snapshot.val().title;
-			//console.log(eventTitle);
-			return {__html: eventTitle};	
-		})
-		return {__html: eventTitle};	
-	}*/
-
 	render () {
-
-		return (
+		return(
 			<div className="eventmenu">
 				<h1 className="heading">{this.state.title} </h1>
 				
