@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import { ref } from '../../config/constants'
+import { ref, firebaseApp } from '../../config/constants'
 import './Event.css';
-
-import {
-  withRouter
-} from 'react-router-dom'
 
 export default class Event extends Component {
 
@@ -13,7 +9,9 @@ export default class Event extends Component {
 		this.goToDetails = this.goToDetails.bind(this)
 		this.goToInventory = this.goToInventory.bind(this)
 		this.goToGuests = this.goToGuests.bind(this)
+		this.getTitle = this.getTitle.bind(this)
 
+		//let eventTitle = firebaseApp.database().ref('events/' + sessionStorage.curEvent + '/title').val(); 
   	}
 
   	goToDetails() {
@@ -30,11 +28,23 @@ export default class Event extends Component {
 		this.props.history.push('event/guests')
 	}
 
-	render () {
+	getTitle() { 
+		let eventRef = firebaseApp.database().ref('events/' + sessionStorage.curEvent); 
+		eventRef.on("value", function(snapshot){
+			console.log("title " + snapshot.val().title);
+			var eventTitle = snapshot.val().title;
+			console.log(eventTitle);
+			return {__html: eventTitle};
+		})
 		
+	}
+
+	render () {
+
 		return (
 			
 			<div>
+			<h1 id="eventTitle" dangerouslySetInnerHTML={this.getTitle()} />
 			<div className="details">
 		      <button onClick={this.goToDetails}>Details</button>
 		    </div>

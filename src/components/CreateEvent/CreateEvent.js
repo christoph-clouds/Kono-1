@@ -33,8 +33,7 @@ export default class CreateEvents extends Component {
 		    inventory: ["2bVodka", "3bBeer", "1bWine"],
 		    wishlist: ["Chips", "Pizza"],
 		    guests: []
-  		});
-		
+  		});	
   	}
 
   	handleChange(event){

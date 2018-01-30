@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import { ref } from '../../config/constants'
+//import { ref } from '../../config/constants'
 import './Guests.css';
-
-import {
-  withRouter
-} from 'react-router-dom'
 
 export default class Guests extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ref, firebaseApp } from '../../config/constants'
+import { ref } from '../../config/constants'
 import './Events.css';
 import {
   	Redirect
@@ -23,7 +23,7 @@ export default class Events extends Component {
 		ref.on('value', (snapshot) => {
 		    let events = snapshot.val();
 		    let newStateHost = [];
-		    let newStateGuests = [];
+		    //let newStateGuests = [];
 		    for (let event in events) {
 		    	if(events[event].host === currentUser){
 		    		newStateHost.push({
