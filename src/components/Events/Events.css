@@ -35,9 +35,18 @@ body{
     border-width: 1px;
 }
 
+.listentry:hover {
+    background-color: #efefef;
+}
+
 .listentry *{
     color: #557037;
 }
+
+.listentry:hover *{
+    background-color: #efefef;
+}
+
 
 .listheading{
     font-size: 1.5em;
@@ -64,6 +73,5 @@ body{
 
 .listtitle{
     border-bottom: solid;
-    margin-bottom:0.5em;
     padding-top: 2em;
 }

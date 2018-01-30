@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { ref } from '../../config/constants'
 import './Events.css';
 import Arrow from '../../images/icons/arrowright.png'
-import Xicon from '../../images/icons/x.png'
 import {
   	Redirect
 } from 'react-router-dom'
@@ -82,7 +81,7 @@ export default class Events extends Component {
                                   <p>{item.date}</p>
                                   <h3 className="listheading">{item.title}</h3>
                               </div>
-                              <img src={Arrow} className="forwardArrow"></img>
+                              <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
 				          </li>
 				        )
 				      })}
@@ -98,14 +97,14 @@ export default class Events extends Component {
 				        };
                           return (
                               <li key={item.id} id={item.id} onClick={handleClick} className="listentry">
-                                  <h3 className="listheading">{item.title}</h3>
-                                  <div className="leftalignedList">
+                                  <div className="rightalignedList">
                                       <p>{item.date}</p>
-                                      <img src={Arrow} className="forwardArrow"></img>
+                                      <h3 className="listheading">{item.title}</h3>
                                   </div>
+                                  <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
                               </li>
                           )
-				      })}
+                      })}
 				    </ul>
 		  		</div>
 			</section> 
