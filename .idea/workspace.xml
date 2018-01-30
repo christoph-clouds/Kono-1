@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="423d3a96-588f-4d39-9ac2-4d1a5c71af23" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.rules.json" afterPath="$PROJECT_DIR$/database.rules.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firebase.json" afterPath="$PROJECT_DIR$/firebase.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CreateEvent/CreateEvent.css" afterPath="$PROJECT_DIR$/src/components/CreateEvent/CreateEvent.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CreateEvent/CreateEvent.js" afterPath="$PROJECT_DIR$/src/components/CreateEvent/CreateEvent.js" />
-    </list>
+    <list default="true" id="423d3a96-588f-4d39-9ac2-4d1a5c71af23" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -47,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/CreateEvent/CreateEvent.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -152,12 +145,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1517302530732</updated>
-      <workItem from="1517302532085" duration="5139000" />
+      <workItem from="1517302532085" duration="5290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5139000" />
+    <option name="totallyTimeSpent" value="5290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -198,7 +191,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1517303802891" expanded="true" signature="214:425" ph="{&quot;start&quot;: &quot;react-scripts start&quot;...}" />
+            <marker date="1517309901333" expanded="true" signature="214:425" ph="{&quot;start&quot;: &quot;react-scripts start&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -232,7 +225,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/CreateEvent/CreateEvent.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding />
         </state>
       </provider>
