@@ -32,20 +32,24 @@ export default class Event extends Component {
 
 	render () {
 		
-		return (
+		return(
 			
-			<div>
-			<div className="details">
-		      <button onClick={this.goToDetails}>Details</button>
-		    </div>
+			<div className="eventmenu">
+				<div className="menubutton details" onClick={this.goToDetails}>
+                    Details
+				</div>
 
-		    <div className="inventory">
-		      <button onClick={this.goToInventory}>Inventory</button>
-		    </div>
+				<div className="menubutton inventory" onClick={this.goToInventory}>
+                    Inventory
+				</div>
 
-		    <div className="guests">
-		      <button onClick={this.goToGuests}>Guests</button>
-		    </div>
+				<div className="menubutton guests" onClick={this.goToGuests}>
+                    Guestlist
+				</div>
+				<div className="eventmenufooter">
+                    <p className="heading">"A message to y'all!"</p>
+                    <button className="chartoombutton">Chat</button>
+				</div>
 
 		    </div>
 		);
