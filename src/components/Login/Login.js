@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { firebaseApp } from '../../config/constants'
 import { signIn } from '../../helpers/auth'
 import './Login.css';
-import {
-    withRouter
-} from 'react-router-dom'
-
 
 export default class Login extends Component {
   constructor(props) {
