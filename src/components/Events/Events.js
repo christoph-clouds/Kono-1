@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { ref, firebaseApp } from '../../config/constants'
 import './Events.css';
 import {
-	BrowserRouter as Router,
-  	Route,
-  	Link,
-  	Switch
+  	Redirect
 } from 'react-router-dom'
 
 
@@ -40,7 +37,7 @@ export default class Events extends Component {
 					   items: newStateHost
 					});
 			    }
-			    else{
+			    /*else{
 			    	let refGuests = firebaseApp.database().ref('events/' + event + '/guests/name'); 
 			    	if(refGuests === "Lukas"){
 			    		newStateGuests.push({
@@ -52,7 +49,7 @@ export default class Events extends Component {
 			    	this.setState({
 					   items: newStateGuests
 					});
-			    }
+			    }*/
 		    }
 		   
 		});
@@ -60,11 +57,13 @@ export default class Events extends Component {
 
 	goToEvent(eventid){
 		console.log(eventid);
-
 		sessionStorage.curEvent = eventid;
 	}
   	
 	render () {
+		if (this.state.redirect) {
+		   return <Redirect push to="/event" />;
+		}
 	    return (
 			<section className="display-item">
 		 		<div className="eventsHosted">
@@ -72,12 +71,12 @@ export default class Events extends Component {
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				        const handleClick = ()=> {
+				        	this.setState({redirect: true});
 				        	this.goToEvent(item.id);
 				        };
 				        return (
 
 				          <li key={item.id} id={item.id} onClick={handleClick}>
-				          	<Link to="/event" />
 				            <h3>{item.title}</h3>
 				            <p>{item.date}</p>
 				          </li>
@@ -90,11 +89,11 @@ export default class Events extends Component {
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				      	const handleClick = ()=> {
+				      		this.setState({redirect: true});
 				        	this.goToEvent(item.id);
 				        };
 				        return (
 				          <li key={item.id} id={item.id} onClick={handleClick}>
-				          	<Link to="/event" />
 				            <h3>{item.title}</h3>
 				            <p>{item.date}</p>
 				          </li>
