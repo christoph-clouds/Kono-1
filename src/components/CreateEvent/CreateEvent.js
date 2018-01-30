@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { ref } from '../../config/constants'
 import './CreateEvent.css';
+import Location from '../../images/icons/location.png';
+import Calendar from '../../images/icons/calendar.png';
+import Time from '../../images/icons/time.png';
 
 export default class CreateEvents extends Component {
 	
@@ -59,39 +62,59 @@ export default class CreateEvents extends Component {
   	render () {
 	    return (
 	      <div>
-	        <h1>
-	        	Create Event
-	        </h1>
-	        <form id="createEventForm" onSubmit={this.handleSubmit}>
-	        	
-			    <label htmlFor="title">Event Title:</label><br />
-			    <input name="title" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="Lukas Birthday Party" />
-			    <br />
-			    <label htmlFor="description">Descripe Your Event:</label><br />
-			    <input name="description" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc" placeholder="It's gonna be awesome" />
-			    <br />
-			    Location <br />
-			    <input name="location" value={this.state.location} onChange={this.handleChange} type="text" id="newEventLocation" placeholder="Broadway 1, 19283 New York" />
-			    <br />
-			    
-			    Date <br />
-			    <input name="date" value={this.state.date} onChange={this.handleChange} type="date" id="newEventDate" />
-			    <br />
-			    
-			    Time <br />
-			    <input name="time" value={this.state.time} onChange={this.handleChange} type="time" id="newEventTime" />
-			     <br />
+	        <h1 className="subtitle">Create New Event</h1>
+			<div className="heading eventform">
+				<form id="createEventForm" onSubmit={this.handleSubmit}>
 
+					<input name="title" className="formelement" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="Lukas Birthday Party" />
 
-			    
-			    Choose a Theme: <br />
-			    <input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" value="p" checked={true} /> Pineapple <br />
-			    <input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" value="b" /> Beach <br />
-			    <input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" value="t" /> Tropic <br />
-			    <input type="hidden" id="hiddenFieldCreateEvent" value="" name="id"/> 
-			     <br />
-			    <button id="button" type="submit" value="Submit">Create Event</button>
-			</form>
+					<textarea name="description" className="formelement" placeholder="tell your guests what your party is about" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
+					<div className="formelement_icon">
+						<img src={Location} className="formicon"></img>
+						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" id="newEventLocation" placeholder="location" />
+					</div>
+					<div className="formelement_icon">
+						<img src={Calendar} className="formicon"></img>
+						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" id="newEventDate" />
+					</div>
+					<div className="formelement_icon">
+						<img src={Time} className="formicon"></img>
+						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" id="newEventTime" />
+					</div>
+
+					<div className="formelement">
+						<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" value="p" defaultChecked="true" id="pineapple"/>
+						<label htmlFor="pineapple">Pineapple</label>
+						<div className="theme">
+							<div className="p1 themecolors"></div>
+							<div className="p2 themecolors"></div>
+							<div className="p3 themecolors"></div>
+							<div className="p4 themecolors"></div>
+							<div className="p5 themecolors"></div>
+						</div>
+						<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" value="b" id="beach"/>
+						<label htmlFor="beach">Beach</label>
+						<div className="theme">
+							<div className="b1 themecolors"></div>
+							<div className="b2 themecolors"></div>
+							<div className="b3 themecolors"></div>
+							<div className="b4 themecolors"></div>
+							<div className="b5 themecolors"></div>
+						</div>
+						<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" value="t" id="tropic"/>
+						<label htmlFor="tropic">Tropic</label>
+						<div className="theme">
+							<div className="t1 themecolors"></div>
+							<div className="t2 themecolors"></div>
+							<div className="t3 themecolors"></div>
+							<div className="t4 themecolors"></div>
+							<div className="t5 themecolors"></div>
+						</div>
+					</div>
+					<input type="hidden" id="hiddenFieldCreateEvent" value="" name="id"/>
+					<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
+				</form>
+			</div>
 	      </div>
 	    )
 	}
