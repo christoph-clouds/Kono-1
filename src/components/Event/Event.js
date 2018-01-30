@@ -29,14 +29,14 @@ export default class Event extends Component {
 	}
 
 	getTitle() { 
+		var eventTitle;
 		let eventRef = firebaseApp.database().ref('events/' + sessionStorage.curEvent); 
 		eventRef.on("value", function(snapshot){
 			console.log("title " + snapshot.val().title);
 			var eventTitle = snapshot.val().title;
-			console.log(eventTitle);
-			return {__html: eventTitle};
+			//console.log(eventTitle);
+			return {__html: eventTitle};	
 		})
-		
 	}
 
 	render () {
