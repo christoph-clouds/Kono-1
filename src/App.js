@@ -7,6 +7,8 @@ import Event from './components/Event/Event'
 import Details from './components/Details/Details'
 import Inventory from './components/Inventory/Inventory'
 import Guests from './components/Guests/Guests'
+import { signIn } from './helpers/auth'
+
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -17,7 +19,7 @@ import {
 } from 'react-router-dom'
 
   let userbutton;
-  if(firebaseApp.auth().currentUser){
+  if(sessionStorage.curUser){
     userbutton = "Logout";
   }
   else{
