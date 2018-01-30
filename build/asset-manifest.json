@@ -1,14 +1,7 @@
 {
-<<<<<<< HEAD
-  "main.css": "static/css/main.4055f3b5.css",
-  "main.css.map": "static/css/main.4055f3b5.css.map",
-  "main.js": "static/js/main.1197de7b.js",
-  "main.js.map": "static/js/main.1197de7b.js.map",
-=======
-  "main.css": "static/css/main.8a9082ff.css",
-  "main.css.map": "static/css/main.8a9082ff.css.map",
-  "main.js": "static/js/main.d3756434.js",
-  "main.js.map": "static/js/main.d3756434.js.map",
->>>>>>> aa50ec2dee44a22fb6c725d96b24d0d1352dac08
+  "main.css": "static/css/main.83e2eb6b.css",
+  "main.css.map": "static/css/main.83e2eb6b.css.map",
+  "main.js": "static/js/main.7d00839f.js",
+  "main.js.map": "static/js/main.7d00839f.js.map",
   "static/media/time.png": "static/media/time.aafd455f.png"
 }
