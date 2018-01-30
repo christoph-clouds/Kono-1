@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 //import { ref } from '../../config/constants'
-import './Inventory.css';
+import './Inventory.css'
+import { Link } from 'react-router-dom'
 
 export default class Inventory extends Component {
 
 	constructor(props) {
     	super(props)
-		this.goBack = this.goBack.bind(this)
   	}
-
-  	goBack() {
-		this.props.history.push('../event')
-	}
 
 	render () {
 		
@@ -19,7 +15,9 @@ export default class Inventory extends Component {
 			
 
 			<div className="back">
-		      <button onClick={this.goBack}>BACK</button>
+		      	<Link to={`/events/${this.props.match.params.eventid}`} >
+				    Back
+			   	</Link>
 		    </div>
 
 

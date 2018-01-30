@@ -3,7 +3,10 @@ import { ref } from '../../config/constants'
 import './Events.css';
 import Arrow from '../../images/icons/arrowright.png'
 import {
-  	Redirect
+  	Redirect,
+  	BrowserRouter as Router,
+  	Route,
+  	Link
 } from 'react-router-dom'
 
 
@@ -58,13 +61,10 @@ export default class Events extends Component {
 
 	goToEvent(eventid){
 		console.log(eventid);
-		sessionStorage.curEvent = eventid;
+		sessionStorage.curEvent = eventid; 
 	}
   	
 	render () {
-		if (this.state.redirect) {
-		   return <Redirect push to="/event" />;
-		}
 	    return (
 			<section className="display-item">
 		 		<div className="eventsHosted">
@@ -76,13 +76,16 @@ export default class Events extends Component {
 				        	this.goToEvent(item.id);
 				        };
 				        return (
-				          <li key={item.id} id={item.id} onClick={handleClick} className="listentry">
-                              <div className="rightalignedList">
-                                  <p>{item.date}</p>
-                                  <h3 className="listheading">{item.title}</h3>
-                              </div>
-                              <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
-				          </li>
+
+						<Link className="No-Link" to={`/events/${item.id}`} >
+				          	<li className="listentry" key={item.id} id={item.id} >
+				          		<div className="rightalignedList">
+                                  	<p>{item.date}</p>
+                                  	<h3 className="listheading">{item.title}</h3>
+                              	</div>
+					            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
+					        </li>
+				        </Link>
 				        )
 				      })}
 				    </ul>

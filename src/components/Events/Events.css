@@ -33,6 +33,7 @@ body{
     align-items: center;
     border-bottom: solid;
     border-width: 1px;
+    text-decoration: none;
 }
 
 .listentry:hover {
