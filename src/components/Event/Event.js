@@ -29,7 +29,7 @@ export default class Event extends Component {
 	}
 
 	getTitle() { 
-		var eventTitle;
+		var eventTitle = "BDAYYYY";
 		let eventRef = firebaseApp.database().ref('events/' + sessionStorage.curEvent); 
 		eventRef.on("value", function(snapshot){
 			console.log("title " + snapshot.val().title);
@@ -37,26 +37,29 @@ export default class Event extends Component {
 			//console.log(eventTitle);
 			return {__html: eventTitle};	
 		})
+		return {__html: eventTitle};	
 	}
 
 	render () {
-
 		return (
-			
-			<div>
-			<h1 id="eventTitle" dangerouslySetInnerHTML={this.getTitle()} />
-			<div className="details">
-		      <button onClick={this.goToDetails}>Details</button>
-		    </div>
+			<div className="eventmenu">
+				<h1 className="heading" dangerouslySetInnerHTML={this.getTitle()} />
+				
+				<div className="menubutton details" onClick={this.goToDetails}>
+                    Details
+				</div>
 
-		    <div className="inventory">
-		      <button onClick={this.goToInventory}>Inventory</button>
-		    </div>
+				<div className="menubutton inventory" onClick={this.goToInventory}>
+                    Inventory
+				</div>
 
-		    <div className="guests">
-		      <button onClick={this.goToGuests}>Guests</button>
-		    </div>
-
+				<div className="menubutton guests" onClick={this.goToGuests}>
+                    Guestlist
+				</div>
+				<div className="eventmenufooter">
+                    <p className="heading">"A message to y'all!"</p>
+                    <button className="chartoombutton">Chat</button>
+				</div>
 		    </div>
 		);
 	}

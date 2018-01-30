@@ -1,0 +1,75 @@
+* {
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    background-color: #fefefe;
+    font-family: 'Roboto Slab';
+    color: #789e4f;
+}
+
+body{
+    padding: 1em;
+}
+
+.heading{
+    font-size: 2em;
+}
+
+
+.menubutton{
+    font-family: Lobster;
+    width: 95%;
+    height: 1.5em;
+    font-size: 4em;
+    border-style: solid;
+    border-width: 7px;
+    border-radius: 0.5em;
+    color: #fefefe;
+    text-align: center;
+    padding-top: 0.2em;
+    margin-bottom: 0.2em;
+    text-decoration: none;
+}
+.eventmenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.details{
+    background-color: #fee332;
+    border-color: #d9b01d;
+}
+.inventory{
+    background-color: #789e4f;
+    border-color: #557037;
+}
+.guests{
+    background-color: #e38003;
+    border-color: #b26403;
+}
+
+.chartoombutton{
+    font-size: 2em;
+    border-width: 3px;
+    width: 4em;
+    height: 4em;
+    text-align: center;
+    border-radius: 50%;
+    border-color: #557037;
+    background-color: #789e4f;
+    color: #fefefe;
+    margin-top: 0.5em;
+}
+
+.eventmenufooter{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.footermessage{
+    font-size: 2em;
+}
