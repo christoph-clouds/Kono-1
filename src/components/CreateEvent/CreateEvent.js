@@ -73,54 +73,65 @@ export default class CreateEvents extends Component {
 			<div className="heading eventform">
 				<form id="createEventForm" onSubmit={this.handleSubmit} >
 
-					<input name="title" className="formelement" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" maxlength="50" required/>
-
-					<textarea name="description" className="formelement" placeholder="tell your guests what your party is about" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
-					<div className="formelement_icon">
-						<img src={Location} className="formicon" alt="location icon"></img>
-						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" id="newEventLocation" placeholder="location" required/>
-					</div>
-					<div className="formelement_icon">
-						<img src={Calendar} className="formicon" alt="calendar icon"></img>
-						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" id="newEventDate" min={today} required/>
-					</div>
-					<div className="formelement_icon">
-						<img src={Time} className="formicon" alt="time icon"></img>
-						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" id="newEventTime" required/>
+					<div className="formelement">
+						<input name="title"value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" maxLength="50" className="inputWithIcon" required/>
 					</div>
 
 					<div className="formelement">
-						<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" defaultChecked="true" id="pineapple"/>
-						<label htmlFor="pineapple">Pineapple</label>
-						<div className="theme">
-							<div className="p1 themecolors"></div>
-							<div className="p2 themecolors"></div>
-							<div className="p3 themecolors"></div>
-							<div className="p4 themecolors"></div>
-							<div className="p5 themecolors"></div>
-						</div>
-						<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" id="beach"/>
-						<label htmlFor="beach">Beach</label>
-						<div className="theme">
-							<div className="b1 themecolors"></div>
-							<div className="b2 themecolors"></div>
-							<div className="b3 themecolors"></div>
-							<div className="b4 themecolors"></div>
-							<div className="b5 themecolors"></div>
-						</div>
-						<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" id="tropic"/>
-						<label htmlFor="tropic">Tropic</label>
-						<div className="theme">
-							<div className="t1 themecolors"></div>
-							<div className="t2 themecolors"></div>
-							<div className="t3 themecolors"></div>
-							<div className="t4 themecolors"></div>
-							<div className="t5 themecolors"></div>
+						<textarea name="description" placeholder="tell your guests what your party is about" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
+					</div>
+
+					<div className="formelement">
+						<img src={Location} className="formicon" alt="location icon"></img>
+						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputWithIcon" id="newEventLocation" placeholder="location" required/>
+					</div>
+
+					<div className="formelement">
+						<img src={Calendar} className="formicon" alt="calendar icon"></img>
+						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" className="inputWithIcon" id="newEventDate" min={today} required/>
+					</div>
+
+					<div className="formelement">
+						<img src={Time} className="formicon" alt="time icon"></img>
+						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputWithIcon" id="newEventTime" required/>
+					</div>
+
+					<div className="formelement">
+						<div>
+							<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" defaultChecked="true" id="pineapple"/>
+							<label htmlFor="pineapple">Pineapple</label>
+							<div className="theme">
+								<div className="p1 themecolors"></div>
+								<div className="p2 themecolors"></div>
+								<div className="p3 themecolors"></div>
+								<div className="p4 themecolors"></div>
+								<div className="p5 themecolors"></div>
+							</div>
+							<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" id="beach"/>
+							<label htmlFor="beach">Beach</label>
+							<div className="theme">
+								<div className="b1 themecolors"></div>
+								<div className="b2 themecolors"></div>
+								<div className="b3 themecolors"></div>
+								<div className="b4 themecolors"></div>
+								<div className="b5 themecolors"></div>
+							</div>
+							<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" id="tropic"/>
+							<label htmlFor="tropic">Tropic</label>
+							<div className="theme">
+								<div className="t1 themecolors"></div>
+								<div className="t2 themecolors"></div>
+								<div className="t3 themecolors"></div>
+								<div className="t4 themecolors"></div>
+								<div className="t5 themecolors"></div>
+							</div>
 						</div>
 					</div>
 					<input type="hidden" id="hiddenFieldCreateEvent" value="" name="id"/>
-					<button onClick={this.resetForm} type="button">clear form</button>
-					<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
+					<div className="buttonsWrapper">
+						<button onClick={this.resetForm} type="button" className="clearbutton">clear form</button>
+						<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
+					</div>
 				</form>
 				{fireRedirectEvents && (
           		<Redirect to={from || '/events'}/>
