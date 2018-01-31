@@ -7,9 +7,7 @@
     color: #789e4f;
 }
 
-body{
-    padding: 1em;
-}
+
 
 .heading{
     font-size: 2em;
@@ -37,6 +35,7 @@ body{
 }
 
 .details{
+    margin-top: 0.5em;
     background-color: #fee332;
     border-color: #d9b01d;
 }

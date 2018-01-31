@@ -27,7 +27,7 @@ export default class Event extends Component {
 
 	render () {
 		return(
-			<div className="eventmenu">
+			<div className="eventmenu pagecontent">
 				<h1 className="heading">{this.state.title} </h1>
 				
 				

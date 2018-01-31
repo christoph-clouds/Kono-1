@@ -67,7 +67,7 @@ export default class CreateEvents extends Component {
     	const { fireRedirectLogin } = this.state
 
 	    return (
-	      <div>
+	      <div className="pagecontent">
 	        <h1 className="subtitle">Create New Event</h1>
 			<div className="heading eventform">
 				<form id="createEventForm" onSubmit={this.handleSubmit} >

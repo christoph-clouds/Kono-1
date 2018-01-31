@@ -12,7 +12,7 @@ export default class Details extends Component {
 	render () {
 		
 		return (
-			<div className="back">
+			<div className="back pagecontent">
 		      	<Link to={`/events/${this.props.match.params.eventid}`} >
 				    Back
 			   	</Link>
