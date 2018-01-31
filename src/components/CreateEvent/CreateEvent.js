@@ -37,9 +37,9 @@ export default class CreateEvents extends Component {
 			    date: event.target.date.value,
 			    time: event.target.time.value,
 			    theme: event.target.theme.value,
-			    inventory: ["2bVodka", "3bBeer", "1bWine"],
-			    wishlist: ["Chips", "Pizza"],
-			    guests: []
+			    inventory: [""],
+			    wishlist: [""],
+			    guests: [""]
   			});	
   			this.setState({ fireRedirectEvents: true })
 		}
@@ -117,7 +117,6 @@ export default class CreateEvents extends Component {
 							<div className="t5 themecolors"></div>
 						</div>
 					</div>
-					<input type="hidden" id="hiddenFieldCreateEvent" value="" name="id"/>
 					<button onClick={this.resetForm} type="button">Cancel</button>
 					<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
 				</form>

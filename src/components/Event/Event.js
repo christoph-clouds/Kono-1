@@ -7,7 +7,6 @@ export default class Event extends Component {
 
 	constructor(props) {
     	super(props)
-    	console.log(this.props.match.params.eventid);
     	this.state = {
 			title: ""
 		};
@@ -21,7 +20,6 @@ export default class Event extends Component {
 			let eventTitle = snapshot.val().title;
 			console.log(eventTitle);
 			this.setState({title: eventTitle});
-			console.log("current State title :" + this.state.title);
 		});	
   	}
 
