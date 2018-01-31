@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ref, firebaseApp } from '../../config/constants'
+import { firebaseApp } from '../../config/constants'
 import './Event.css'
 import { Link } from 'react-router-dom'
 
