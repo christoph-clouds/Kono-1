@@ -3,9 +3,6 @@ import { ref } from '../../config/constants'
 import './Events.css';
 import Arrow from '../../images/icons/arrowright.png'
 import {
-  	Redirect,
-  	BrowserRouter as Router,
-  	Route,
   	Link
 } from 'react-router-dom'
 
@@ -13,7 +10,6 @@ import {
 export default class Events extends Component {
 	constructor() {
 	    super();
-	    this.goToEvent = this.goToEvent.bind(this);
 	    this.state = {
 	      currentItem: '',
 	      username: '',
@@ -58,11 +54,6 @@ export default class Events extends Component {
 		   
 		});
 	}
-
-	goToEvent(eventid){
-		console.log(eventid);
-		sessionStorage.curEvent = eventid; 
-	}
   	
 	render () {
 	    return (
@@ -71,12 +62,7 @@ export default class Events extends Component {
 		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
-				        const handleClick = ()=> {
-				        	this.setState({redirect: true});
-				        	this.goToEvent(item.id);
-				        };
 				        return (
-
 						<Link className="No-Link" to={`/events/${item.id}`} >
 				          	<li className="listentry" key={item.id} id={item.id} >
 				          		<div className="rightalignedList">
@@ -90,26 +76,7 @@ export default class Events extends Component {
 				      })}
 				    </ul>
 		  		</div>
-		  		<div className="eventsGuest">
-		 			<h1 className="heading listtitle"> Events As Guest </h1>
-				    <ul className="eventsList">
-				      {this.state.items.map((item) => {
-				      	const handleClick = ()=> {
-				      		this.setState({redirect: true});
-				        	this.goToEvent(item.id);
-				        };
-                          return (
-                              <li key={item.id} id={item.id} onClick={handleClick} className="listentry">
-                                  <div className="rightalignedList">
-                                      <p>{item.date}</p>
-                                      <h3 className="listheading">{item.title}</h3>
-                                  </div>
-                                  <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
-                              </li>
-                          )
-                      })}
-				    </ul>
-		  		</div>
+		  		
 			</section> 
     	); 
 	}
