@@ -54,14 +54,12 @@ export default class Inventory extends Component {
 				<ul className="eventsList">
 				      {this.state.items.map((item) => {
 				        return (
-						<Link className="No-Link" to={`/events/${item.id}`} >
 				          	<li className="listentry" id={item.type} >
 				          		<div className="rightalignedList">
                                   	<p>{item.amount}</p>
                                   	<h3 className="listheading">{item.type}</h3>
                               	</div>
 					        </li>
-				        </Link>
 				        )
 				      })}
 				    </ul>
