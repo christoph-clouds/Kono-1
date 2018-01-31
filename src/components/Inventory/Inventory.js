@@ -19,7 +19,11 @@ export default class Inventory extends Component {
 	      	amount: '',
 	      	what: '',
 	      	price: '',
-	      	wish: ''
+	      	wish: '',
+            standardView: true,
+            formView: false,
+            listView: true,
+            wishView: false
 	    }
 	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
@@ -27,6 +31,8 @@ export default class Inventory extends Component {
 	    this.deleteWish = this.deleteWish.bind(this);
 	    this.addToWishlist = this.addToWishlist.bind(this);
 	    this.addToInventory = this.addToInventory.bind(this);
+	    this.changeInventoryView = this.changeInventoryView.bind(this);
+	    this.changeListView = this.changeListView.bind(this);
   	}
 
   	componentDidMount() {
@@ -107,6 +113,11 @@ export default class Inventory extends Component {
 					buyer:  sessionStorage.curUser
 			  	});
 		}
+
+        this.setState({
+            standardView: !(this.state.standardView),
+            formView: !(this.state.formView)
+        });
 	}
 
 	handleChange(event){
@@ -127,7 +138,26 @@ export default class Inventory extends Component {
 			    	wish: event.target.wish.value
 			  	});
 		}
+
+        this.setState({
+            listView: !(this.state.listView),
+            wishView: !(this.state.wishView)
+        })
 	}
+
+    changeInventoryView(){
+        this.setState({
+            standardView: !(this.state.standardView),
+            formView: !(this.state.formView)
+        });
+    }
+
+    changeListView(){
+        this.setState({
+            listView: !(this.state.listView),
+            wishView: !(this.state.wishView)
+        })
+    }
 
 	render() {
 		const { boozeStatus } = this.state
@@ -137,29 +167,34 @@ export default class Inventory extends Component {
                 <h1 className="title"> Inventory </h1>
 				<div className="Inventory">
                     <div className="pagecontent">
+                        {this.state.standardView &&
                         <div className="boozeStatus">
                             <img src={bottle} alt="bottle" className="milkbottle"></img>
                             <div className="boozelist">
-                                <h2 className="heading"> Booze Status: { this.state.boozeStatus } </h2>
+                                <h2 className="subheading"> Booze Status: {this.state.boozeStatus} </h2>
                                 <ul className="eventsList">
                                     {this.state.items.map((item) => {
                                         return (
                                             <li className="inventoryentry">
-                                                {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
+                                                {item.amount} {item.type}
+                                                <div id={item.id} onClick={() => this.deleteItem(item.id)}>X</div>
                                             </li>
                                         )
                                     })}
                                 </ul>
+                                <button id="addItemButton" className="submitbutton" onClick={this.changeInventoryView}>+ Add Drink</button>
                             </div>
                         </div>
-                        <div>
-                            <h2> Add To Inventory </h2>
-                            <form className="addToInventory" onSubmit={this.addToInventory}>
+                        }
+                        {this.state.formView &&
+                        <div className="itemform">
+                            <form id="addToInventoryForm" className="addToInventory" onSubmit={this.addToInventory}>
+                                <h2 className="subheading"> Add To Inventory </h2>
                                 <div className="formentry">
                                     <input name="amount" className="formitem" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" required/> bottle(s)
                                 </div>
                                 <div className="formentry">
-                                    <input name="what" className="formitem" value={this.state.what} onChange={this.handleChange} type="text" maxLength="15" placeholder="type of drink" required/>
+                                    <input name="what" className="formitem" value={this.state.what} onChange={this.handleChange} type="text" maxLength="15" placeholder="type of drink" required/> drink
                                 </div>
                                 <div className="formentry">
                                     <input name="price" className="formitem" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000"/> bucks
@@ -169,40 +204,43 @@ export default class Inventory extends Component {
                                 </div>
                             </form>
                         </div>
-                        <div className="furtherDetailsInventory">
-
-
-                        </div>
+                        }
                     </div>
 			   	</div>
 			   	<div className="pagecontent">
-			   		<div>
-						<h1> Wishlist </h1>
-						<ul className="eventsList">
-						      {this.state.wishes.map((wish) => {
-						        return (
-						          	<li className="listentry" >
-						          		{wish.wish} <div onClick={ () => this.deleteWish(wish.id)}>X</div>
-							        </li>
-						        )
-						      })}
-						</ul>
-					</div>
-					<div className="addToWishlist">
-						<h2> Add To Wishlist </h2>
-						<form onSubmit={this.addToWishlist} >
-						<input name="wish" className="formelement" value={this.state.wish} onChange={this.handleChange} type="text" placeholder="Pineapple Please?!" />
-						<button id="button" type="submit" className="submitbutton" value="Submit">+ Add</button>
-						</form>
-					</div>
-					<button className="submitbutton" id="MakeAWish">Make a Wish</button>
+                    {this.state.listView &&
+                    <div>
+                        <h1 className="subheading"> Wishlist </h1>
+                        <ul className="wishlist">
+                            {this.state.wishes.map((wish) => {
+                                return (
+                                    <li className="listentry">
+                                        {wish.wish}
+                                        <div onClick={() => this.deleteWish(wish.id)}>X</div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        <button className="submitbutton" onClick={this.changeListView} >Make a Wish</button>
+                    </div>
+                    }
+                    {this.state.wishView &&
+                    <div className="addToWishlist">
+                        <h2 className="subheading"> Add To Wishlist </h2>
+                        <form onSubmit={this.addToWishlist}>
+                            <input name="wish" className="formitem" value={this.state.wish}
+                                   onChange={this.handleChange} type="text" placeholder="Pineapple Please?!"
+                                   maxLength="20" required/>
+                            <button id="button" type="submit" className="submitbutton" value="Submit">+ Add</button>
+                        </form>
+                    </div>
+                    }
+                    <div className="back">
+                        <Link to={`/events/${this.props.match.params.eventid}`} >
+                            Back
+                        </Link>
+                    </div>
 			   	</div>
-
-			   	<div className="back">
-			   		<Link to={`/events/${this.props.match.params.eventid}`} >
-						Back
-					</Link>
-		    	</div>
 		    </div>
 		);
 	}

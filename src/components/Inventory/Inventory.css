@@ -19,7 +19,11 @@
     padding: 0.5em;
 }
 
-.formentry{
+.itemform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2em;
 }
 
 
@@ -31,11 +35,13 @@
     border-bottom: solid;
     border-width: 1px;
     text-decoration: none;
+    margin-bottom: 0.5em;
 }
 
 .inventoryentry:hover {
     background-color: #789e4f;
 }
+
 .inventoryentry:hover *{
     background-color: #789e4f;
 }
@@ -54,3 +60,16 @@
     padding-left: 1em;
 }
 
+#showItemFormButton{
+    align: center;
+}
+
+.wishlist{
+    padding-bottom: 1em;
+}
+
+.back{
+    border-color: #789e4f;
+    border-style: solid;
+
+}
