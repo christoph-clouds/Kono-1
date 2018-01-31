@@ -5,6 +5,7 @@ import './CreateEvent.css';
 import Location from '../../images/icons/location.png';
 import Calendar from '../../images/icons/calendar.png';
 import Time from '../../images/icons/time.png';
+import {today} from '../../helpers/date.js';
 
 export default class CreateEvents extends Component {
 	
@@ -72,20 +73,20 @@ export default class CreateEvents extends Component {
 			<div className="heading eventform">
 				<form id="createEventForm" onSubmit={this.handleSubmit} >
 
-					<input name="title" className="formelement" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" />
+					<input name="title" className="formelement" value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" maxlength="50" required/>
 
 					<textarea name="description" className="formelement" placeholder="tell your guests what your party is about" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
 					<div className="formelement_icon">
 						<img src={Location} className="formicon" alt="location icon"></img>
-						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" id="newEventLocation" placeholder="location" />
+						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" id="newEventLocation" placeholder="location" required/>
 					</div>
 					<div className="formelement_icon">
 						<img src={Calendar} className="formicon" alt="calendar icon"></img>
-						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" id="newEventDate" />
+						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" id="newEventDate" min={today} required/>
 					</div>
 					<div className="formelement_icon">
 						<img src={Time} className="formicon" alt="time icon"></img>
-						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" id="newEventTime" />
+						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" id="newEventTime" required/>
 					</div>
 
 					<div className="formelement">
@@ -118,7 +119,7 @@ export default class CreateEvents extends Component {
 						</div>
 					</div>
 					<input type="hidden" id="hiddenFieldCreateEvent" value="" name="id"/>
-					<button onClick={this.resetForm} type="button">Cancel</button>
+					<button onClick={this.resetForm} type="button">clear form</button>
 					<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
 				</form>
 				{fireRedirectEvents && (

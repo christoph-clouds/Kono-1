@@ -57,7 +57,7 @@ export default class Events extends Component {
   	
 	render () {
 	    return (
-			<section className="display-item pagecontentd">
+			<section className="display-item pagecontent">
 		 		<div className="eventsHosted">
 		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">

@@ -52,6 +52,8 @@
 
 .listheading{
     font-size: 1.5em;
+    overflow-wrap: break-word;
+    width: 280px;
 }
 
 .rightalignedList{
