@@ -57,10 +57,8 @@ export default class Inventory extends Component {
 			    	this.setState({
 						items: InventoryList
 					});
-			    }
-			    
+			    }  
 		    }
-		   
 		});
 
 		wishlistRef.on('value', (snapshot) => {
@@ -175,9 +173,8 @@ export default class Inventory extends Component {
                                 <ul className="eventsList">
                                     {this.state.items.map((item) => {
                                         return (
-                                            <li className="inventoryentry">
-                                                {item.amount} {item.type}
-                                                <div id={item.id} onClick={() => this.deleteItem(item.id)}>X</div>
+                                            <li className="inventoryentry" key={item.id}>
+                                                {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
                                             </li>
                                         )
                                     })}
@@ -214,7 +211,7 @@ export default class Inventory extends Component {
                         <ul className="wishlist">
                             {this.state.wishes.map((wish) => {
                                 return (
-                                    <li className="listentry">
+                                    <li key={wish.id} className="listentry">
                                         {wish.wish}
                                         <div onClick={() => this.deleteWish(wish.id)}>X</div>
                                     </li>

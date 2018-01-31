@@ -14,7 +14,8 @@ export default class Guests extends Component {
 	      	guests: [],
 	      	drives: '',
 	      	hasbed: '',
-	      	hasgift: ''
+	      	hasgift: '',
+	      	invitationLink: ''
 	    }
 	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
@@ -25,6 +26,10 @@ export default class Guests extends Component {
   	componentDidMount() {
     	const currentUser = firebaseApp.auth().currentUser;
     	let currentEvent = this.props.match.params.eventid;
+    	let invitationLink = "https://lukasseiwald.github.io/Kono/events/"+currentEvent+"/invitation";
+    	this.setState({
+			invitationLink: invitationLink
+		});
     	let GuestListRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/');
 
 		GuestListRef.on('value', (snapshot) => {
@@ -38,6 +43,7 @@ export default class Guests extends Component {
 				        drives: 	guests[prop].drives,
 				        hasbed: 	guests[prop].hasbed,
 				        hasgift: 	guests[prop].hasgift,
+				        profileImg: guests[prop].profileImg
 			    	});
 			    	this.setState({
 						guests: GuestList
@@ -47,6 +53,7 @@ export default class Guests extends Component {
 		    }
 		   
 		});
+
 	}
 
 	removeGuest(id){
@@ -91,14 +98,26 @@ export default class Guests extends Component {
                             <ul className="guestsList">
                                   {this.state.guests.map((prop) => {
                                     return (
-                                        <li className="listentry">
-                                            {prop.name}  drives: {prop.drives}<div onClick={ () => this.removeGuest(prop.id)}>X</div>
+                                        <li className="listentry" key={prop.id}>
+                                        	<img className="profileImg" src={prop.profileImg}/>
+                                            <h3>{prop.name} </h3> 
+                                            <div className="guestProperties">
+                                            	<ul>
+		                                            <li>drives: {prop.drives}</li>      
+		                                            <li>has Bed: {prop.hasbed}</li> 
+		                                            <li>has Gift: {prop.hasgift}</li>
+                                            	</ul>
+                                            </div>
+                                            <div onClick={ () => this.removeGuest(prop.id)}>X</div>
                                         </li>
                                     )
                                   })}
                             </ul>
                         </div>
                     </div>
+                </div>
+                <div className="invitationLink">
+                {this.state.invitationLink}
                 </div>
 			   	<div className="back">
 			   		<Link to={`/events/${this.props.match.params.eventid}`} >
