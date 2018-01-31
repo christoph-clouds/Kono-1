@@ -1,0 +1,23 @@
+.Inventory *{
+    background-color: #bed09f;
+    color: #557037;
+    border-color: #557037;
+}
+
+.addToInventory{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.formitem{
+    border-style: none;
+
+    border-bottom: solid;
+    width: 10em;
+    margin-bottom: 1em;
+    padding: 0.5em;
+}
+
+.formentry{
+}

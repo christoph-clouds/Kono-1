@@ -133,36 +133,45 @@ export default class Inventory extends Component {
 
 		return (
 			<div>
+                <h1> Inventory </h1>
 				<div className="Inventory">
-					<div>
-						<h1> Inventory </h1>
-						<h2> Booze Status: { this.state.boozeStatus } </h2>
-						<ul className="eventsList">
-						      {this.state.items.map((item) => {
-						        return (
-						          	<li className="listentry">
-						          		{item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
-							        </li>
-						        )
-						      })}
-						</ul>
-						<button className="submitbutton" id="AddAItem">+</button>
-					</div>
-					<div>
-						<h2> Add To Inventory </h2>
-						<form className="addToInventory" onSubmit={this.addToInventory} >
-						<input name="amount" className="formelement" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" /> Bottle(s)
-						<input name="what" className="formelement" value={this.state.what} onChange={this.handleChange} type="text" placeholder="Beer" />
-						<input name="price" className="formelement" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000" /> Bucks
-						<button id="button" type="submit" className="submitbutton" value="Submit">+ Add</button>
-						</form>
-					</div>
-					<div className="furtherDetailsInventory">
+                    <div className="pagecontent">
+                        <div>
+                            <h2> Booze Status: { this.state.boozeStatus } </h2>
+                            <ul className="eventsList">
+                                  {this.state.items.map((item) => {
+                                    return (
+                                        <li className="listentry">
+                                            {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
+                                        </li>
+                                    )
+                                  })}
+                            </ul>
+                        </div>
+                        <div>
+                            <h2> Add To Inventory </h2>
+                            <form className="addToInventory" onSubmit={this.addToInventory}>
+                                <div className="formentry">
+                                    <input name="amount" className="formitem" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" /> Bottle(s)
+                                </div>
+                                <div className="formentry">
+                                    <input name="what" className="formitem" value={this.state.what} onChange={this.handleChange} type="text" maxLength="20" placeholder="type of drink" />
+                                </div>
+                                <div className="formentry">
+                                    <input name="price" className="formitem" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000" /> Bucks
+                                </div>
+                                <div>
+                                    <button id="button" type="submit" className="submitbutton" value="Submit">+ Add Drink</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="furtherDetailsInventory">
 
 
-					</div>	
+                        </div>
+                    </div>
 			   	</div>
-			   	<div className="Wishlist">
+			   	<div className="pagecontent">
 			   		<div>
 						<h1> Wishlist </h1>
 						<ul className="eventsList">
