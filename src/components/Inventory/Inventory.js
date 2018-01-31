@@ -12,17 +12,19 @@ export default class Inventory extends Component {
 	      	currentItem: '',
 	      	username: '',
 	      	items: [],
+	      	itemsUser: [],
 	      	boozeStatus: '',
 	      	wishes: [],
 	      	amount: '',
 	      	what: '',
-	      	price: ''
+	      	price: '',
+	      	wish: ''
 	    }
 	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
 	    this.deleteItem = this.deleteItem.bind(this);
 	    this.deleteWish = this.deleteWish.bind(this);
-	    this.addWish = this.addWish.bind(this);
+	    this.addToWishlist = this.addToWishlist.bind(this);
 	    this.addToInventory = this.addToInventory.bind(this);
   	}
 
@@ -96,7 +98,6 @@ export default class Inventory extends Component {
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
 			let InventoryListRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory');
-			console.log("adding to inventory");
 			var newItem = InventoryListRef.push();
 			  	newItem.set({
 			    	type: 	event.target.what.value,
@@ -115,59 +116,80 @@ export default class Inventory extends Component {
   		});
   	}
 
-	addWish(){
-		let currentEvent = this.props.match.params.eventid;
-		let wishListRef = firebaseApp.database().ref('events/' + currentEvent + '/wishlist');
-
-		var newWish = wishListRef.push();
-		  	newWish.set({
-		    	wish: "myyyyyy new wish"
-		  	});
+	addToWishlist(event){
+		if(sessionStorage.curUser != "null"){
+			event.preventDefault();
+			let currentEvent = this.props.match.params.eventid;
+			let wishListRef = firebaseApp.database().ref('events/' + currentEvent + '/wishlist');
+			var newWish = wishListRef.push();
+			  	newWish.set({
+			    	wish: event.target.wish.value
+			  	});
+		}
 	}
 
 	render() {
 		const { boozeStatus } = this.state
 
 		return (
-			<div className="back">
+			<div>
 				<div className="Inventory">
-					<h1> Inventory </h1>
-					<h2> Booze Status: { this.state.boozeStatus } </h2>
-					<ul className="eventsList">
-					      {this.state.items.map((item) => {
-					        return (
-					          	<li className="listentry">
-					          		{item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
-						        </li>
-					        )
-					      })}
-					</ul>
+					<div>
+						<h1> Inventory </h1>
+						<h2> Booze Status: { this.state.boozeStatus } </h2>
+						<ul className="eventsList">
+						      {this.state.items.map((item) => {
+						        return (
+						          	<li className="listentry">
+						          		{item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
+							        </li>
+						        )
+						      })}
+						</ul>
+						<button className="submitbutton" id="AddAItem">+</button>
+					</div>
 					<div>
 						<h2> Add To Inventory </h2>
 						<form className="addToInventory" onSubmit={this.addToInventory} >
 						<input name="amount" className="formelement" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" /> Bottle(s)
 						<input name="what" className="formelement" value={this.state.what} onChange={this.handleChange} type="text" placeholder="Beer" />
 						<input name="price" className="formelement" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000" /> Bucks
-						<button id="button" type="submit" className="submitbutton" value="Submit">+</button>
+						<button id="button" type="submit" className="submitbutton" value="Submit">+ Add</button>
 						</form>
 					</div>
+					<div className="furtherDetailsInventory">
+
+
+					</div>	
 			   	</div>
 			   	<div className="Wishlist">
-					<h1> Wishlist </h1>
-					<ul className="eventsList">
-					      {this.state.wishes.map((wish) => {
-					        return (
-					          	<li className="listentry" >
-					          		{wish.wish} <div onClick={ () => this.deleteWish(wish.id)}>X</div>
-						        </li>
-					        )
-					      })}
-					    </ul>
-			      	<div onClick={this.addWish}>Make A Wish</div>
+			   		<div>
+						<h1> Wishlist </h1>
+						<ul className="eventsList">
+						      {this.state.wishes.map((wish) => {
+						        return (
+						          	<li className="listentry" >
+						          		{wish.wish} <div onClick={ () => this.deleteWish(wish.id)}>X</div>
+							        </li>
+						        )
+						      })}
+						</ul>
+					</div>
+					<div class="addToWishlist">
+						<h2> Add To Wishlist </h2>
+						<form onSubmit={this.addToWishlist} >
+						<input name="wish" className="formelement" value={this.state.wish} onChange={this.handleChange} type="text" placeholder="Pineapple Please?!" />
+						<button id="button" type="submit" className="submitbutton" value="Submit">+ Add</button>
+						</form>
+					</div>
+					<button className="submitbutton" id="MakeAWish">Make a Wish</button>
 			   	</div>
-			   	<Link to={`/events/${this.props.match.params.eventid}`} >
-					    Back
-				   	</Link>
+
+			   	<div className="back">
+			   		<Link to={`/events/${this.props.match.params.eventid}`} >
+						Back
+					</Link>
+		    	</div>
 		    </div>
 		);
 	}

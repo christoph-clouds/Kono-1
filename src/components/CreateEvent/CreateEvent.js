@@ -40,7 +40,8 @@ export default class CreateEvents extends Component {
 			    theme: event.target.theme.value,
 			    inventory: [""],
 			    wishlist: [""],
-			    guests: [""]
+			    guests: [""],
+			    boozeStatus: '0%'
   			});	
   			this.setState({ fireRedirectEvents: true })
 		}
