@@ -34,7 +34,7 @@ Styling for new event form
 
 .eventform {
     border-style: none;
-    width: 90%;
+    width: 95%;
     font-size: 1.5em;
 }
 
@@ -63,13 +63,15 @@ Styling for new event form
     padding-bottom: 0.2em;
 }
 
+
 .formelement *{
     border-style: none;
 }
 
-.inputWithIcon{
+.inputfield{
     width: 100%;
     padding-left: 0.2em;
+    cursor: pointer;
 }
 
 textarea{
@@ -168,6 +170,13 @@ input[type=radio]:hover + label:before {
     padding: 1em;
 }
 
+.submitbutton:hover{
+    background-color: #789e4f;
+    border-color: #fefefe;
+    color: #fefefe;
+    cursor: pointer;
+}
+
 .clearbutton{
     border-radius: 0.5em;
     font-size: 0.8em;
@@ -182,11 +191,17 @@ input[type=radio]:hover + label:before {
 .clearbutton:hover{
     color: #c44444;
     border-color: #c44444;
-    cursor: ;
+    cursor: pointer;
 }
 
 .buttonsWrapper{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+.formcontent{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
