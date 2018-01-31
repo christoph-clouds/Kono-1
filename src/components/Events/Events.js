@@ -63,8 +63,8 @@ export default class Events extends Component {
 				    <ul className="eventsList">
 				      {this.state.items.map((item) => {
 				        return (
-						<Link className="No-Link" to={`/events/${item.id}`} >
-				          	<li className="listentry" key={item.id} id={item.id} >
+						<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
+				          	<li className="listentry" id={item.id} >
 				          		<div className="rightalignedList">
                                   	<p>{item.date}</p>
                                   	<h3 className="listheading">{item.title}</h3>

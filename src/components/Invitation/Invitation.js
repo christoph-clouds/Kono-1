@@ -24,7 +24,7 @@ export default class Invitation extends Component {
   }
 
   addToEventList(){
-    let currentUser =sessionStorage.curUser;
+    let currentUser = sessionStorage.curUser;
     if(firebaseApp.auth().currentUser){
       let currentEvent = this.props.match.params.eventid;
               console.log("adding new guest to :" + currentEvent);
@@ -32,9 +32,10 @@ export default class Invitation extends Component {
 
       var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
           name: firebaseApp.auth().currentUser.displayName,
+          profileImg: firebaseApp.auth().currentUser.photoURL,
           drives: "n",
           hasgift: "n",
-          hasBed: "n"
+          hasbed: "n"
         });
         console.log("adding new guest");
         this.props.history.push('./')
