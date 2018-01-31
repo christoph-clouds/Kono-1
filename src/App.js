@@ -7,6 +7,7 @@ import Event from './components/Event/Event'
 import Details from './components/Details/Details'
 import Inventory from './components/Inventory/Inventory'
 import Guests from './components/Guests/Guests'
+import Invitation from './components/Invitation/Invitation'
 import { signOut } from './helpers/auth'
 import './App.css';
 import {
@@ -23,8 +24,6 @@ import {
   else{
     userbutton = "Login";
   }
-    
-
 
 const RouterNav = () => (
   <Router>
@@ -45,6 +44,7 @@ const RouterNav = () => (
         <Route exact path="/events/:eventid/details" component={Details} />
         <Route exact path="/events/:eventid/inventory" component={Inventory} />
         <Route exact path="/events/:eventid/guests" component={Guests} />
+        <Route exact path="/events/:eventid/invitation" component={Invitation} />
       </Switch>   
     </div>
   </Router>
