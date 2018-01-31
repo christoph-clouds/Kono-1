@@ -21,3 +21,36 @@
 
 .formentry{
 }
+
+
+.inventoryentry{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    align-items: center;
+    border-bottom: solid;
+    border-width: 1px;
+    text-decoration: none;
+}
+
+.inventoryentry:hover {
+    background-color: #789e4f;
+}
+.inventoryentry:hover *{
+    background-color: #789e4f;
+}
+
+.boozeStatus{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.milkbottle{
+    width: 10em;
+}
+
+.boozelist{
+    padding-left: 1em;
+}
+

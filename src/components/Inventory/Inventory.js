@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ref, firebaseApp } from '../../config/constants'
 import './Inventory.css'
 import { Link } from 'react-router-dom'
+import bottle from '../../images/icons/bottle.png'
 
 export default class Inventory extends Component {
 
@@ -133,32 +134,35 @@ export default class Inventory extends Component {
 
 		return (
 			<div>
-                <h1> Inventory </h1>
+                <h1 className="title"> Inventory </h1>
 				<div className="Inventory">
                     <div className="pagecontent">
-                        <div>
-                            <h2> Booze Status: { this.state.boozeStatus } </h2>
-                            <ul className="eventsList">
-                                  {this.state.items.map((item) => {
-                                    return (
-                                        <li className="listentry">
-                                            {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
-                                        </li>
-                                    )
-                                  })}
-                            </ul>
+                        <div className="boozeStatus">
+                            <img src={bottle} alt="bottle" className="milkbottle"></img>
+                            <div className="boozelist">
+                                <h2 className="heading"> Booze Status: { this.state.boozeStatus } </h2>
+                                <ul className="eventsList">
+                                    {this.state.items.map((item) => {
+                                        return (
+                                            <li className="inventoryentry">
+                                                {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
                         </div>
                         <div>
                             <h2> Add To Inventory </h2>
                             <form className="addToInventory" onSubmit={this.addToInventory}>
                                 <div className="formentry">
-                                    <input name="amount" className="formitem" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" /> Bottle(s)
+                                    <input name="amount" className="formitem" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" required/> bottle(s)
                                 </div>
                                 <div className="formentry">
-                                    <input name="what" className="formitem" value={this.state.what} onChange={this.handleChange} type="text" maxLength="20" placeholder="type of drink" />
+                                    <input name="what" className="formitem" value={this.state.what} onChange={this.handleChange} type="text" maxLength="15" placeholder="type of drink" required/>
                                 </div>
                                 <div className="formentry">
-                                    <input name="price" className="formitem" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000" /> Bucks
+                                    <input name="price" className="formitem" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000"/> bucks
                                 </div>
                                 <div>
                                     <button id="button" type="submit" className="submitbutton" value="Submit">+ Add Drink</button>
