@@ -31,9 +31,10 @@ export default class Invitation extends Component {
               console.log("adding new guest id :" + currentUser);
 
       var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
-          drives: false,
-          hasgift: false,
-          hasBed: false
+          name: firebaseApp.auth().currentUser.displayName,
+          drives: "n",
+          hasgift: "n",
+          hasBed: "n"
         });
         console.log("adding new guest");
         this.props.history.push('./')
