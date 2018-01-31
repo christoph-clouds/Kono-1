@@ -69,32 +69,32 @@ export default class CreateEvents extends Component {
     	const { fireRedirectLogin } = this.state
 
 	    return (
-	      <div className="pagecontent">
+	      <div className="inputfield formcontent">
 	        <h1 className="subtitle">Create New Event</h1>
 			<div className="heading eventform">
 				<form id="createEventForm" onSubmit={this.handleSubmit} >
 
 					<div className="formelement">
-						<input name="title"value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" maxLength="50" className="inputWithIcon" required/>
+						<input name="title"value={this.state.title} onChange={this.handleChange} type="text" id="newEventTitle" placeholder="event title" maxLength="50" className="inputfield" required/>
 					</div>
 
 					<div className="formelement">
-						<textarea name="description" placeholder="tell your guests what your party is about" value={this.state.description} onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
+						<textarea name="description" placeholder="tell your guests what your party is about" value={this.state.description} className="inputfield" onChange={this.handleChange} type="text" id="newEventDesc"></textarea>
 					</div>
 
 					<div className="formelement">
 						<img src={Location} className="formicon" alt="location icon"></img>
-						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputWithIcon" id="newEventLocation" placeholder="location" required/>
+						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputfield" id="newEventLocation" placeholder="location" required/>
 					</div>
 
 					<div className="formelement">
 						<img src={Calendar} className="formicon" alt="calendar icon"></img>
-						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" className="inputWithIcon" id="newEventDate" min={today} required/>
+						<input name="date" value={this.state.date} onChange={this.handleChange} type="date" className="inputfield" id="newEventDate" min={today} required/>
 					</div>
 
 					<div className="formelement">
 						<img src={Time} className="formicon" alt="time icon"></img>
-						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputWithIcon" id="newEventTime" required/>
+						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime" required/>
 					</div>
 
 					<div className="formelement">
