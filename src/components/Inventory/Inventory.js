@@ -184,7 +184,7 @@ export default class Inventory extends Component {
 						      })}
 						</ul>
 					</div>
-					<div class="addToWishlist">
+					<div className="addToWishlist">
 						<h2> Add To Wishlist </h2>
 						<form onSubmit={this.addToWishlist} >
 						<input name="wish" className="formelement" value={this.state.wish} onChange={this.handleChange} type="text" placeholder="Pineapple Please?!" />

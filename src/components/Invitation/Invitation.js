@@ -7,7 +7,7 @@ import background from '../../images/backgroundLogin.jpg'
 import logo from '../../images/Logo.png'
 
 
-export default class Login extends Component {
+export default class Invitation extends Component {
   constructor(props) {
     super(props)
     this.Login = this.Login.bind(this)
@@ -25,14 +25,14 @@ export default class Login extends Component {
 
   addToEventList(){
     let currentUser =sessionStorage.curUser;
-    if(currentUser != "null"){
+    if(firebaseApp.auth().currentUser){
       let currentEvent = this.props.match.params.eventid;
               console.log("adding new guest to :" + currentEvent);
               console.log("adding new guest id :" + currentUser);
 
       var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
           drives: false,
-          haspresent: false,
+          hasgift: false,
           hasBed: false
         });
         console.log("adding new guest");
