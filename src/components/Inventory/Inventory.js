@@ -88,12 +88,22 @@ export default class Inventory extends Component {
 	}
 
 	deleteItem(id){
+		let items = this.state.items;
+		items.splice(id, 1);
+		this.setState({items: items });
+
 		let currentEvent = this.props.match.params.eventid;
 		let InventoryListRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory');
 		InventoryListRef.child(id).remove();
 	}
 
+	
+
 	deleteWish(id){
+		let wishes = this.state.wishes;
+		wishes.splice(id, 1);
+		this.setState({wishes: wishes });
+		
 		let currentEvent = this.props.match.params.eventid;
 		let wishListRef = firebaseApp.database().ref('events/' + currentEvent + '/wishlist');
 		wishListRef.child(id).remove();
@@ -171,11 +181,11 @@ export default class Inventory extends Component {
                                 <h2 className="subheading"> Booze Status: {this.state.boozeStatus} </h2>
                                 <ul className="eventsList">
                                     {this.state.items.map((item) => { 
-                                        return (
-                                            <li className="inventoryentry" key={item.id}>
-                                                {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
-                                            </li>
-                                        )
+                                    		return (
+                                            	<li className="inventoryentry" key={item.id}>
+                                                	{item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
+                                            	</li>
+                                        	)
                                     })}
                                 </ul>
                                 <button className="openInventoryFormButton" id="addItemButton" onClick={this.changeInventoryView}>+ Add Drink</button>
