@@ -91,17 +91,17 @@ export default class Event extends Component {
 				<div className="eventmenufooter">
 					{(this.state.isHost && !this.state.editView) &&
                     	<div>
-	                    	<p className="heading">{this.state.hostMessage}</p>
+	                    	<p className="subheading guestmessage">{this.state.hostMessage}</p>
 	                    	<div className="edit" onClick={this.editHostMessage}> edit </div>
                 		</div>
                 	}
                 	{!this.state.isHost &&
-	                	<p className="heading">{this.state.hostMessage}</p>
+	                	<p className="subheading guestmessage">{this.state.hostMessage}</p>
                 	}
                 	{this.state.editView &&
                 		<div>
                 			<form onSubmit={this.handleSubmit}>
-	                            <input name="hostMessage" className="formitem" value={this.state.hostMessage}
+	                            <input name="hostMessage" className="formitem guestmessage" value={this.state.hostMessage}
 	                                   onChange={this.handleChange} type="text"
 	                                   maxLength="30" required/>
 	                            <button id="button" type="submit" className="submitbutton" value="Submit">Save</button>
