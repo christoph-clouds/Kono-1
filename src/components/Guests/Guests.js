@@ -3,6 +3,7 @@ import { firebaseApp } from '../../config/constants'
 import './Guests.css'
 import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
+import Clipboard from 'react-clipboard.js'
 
 export default class Guests extends Component {
 
@@ -140,23 +141,31 @@ export default class Guests extends Component {
 	render() {
 
 		return (
-			<div>
-                <h1> Guest List </h1>
+			<div className="pagecontent">
+                <h1 className="title"> Guests</h1>
 				<div className="Guests">
-                    <div className="pagecontent">
-	                    <div className="eventmenufooter">
+                    <div>
+	                    <div>
 							{(this.state.isHost && !this.state.editView) &&
-		                    	<div>
-			                    	<p className="heading">{this.state.hostMessage}</p>
-			                    	<div className="edit" onClick={this.editHostMessage}> edit </div>
-			                    	<div className="hostData">
-			                    		<img className="profileImg" src={this.state.profileHostImg}/>
-			                    		<p> {this.state.profileHostName} </p>
-			                    	</div>
+		                    	<div className="hostPart">
+									<div className="horizontallyAligned">
+										<img className="profileImg marginright" src={this.state.profileHostImg}/>
+										<h2 className="heading">{this.state.profileHostName}</h2>
+									</div>
+									<div className="horizontallyAligned">
+										<p className="subheading marginright">"{this.state.hostMessage}"</p>
+										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
+									</div>
 		                		</div>
 		                	}
 		                	{!this.state.isHost &&
-			                	<p className="heading">{this.state.hostMessage}</p>
+							<div className="hostPart">
+								<div className="horizontallyAligned">
+									<img className="profileImg marginright" src={this.state.profileHostImg}/>
+									<h2 className="heading">{this.state.profileHostName}</h2>
+								</div>
+								<p className="subheading">"{this.state.hostMessage}"</p>
+							</div>
 		                	}
 		                	{this.state.editView &&
 		                		<div>
@@ -164,37 +173,39 @@ export default class Guests extends Component {
 			                            <input name="hostMessage" className="formitem" value={this.state.hostMessage}
 			                                   onChange={this.handleChange} type="text"
 			                                   maxLength="70" required/>
-			                            <button id="button" type="submit" className="submitbutton" value="Submit">Save</button>
+			                            <button id="button" type="submit" className="submitbutton smallerpadding" value="Submit">Save</button>
 		                        	</form>
 		                		</div>
 		                	}
 						</div>
 	                    <div>
-	                        <ul className="guestsList">
+	                        <ul>
 	                              {this.state.guests.map((prop) => {
 	                                return (
-	                                    <li className="listentry" key={prop.id}>
-	                                    	<img className="profileImg" src={prop.profileImg}/>
-	                                        <h3>{prop.name} </h3> <h2>{prop.host}</h2>
-	                                        <div className="guestProperties">
-	                                        	<ul>
-		                                            <li>drives: {prop.drives}</li>      
-		                                            <li>has Bed: {prop.hasbed}</li> 
-		                                            <li>has Gift: {prop.hasgift}</li>
-	                                        	</ul>
-	                                        </div>
-	                                        {this.state.isHost &&
-	                                        <div onClick={ () => this.removeGuest(prop.id)}>X</div>
-	                                    	}
+	                                    <li className="guestListEntry" key={prop.id}>
+											<div className="guestInfo">
+												<img className="profileImg" src={prop.profileImg}/>
+												<div className="guestProperties">
+													<h3 className="heading">{prop.name} </h3>
+													<ul className="guestAttributeList">
+														<li>drives: {prop.drives}</li>
+														<li>has Bed: {prop.hasbed}</li>
+														<li>has Gift: {prop.hasgift}</li>
+													</ul>
+												</div>
+											</div>
+                                            {this.state.isHost &&
+											<div className="deleteEntryX"
+												 onClick={() => this.removeGuest(prop.id)}></div>
+                                            }
 	                                    </li>
 	                                )
 	                              })}
 	                        </ul>
 	                    </div>
                     </div>
-                </div>
-                <div className="invitationLink">
-                {this.state.invitationLink}
+
+					<Clipboard className="submitbutton margintop" data-clipboard-text={this.state.invitationLink}>Copy Invitation Link</Clipboard>
                 </div>
 				<Link className="back" to={`/events/${this.props.match.params.eventid}`} >
 					<img src={backArrow} alt="back" className="backIcon"></img>

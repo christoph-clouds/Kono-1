@@ -184,7 +184,9 @@ export default class Inventory extends Component {
 	render() {
 		return (
 			<div>
-                <h1 className="title"> Inventory </h1>
+                <div className="pagecontent">
+                    <h1 className="title"> Inventory </h1>
+                </div>
 				<div className="Inventory">
                     <div className="pagecontent">
                         {this.state.standardView &&
@@ -193,12 +195,13 @@ export default class Inventory extends Component {
                             <div className="boozelist">
                                 <h2 className="subheading"> Booze Status: {this.state.boozeStatus} </h2>
                                 <ul className="eventsList">
-                                    {this.state.items.map((item) => { 
-                                    		return (
-                                            	<li className="inventoryentry" key={item.id}>
-                                                	{item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
-                                            	</li>
-                                        	)
+                                    {this.state.items.map((item) => {
+                                        return (
+                                            <li className="inventoryentry" key={item.id}>
+                                                {item.amount} {item.type}
+                                                <div id={item.id} onClick={ () => this.deleteItem(item.id)} className="deleteEntryX"></div>
+                                            </li>
+                                        )
                                     })}
                                 </ul>
                                 <button className="openInventoryFormButton" id="addItemButton" onClick={this.changeInventoryView}>+ Add Drink</button>

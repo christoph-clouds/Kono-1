@@ -151,7 +151,8 @@
     height: 1em;
 }
 .deleteEntryX:hover{
-    background-image: url('../../images/icons/redx.png');
+    background-image: url('../../images/icons/redx2.png');
+    cursor: pointer;
 }
 
 .closeItemForm{
