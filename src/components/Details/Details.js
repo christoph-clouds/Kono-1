@@ -32,7 +32,7 @@ export default class CreateEvents extends Component {
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
 			var newEvent = firebaseApp.database().ref('events/' + currentEvent + '/');	
-			newEvent.set({
+			newEvent.update({
 			    host: sessionStorage.curUser,
 			    title: event.target.title.value,
 			    desc: event.target.description.value,
@@ -40,10 +40,6 @@ export default class CreateEvents extends Component {
 			    date: event.target.date.value,
 			    time: event.target.time.value,
 			    theme: event.target.theme.value,
-			    inventory: [""],
-			    wishlist: [""],
-			    guests: [""],
-			    boozeStatus: '0%'
   			});	
 		}
   	}

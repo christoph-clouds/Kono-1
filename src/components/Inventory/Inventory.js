@@ -169,7 +169,7 @@ export default class Inventory extends Component {
                             <div className="boozelist">
                                 <h2 className="subheading"> Booze Status: {this.state.boozeStatus} </h2>
                                 <ul className="eventsList">
-                                    {this.state.items.map((item) => {
+                                    {this.state.items.map((item) => { 
                                         return (
                                             <li className="inventoryentry" key={item.id}>
                                                 {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>

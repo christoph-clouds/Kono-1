@@ -181,7 +181,9 @@ export default class Guests extends Component {
 		                                            <li>has Gift: {prop.hasgift}</li>
 	                                        	</ul>
 	                                        </div>
+	                                        {this.state.isHost &&
 	                                        <div onClick={ () => this.removeGuest(prop.id)}>X</div>
+	                                    	}
 	                                    </li>
 	                                )
 	                              })}
