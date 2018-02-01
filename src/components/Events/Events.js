@@ -20,36 +20,65 @@ export default class Events extends Component {
 
     componentDidMount = (events) => {
     	const currentUser = sessionStorage.curUser;
+					    let i = 0;
 
 		ref.on('value', (snapshot) => {
 		    let events = snapshot.val();
 		    let newStateHost = [];
-		    //let newStateGuests = [];
 		    for (let event in events) {
 		    	if(events[event].host === currentUser){
 		    		newStateHost.push({
-				        id: event,
+				        id: 	event,
 				        title: 	events[event].title,
 				        date: 	events[event].date,
 				        host: 	events[event].host
 			    	});
-
 			    	this.setState({
 					   eventsHosted: newStateHost
 					});
 			    }
-		    }
+			    else{	
+		    		console.log("inside else");
+		    		let guestListRef = firebaseApp.database().ref('events/' + event + '/guests/');
+		    		guestListRef.on('value', (snapshot) => {
+	  					
+	  					let guests = snapshot.val();
+					    //let newStateGuests = [];
+						for (let guest in guests) {
+							console.log(guest);
+		    				if(guest === currentUser){
+		    					console.log("inside if");
+
+		    					let guests = this.state.eventsGuest.slice();
+				    			
+				    			guests.push({
+							        id: 	event,
+							        title: 	events[event].title,
+							        date: 	events[event].date,
+							        host: 	events[event].host
+						    	});
+						    
+						    	this.setState({
+								   eventsGuest: guests
+								});
+		    				}
+		    			}
+		    		});
+					    	
+			    }	
+			}
 		});
 
-		ref.on('value', (snapshot) => {
+		//iterate through events
+		/*ref.on('value', (snapshot) => {
 		  	snapshot.forEach((childSnapshot) =>{
 			    var childKeyEvent = childSnapshot.key;
 			    var childDataEventTitle = childSnapshot.val().title;
 			    var childDataEventDate = childSnapshot.val().date;
 
-		  	
 			    let guestListRef = firebaseApp.database().ref('events/' + childKeyEvent + '/guests/');
 
+			    //iterate thorugh guests in event
 			    guestListRef.on('value', (snapshot) => {
 		  			snapshot.forEach((childSnapshot) => {
 		  			let eventsGuest = [];
@@ -57,60 +86,66 @@ export default class Events extends Component {
 			    	var childData = childSnapshot.val();
 
 			    	console.log(childKey+ "    event: "+ childKeyEvent + "   "+ childDataEventTitle + "   "+ childDataEventDate);
+			    	console.log("user brah: "+ currentUser);
 				    	if(childKey == currentUser){
+				    		console.log("ich kam rein");
 				    		eventsGuest.push({
-				    			id: childKeyEvent,
+				    			id: 	childKeyEvent,
 				        		title: 	childDataEventTitle,
 				        		date: 	childDataEventDate
 					    	});
+					    	console.log(eventsGuest[0].id);
 				    	}
-				    	console.log(eventsGuest[0]);
-				    	this.setState({
-							eventsGuest: eventsGuest
-						});
+				    	var arrayvar = this.state.eventsGuest.slice()
+						arrayvar.push(eventsGuest)
+						this.setState({ eventsGuest: arrayvar })
 		  			});
 		  		});
 		  	});
-		});
+		});*/
 	}
   	
 	render () {
+		const list = this.state.eventsGuest.map((item, i) => {
+		      return <li key={i}>{item}</li>
+		    });
+		       console.log(this.state);
 	    return (
 			<section className="display-item pagecontent">
 		 		<div className="eventsHosted">
 		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
 				      {this.state.eventsHosted.map((item) => {
-				        return (
-						<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
-				          	<li className="listentry" id={item.id} >
-				          		<div className="rightalignedList">
-                                  	<p>{item.date}</p>
-                                  	<h3 className="listheading">{item.title}</h3>
-                              	</div>
-					            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
-					        </li>
-				        </Link>
-				        )
-				      })}
+					        return (
+								<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
+						          	<li className="listentry" id={item.id} >
+						          		<div className="rightalignedList">
+		                                  	<p>{item.date}</p>
+		                                  	<h3 className="listheading">{item.title}</h3>
+		                              	</div>
+							            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
+							        </li>
+						        </Link>
+					        )
+				      	})}
 				    </ul>
 		  		</div>
 		  		<div className="eventsGuest">
 		 			<h1 className="heading listtitle"> Events As Guest </h1>
 				    <ul className="eventsList">
-				      {this.state.eventsGuest.map((item) => {
-				        return (
-						<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
-				          	<li className="listentry" id={item.id} >
-				          		<div className="rightalignedList">
-                                  	<p>{item.date}</p>
-                                  	<h3 className="listheading">{item.title}</h3>
-                              	</div>
-					            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
-					        </li>
-				        </Link>
-				        )
-				      })}
+				    	{this.state.eventsGuest.map((item) => {
+					        return (
+								<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
+						          	<li className="listentry" id={item.id} >
+						          		<div className="rightalignedList">
+		                                  	<p>{item.date}</p>
+		                                  	<h3 className="listheading">{item.title}</h3>
+		                              	</div>
+							            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
+							        </li>
+						        </Link>
+					        )
+				      	})}
 				    </ul>
 		  		</div>
 			</section> 
