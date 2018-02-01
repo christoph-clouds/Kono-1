@@ -1,12 +1,13 @@
 .backgroundimage{
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .logo{
     width: 15em;
     height: 15em;
     background-color: transparent;
+    margin-bottom: 10em;
 }
 .absoluteElements{
     position: absolute;
@@ -29,3 +30,12 @@
     width: 100%;
 }
 
+.startscreenbutton{
+    color: #fefefe;
+    border-color: #fefefe;
+    background-color: transparent;
+}
+
+.startscreenbutton:hover{
+    background-color: #bed09f;
+}

@@ -3,7 +3,7 @@ import { firebaseApp } from '../../config/constants'
 import { signIn } from '../../helpers/auth'
 import './Invitation.css';
 import { Redirect } from 'react-router-dom'
-import background from '../../images/backgroundLogin.jpg'
+import background from '../../images/backgroundLogin.png'
 import logo from '../../images/Logo.png'
 
 
@@ -56,22 +56,19 @@ export default class Invitation extends Component {
   render () {
     return (
         <div className="backgroundimage">
-            <img src={background} alt="background picture" className="palmimage"></img>
-            
-            <h1>Welcome To Kono</h1>
-
-            <h2>You have been invited to</h2><h1>an Event</h1>
-              <div>
-                    <button onClick={this.addToEventList} className="submitbutton">
-                      Add Event to Your Event list
-                    </button>
-              </div>
-
+            <img src={background} alt="background" className="palmimage"></img>
             <div className="pagecontent">
                 <div className="absoluteElements">
-                    <img src={logo} alt="kono logo" className="logo"></img>
+                    <h1 className="title noBackground">Aloha</h1>
+                    <div className="logoutmessage">
+                        <h2 className="subheading noBackground">my dude</h2>
+                        <h1 className="heading noBackground">an Event</h1>
+                    </div>
                     <button onClick={this.Login} className="submitbutton">
                         Sign In with Google
+                    </button>
+                    <button onClick={this.addToEventList} className="submitbutton">
+                        Add Event to Your Event list
                     </button>
                 </div>
             </div>
