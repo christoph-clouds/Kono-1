@@ -92,19 +92,24 @@
     justify-content: center;
 }
 
-.wishlistnote{
+.wishlistitem{
     width: 15em;
-    height: 3em;
+    height: 4.5dem;
     margin: 0.5em;
     list-style: none;
-    display: flex;
-    justify-content: space-between;
     padding: 0.5em;
+    padding-top: 0em;
     background-color: #efefef;
     overflow-wrap: break-word;
 }
 
-.wishlistnote *{
+.note{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.wishlistitem *{
     background-color: transparent;
 }
 
@@ -174,6 +179,7 @@
     display: flex;
     border: none;
     box-shadow: none;
+    width: 8em;
     background: transparent;
     background-image: none;
     -webkit-appearance: none;
@@ -209,6 +215,10 @@
 }
 
 .pin{
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
+}
+.centerpin{
+    display: flex;
+    justify-content: center;
 }
