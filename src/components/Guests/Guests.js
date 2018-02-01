@@ -149,7 +149,7 @@ export default class Guests extends Component {
 							{(this.state.isHost && !this.state.editView) &&
 		                    	<div className="hostPart">
 									<div className="horizontallyAligned">
-										<img className="profileImg marginright" src={this.state.profileHostImg}/>
+										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
 										<h2 className="heading">{this.state.profileHostName}</h2>
 									</div>
 									<div className="horizontallyAligned">
@@ -161,7 +161,7 @@ export default class Guests extends Component {
 		                	{!this.state.isHost &&
 							<div className="hostPart">
 								<div className="horizontallyAligned">
-									<img className="profileImg marginright" src={this.state.profileHostImg}/>
+									<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
 									<h2 className="heading">{this.state.profileHostName}</h2>
 								</div>
 								<p className="subheading">"{this.state.hostMessage}"</p>
@@ -184,7 +184,7 @@ export default class Guests extends Component {
 	                                return (
 	                                    <li className="guestListEntry" key={prop.id}>
 											<div className="guestInfo">
-												<img className="profileImg" src={prop.profileImg}/>
+												<img className="profileImg" src={prop.profileImg} alt="profilepic"/>
 												<div className="guestProperties">
 													<h3 className="heading">{prop.name} </h3>
 													<ul className="guestAttributeList">

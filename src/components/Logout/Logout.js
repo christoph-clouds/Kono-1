@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { firebaseApp } from '../../config/constants'
 import { signIn, signOut } from '../../helpers/auth'
 import './Logout.css';
+import background from '../../images/backgroundLogin.png'
+import logo from '../../images/Logo.png'
 
 export default class Login extends Component {
   constructor(props) {
@@ -19,12 +21,17 @@ export default class Login extends Component {
   render () {
     signOut();
     return (
-        <div>
-          <h1>You have been Logged Out</h1>
-          <button onClick={this.Login}>
-            Sign Back In with Google 
-          </button>
-        </div> 
+        <div className="backgroundimage">
+            <img src={background} alt="background" className="palmimage"></img>
+            <div className="pagecontent">
+                <div className="absoluteElements">
+                    <h1 className="subheading logoutmessage">You have been Logged Out</h1>
+                    <button onClick={this.Login} className="submitbutton startscreenbutton">
+                        Sign Back In with Google
+                    </button>
+                </div>
+            </div>
+        </div>
     )
   }
 }
