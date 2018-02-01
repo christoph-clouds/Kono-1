@@ -88,12 +88,22 @@ export default class Inventory extends Component {
 	}
 
 	deleteItem(id){
+		let items = this.state.items;
+		items.splice(id, 1);
+		this.setState({items: items });
+
 		let currentEvent = this.props.match.params.eventid;
 		let InventoryListRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory');
 		InventoryListRef.child(id).remove();
 	}
 
+	
+
 	deleteWish(id){
+		let wishes = this.state.wishes;
+		wishes.splice(id, 1);
+		this.setState({wishes: wishes });
+		
 		let currentEvent = this.props.match.params.eventid;
 		let wishListRef = firebaseApp.database().ref('events/' + currentEvent + '/wishlist');
 		wishListRef.child(id).remove();
@@ -161,7 +171,9 @@ export default class Inventory extends Component {
 	render() {
 		return (
 			<div>
-                <h1 className="title"> Inventory </h1>
+                <div className="pagecontent">
+                    <h1 className="title"> Inventory </h1>
+                </div>
 				<div className="Inventory">
                     <div className="pagecontent">
                         {this.state.standardView &&

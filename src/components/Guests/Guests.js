@@ -87,10 +87,12 @@ export default class Guests extends Component {
 	}
 
 	removeGuest(id){
+		let guests = this.state.guests;
+		guests.splice(id, 1);
+		this.setState({guests: guests });
+		
 		let currentEvent = this.props.match.params.eventid;
 		let GuestListRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/');
-		
-		console.log("about to delete guest: " + id);
 		GuestListRef.child(id).remove();
 	}
 
@@ -192,7 +194,10 @@ export default class Guests extends Component {
 													</ul>
 												</div>
 											</div>
-	                                        <div  className="deleteEntryX" onClick={ () => this.removeGuest(prop.id)}></div>
+                                            {this.state.isHost &&
+											<div className="deleteEntryX"
+												 onClick={() => this.removeGuest(prop.id)}></div>
+                                            }
 	                                    </li>
 	                                )
 	                              })}
