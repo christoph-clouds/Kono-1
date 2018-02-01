@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ref, firebaseApp } from '../../config/constants'
+import { firebaseApp } from '../../config/constants'
 import './Inventory.css'
 import { Link } from 'react-router-dom'
 import bottle from '../../images/icons/bottle.png'
@@ -36,7 +36,6 @@ export default class Inventory extends Component {
   	}
 
   	componentDidMount() {
-    	const currentUser = firebaseApp.auth().currentUser;
     	let currentEvent = this.props.match.params.eventid;
     	let inventoryRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory/');
     	let wishlistRef = firebaseApp.database().ref('events/' + currentEvent + '/wishlist/');
@@ -99,7 +98,7 @@ export default class Inventory extends Component {
 	}
 
 	addToInventory(event){
-		if(sessionStorage.curUser != "null"){
+		if(sessionStorage.curUser !== "null"){
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
 			let InventoryListRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory');
@@ -127,7 +126,7 @@ export default class Inventory extends Component {
   	}
 
 	addToWishlist(event){
-		if(sessionStorage.curUser != "null"){
+		if(sessionStorage.curUser !== "null"){
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
 			let wishListRef = firebaseApp.database().ref('events/' + currentEvent + '/wishlist');
@@ -158,8 +157,6 @@ export default class Inventory extends Component {
     }
 
 	render() {
-		const { boozeStatus } = this.state
-
 		return (
 			<div>
                 <h1 className="title"> Inventory </h1>

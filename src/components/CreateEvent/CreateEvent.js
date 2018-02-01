@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ref } from '../../config/constants'
+import { ref, firebaseApp} from '../../config/constants'
 import { Redirect } from 'react-router-dom'
 import './CreateEvent.css';
 import Location from '../../images/icons/location.png';
@@ -27,11 +27,20 @@ export default class CreateEvents extends Component {
   	}
 
   	handleSubmit(event) {
-		if(sessionStorage.curUser != "null"){
+  		let currentUser = sessionStorage.curUser;
+  		console.log("currentUser :   " +currentUser);
+		
+		if(currentUser != "null"){
 			event.preventDefault();
-			var newEvent = ref.push();  	
+			var newEvent = ref.push();  
 			newEvent.set({
 			    host: sessionStorage.curUser,
+			  	hostSpecial: {
+			  		name: firebaseApp.auth().currentUser.displayName,
+	          		profileImg: firebaseApp.auth().currentUser.photoURL
+			    },
+			   	mainMessage: "Aloha my friends",
+	          	guestMessage: "Feel free to invite others with the invitation Link",
 			    title: event.target.title.value,
 			    desc: event.target.description.value,
 			    location: event.target.location.value,
@@ -40,10 +49,10 @@ export default class CreateEvents extends Component {
 			    theme: event.target.theme.value,
 			    inventory: [""],
 			    wishlist: [""],
-			    guests: [""],
 			    boozeStatus: '0%'
   			});	
   			this.setState({ fireRedirectEvents: true })
+  			this.resetForm()
 		}
 		else{
 			console.log("user isnt logged in");
@@ -84,7 +93,7 @@ export default class CreateEvents extends Component {
 
 					<div className="formelement">
 						<img src={Location} className="formicon" alt="location icon"></img>
-						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputfield" id="newEventLocation" placeholder="location" required/>
+						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputfield" id="newEventLocation" placeholder="location" />
 					</div>
 
 					<div className="formelement">
@@ -94,7 +103,7 @@ export default class CreateEvents extends Component {
 
 					<div className="formelement">
 						<img src={Time} className="formicon" alt="time icon"></img>
-						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime" required/>
+						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime" />
 					</div>
 
 					<div className="formelement">
