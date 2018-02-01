@@ -4,6 +4,7 @@ import './Inventory.css'
 import { Link } from 'react-router-dom'
 import bottle from '../../images/icons/bottle.png'
 import backArrow from '../../images/icons/back.png'
+import pin from '../../images/icons/pin1.png'
 
 export default class Inventory extends Component {
 
@@ -224,9 +225,12 @@ export default class Inventory extends Component {
                         <ul className="wishlist">
                             {this.state.wishes.map((wish) => {
                                 return (
-                                    <li key={wish.id} className="wishlistnote">
-                                        <div className="noteEntry">{wish.wish}</div>
-                                        <div className="deleteEntryX" onClick={() => this.deleteWish(wish.id)}></div>
+                                    <li key={wish.id}>
+                                        <div className="wishlistnote">
+                                            <img src={pin} alt="pin" className="pin"></img>
+                                            <div className="noteEntry">{wish.wish}</div>
+                                            <div className="deleteEntryX" onClick={() => this.deleteWish(wish.id)}></div>
+                                        </div>
                                     </li>
                                 )
                             })}

@@ -129,14 +129,14 @@
 
 
 .closeFormX{
-    background-image: url('../../images/icons/greyx.png');
+    background-image: url('../../images/icons/greyx2.png');
     background-size: 2em;
     width: 2em;
     height: 2em;
     margin-left: 3em;
 }
 .closeFormX:hover{
-    background-image: url('../../images/icons/redx.png');
+    background-image: url('../../images/icons/redx2.png');
 }
 
 .deleteEntryX{
@@ -206,4 +206,9 @@
     background-color: #557037;
     border-color: #bed09f;
     color: #bed09f;
+}
+
+.pin{
+    width: 1em;
+    height: 1em;
 }
