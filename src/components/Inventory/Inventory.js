@@ -173,7 +173,8 @@ export default class Inventory extends Component {
                                     {this.state.items.map((item) => {
                                         return (
                                             <li className="inventoryentry" key={item.id}>
-                                                {item.amount} {item.type} <div id={item.id} onClick={ () => this.deleteItem(item.id)}>X</div>
+                                                {item.amount} {item.type}
+                                                <div id={item.id} onClick={ () => this.deleteItem(item.id)} className="deleteEntryX"></div>
                                             </li>
                                         )
                                     })}

@@ -1,5 +1,47 @@
 .profileImg{
-	width: 3em;
-	height: 3em;
+	width: 4em;
+	height: 4em;
 	border-radius: 2em;
+}
+
+.guestListEntry{
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: solid;
+	border-width: 2px;
+}
+.guestInfo{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.guestProperties{
+	padding: 2em;
+}
+
+.guestAttributeList{
+	list-style: none;
+}
+
+.horizontallyAligned{
+	display: flex;
+	align-items: center;
+}
+
+.smallerpadding{
+	padding: 0.5em;
+}
+.marginright{
+	margin-right: 1em;
+}
+
+.margintop{
+	margin-top: 1em;
+}
+.hostPart{
+	padding-top: 1.5em;
+	padding-bottom: 2em;
 }
