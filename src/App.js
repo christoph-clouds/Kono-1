@@ -17,21 +17,13 @@ import {
   Switch
 } from 'react-router-dom'
 
-  let userbutton;
-  if(sessionStorage.curUser != null){
-    userbutton = "Logout";
-  }
-  else{
-    userbutton = "Login";
-  }
-
 const RouterNav = () => (
   <Router>
     <div>
       <ul>
         <li><Link to="/create-event">Create Event</Link></li>
         <li><Link to="/events">Events</Link></li>
-        <li><Link to={userbutton.toLowerCase()} onClick={signOut}>{userbutton}</Link></li>
+        <li><Link to="/logout" onClick={signOut}>Logout</Link></li>
       </ul>
 
       <hr/>

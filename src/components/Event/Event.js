@@ -8,20 +8,66 @@ export default class Event extends Component {
 	constructor(props) {
     	super(props)
     	this.state = {
-			title: ""
+			title: "",
+			hostMessage: "",
+			isHost: false,
+			editView: false
 		};
+		this.editHostMessage = this.editHostMessage.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.resetForm = this.resetForm.bind(this);
   	}
 
   	componentDidMount() {
   		let eventID = this.props.match.params.eventid;
   		let eventRef = firebaseApp.database().ref('events/' + eventID ); 
 		eventRef.on("value", (snapshot)=>{
-			
 			let eventTitle = snapshot.val().title;
-			console.log(eventTitle);
-			this.setState({title: eventTitle});
+			let hostMessage = snapshot.val().mainMessage;
+			let host = snapshot.val().host;
+			if(host === sessionStorage.curUser){
+				this.setState({isHost: true});
+			}
+			this.setState({
+				title: eventTitle,
+				hostMessage: hostMessage
+			});
 		});	
   	}
+
+  	handleSubmit(event){
+  		if(sessionStorage.curUser !== "null"){
+			event.preventDefault();
+			let currentEvent = this.props.match.params.eventid;
+			let eventRef = firebaseApp.database().ref('events/' + currentEvent);
+		  	eventRef.update({
+		    	mainMessage: event.target.hostMessage.value
+		  	});
+		  	this.resetForm()
+		}
+
+        this.setState({
+            editView: false
+        });
+  	}
+
+  	resetForm(){
+  		this.setState(this.baseState)
+  	}
+
+
+  	handleChange(event){
+  		const name = event.target.name;
+  		const value = event.target.value;
+  		this.setState({
+  			[name]: value
+  		});
+  	}
+
+  	editHostMessage(){
+  		this.setState({editView: true});
+	}
 
 	render () {
 		return(
@@ -41,10 +87,31 @@ export default class Event extends Component {
 				<Link className="menubutton guests" to={`/events/${this.props.match.params.eventid}/guests`} >
 				          Guests
 			   	</Link>
+
 				<div className="eventmenufooter">
-                    <p className="heading">"A message to y'all!"</p>
-                    <button className="chartoombutton">Chat</button>
+					{(this.state.isHost && !this.state.editView) &&
+                    	<div>
+	                    	<p className="heading">{this.state.hostMessage}</p>
+	                    	<div className="edit" onClick={this.editHostMessage}> edit </div>
+                		</div>
+                	}
+                	{!this.state.isHost &&
+	                	<p className="heading">{this.state.hostMessage}</p>
+                	}
+                	{this.state.editView &&
+                		<div>
+                			<form onSubmit={this.handleSubmit}>
+	                            <input name="hostMessage" className="formitem" value={this.state.hostMessage}
+	                                   onChange={this.handleChange} type="text"
+	                                   maxLength="30" required/>
+	                            <button id="button" type="submit" className="submitbutton" value="Submit">Save</button>
+                        	</form>
+                		</div>
+                	}
+
+                	<button className="chatroombutton">Chat</button>
 				</div>
+
 		    </div>
 		);
 	}
