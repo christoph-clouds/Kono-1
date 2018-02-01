@@ -24,33 +24,42 @@ export default class Invitation extends Component {
   }
 
   addToEventList(){
-    let currentUser = sessionStorage.curUser;
-    let host;
-    let currentEvent = this.props.match.params.eventid;
-    let hostRef = firebaseApp.database().ref('events/' + currentEvent + '/host');
-    hostRef.on('value', (snapshot) => {
-        host = snapshot.val();
-    console.log("the host: " + host);
-    });
-    if(firebaseApp.auth().currentUser && firebaseApp.auth().currentUser !=  host){
-      
-              console.log("adding new guest to :" + currentEvent);
-              console.log("adding new guest id :" + currentUser);
+    console.log(firebaseApp.auth().currentUser);
+    if(firebaseApp.auth().currentUser){
+      let currentUser = sessionStorage.curUser;
 
-      var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
-          name: firebaseApp.auth().currentUser.displayName,
-          profileImg: firebaseApp.auth().currentUser.photoURL,
-          drives: "n",
-          hasgift: "n",
-          hasbed: "n",
-          host: "n"
-        });
-        console.log("adding new guest");
-        this.props.history.push('./')
+      let currentEvent = this.props.match.params.eventid;
+      let ref = firebaseApp.database().ref('events/' + currentEvent + '/');
+      let host;
+
+      ref.on('value', (snapshot) => {
+          host = snapshot.val().host;
+          console.log("the host: " + host);
+      });
+
+      if(currentUser !=  host){
+            console.log("adding new guest to :" + currentEvent);
+            console.log("adding new guest id: " + currentUser);
+
+        var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
+            name: firebaseApp.auth().currentUser.displayName,
+            profileImg: firebaseApp.auth().currentUser.photoURL,
+            drives: "n",
+            hasgift: "n",
+            hasbed: "n",
+            host: "n"
+          });
+          console.log("adding new guest");
+          this.props.history.push('./')
+      }
+      else{
+        console.log("cant be host and guest at the same time");
+      }
     }
     else{
-      console.log("no user logged in")
+      console.log("user need to login first");
     }
+   
   }
 
   render () {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ref } from '../../config/constants'
+import { ref, firebaseApp } from '../../config/constants'
 import './Events.css';
 import Arrow from '../../images/icons/arrowright.png'
 import {
@@ -13,11 +13,12 @@ export default class Events extends Component {
 	    this.state = {
 	      currentItem: '',
 	      username: '',
-	      items: []
+	      eventsHosted: [],
+	      eventsGuest: []
 	    }
 	}
 
-    componentDidMount() {
+    componentDidMount = (events) => {
     	const currentUser = sessionStorage.curUser;
 
 		ref.on('value', (snapshot) => {
@@ -34,24 +35,42 @@ export default class Events extends Component {
 			    	});
 
 			    	this.setState({
-					   items: newStateHost
+					   eventsHosted: newStateHost
 					});
 			    }
-			    /*else{
-			    	let refGuests = firebaseApp.database().ref('events/' + event + '/guests/name'); 
-			    	if(refGuests === "Lukas"){
-			    		newStateGuests.push({
-					        id: 	event,
-					        title: 	events[event].title,
-					        date: 	events[event].date,
-			    		});
-			    	}
-			    	this.setState({
-					   items: newStateGuests
-					});
-			    }*/
 		    }
-		   
+		});
+
+		ref.on('value', (snapshot) => {
+		  	snapshot.forEach((childSnapshot) =>{
+			    var childKeyEvent = childSnapshot.key;
+			    var childDataEventTitle = childSnapshot.val().title;
+			    var childDataEventDate = childSnapshot.val().date;
+
+		  	
+			    let guestListRef = firebaseApp.database().ref('events/' + childKeyEvent + '/guests/');
+
+			    guestListRef.on('value', (snapshot) => {
+		  			snapshot.forEach((childSnapshot) => {
+		  			let eventsGuest = [];
+		  			var childKey = childSnapshot.key;
+			    	var childData = childSnapshot.val();
+
+			    	console.log(childKey+ "    event: "+ childKeyEvent + "   "+ childDataEventTitle + "   "+ childDataEventDate);
+				    	if(childKey == currentUser){
+				    		eventsGuest.push({
+				    			id: childKeyEvent,
+				        		title: 	childDataEventTitle,
+				        		date: 	childDataEventDate
+					    	});
+				    	}
+				    	console.log(eventsGuest[0]);
+				    	this.setState({
+							eventsGuest: eventsGuest
+						});
+		  			});
+		  		});
+		  	});
 		});
 	}
   	
@@ -61,7 +80,7 @@ export default class Events extends Component {
 		 		<div className="eventsHosted">
 		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
-				      {this.state.items.map((item) => {
+				      {this.state.eventsHosted.map((item) => {
 				        return (
 						<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
 				          	<li className="listentry" id={item.id} >
@@ -76,7 +95,24 @@ export default class Events extends Component {
 				      })}
 				    </ul>
 		  		</div>
-		  		
+		  		<div className="eventsGuest">
+		 			<h1 className="heading listtitle"> Events As Guest </h1>
+				    <ul className="eventsList">
+				      {this.state.eventsGuest.map((item) => {
+				        return (
+						<Link className="No-Link" to={`/events/${item.id}`} key={item.id}>
+				          	<li className="listentry" id={item.id} >
+				          		<div className="rightalignedList">
+                                  	<p>{item.date}</p>
+                                  	<h3 className="listheading">{item.title}</h3>
+                              	</div>
+					            <img src={Arrow} className="forwardArrow" alt="arrow icon"></img>
+					        </li>
+				        </Link>
+				        )
+				      })}
+				    </ul>
+		  		</div>
 			</section> 
     	); 
 	}
