@@ -3,6 +3,7 @@ import { ref, firebaseApp } from '../../config/constants'
 import './Inventory.css'
 import { Link } from 'react-router-dom'
 import bottle from '../../images/icons/bottle.png'
+import backArrow from '../../images/icons/back.png'
 
 export default class Inventory extends Component {
 
@@ -179,64 +180,77 @@ export default class Inventory extends Component {
                                         )
                                     })}
                                 </ul>
-                                <button id="addItemButton" className="submitbutton" onClick={this.changeInventoryView}>+ Add Drink</button>
+                                <button className="openInventoryFormButton" id="addItemButton" onClick={this.changeInventoryView}>+ Add Drink</button>
                             </div>
                         </div>
                         }
                         {this.state.formView &&
-                        <div className="itemform">
-                            <form id="addToInventoryForm" className="addToInventory" onSubmit={this.addToInventory}>
-                                <h2 className="subheading"> Add To Inventory </h2>
-                                <div className="formentry">
-                                    <input name="amount" className="formitem" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" required/> bottle(s)
-                                </div>
-                                <div className="formentry">
-                                    <input name="what" className="formitem" value={this.state.what} onChange={this.handleChange} type="text" maxLength="15" placeholder="type of drink" required/> drink
-                                </div>
-                                <div className="formentry">
-                                    <input name="price" className="formitem" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000"/> bucks
-                                </div>
-                                <div>
-                                    <button id="button" type="submit" className="submitbutton" value="Submit">+ Add Drink</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div className="itemform">
+                                <form id="addToInventoryForm" className="addToInventory" onSubmit={this.addToInventory}>
+                                    <div className="closeItemForm formentry">
+                                        <h2 className="subheading"> Add To Inventory </h2>
+                                        <div className="closeFormX" onClick={this.changeInventoryView}></div>
+                                    </div>
+                                    <div className="formentry">
+                                        <input name="amount" className="formitem" value={this.state.amount} onChange={this.handleChange} type="number" min="1" max="500" required/>
+                                        <div className="formlabel">bottle(s)</div>
+                                        <div className="selectstyle">
+                                            <select name="what" className="dropdown" value={this.state.what} onChange={this.handleChange} type="text" required>
+                                                <option>beer</option>
+                                                <option>wine</option>
+                                                <option>vodka</option>
+                                                <option>whiskey</option>
+                                                <option>rum</option>
+                                                <option>other liquor</option>
+                                                <option>juce</option>
+                                                <option>softdrink</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="formentry">
+                                        <input name="price" className="formitem" value={this.state.price} onChange={this.handleChange} type="number" min="0" max="10000"/>
+                                        <div className="formlabel">bucks</div>
+                                    </div>
+                                    <button className="addToInventoryButton" id="button" type="submit" value="Submit">+ Add Drink</button>
+                                </form>
+                            </div>
                         }
                     </div>
 			   	</div>
 			   	<div className="pagecontent">
                     {this.state.listView &&
-                    <div>
-                        <h1 className="subheading"> Wishlist </h1>
+                    <div className="noteList">
+                        <h1 className="subheading"> Notes </h1>
                         <ul className="wishlist">
                             {this.state.wishes.map((wish) => {
                                 return (
-                                    <li key={wish.id} className="listentry">
-                                        {wish.wish}
-                                        <div onClick={() => this.deleteWish(wish.id)}>X</div>
+                                    <li key={wish.id} className="wishlistnote">
+                                        <div className="noteEntry">{wish.wish}</div>
+                                        <div className="deleteEntryX" onClick={() => this.deleteWish(wish.id)}></div>
                                     </li>
                                 )
                             })}
                         </ul>
-                        <button className="submitbutton" onClick={this.changeListView} >Make a Wish</button>
+                        <button className="submitbutton" onClick={this.changeListView} >Add a Note</button>
                     </div>
                     }
                     {this.state.wishView &&
-                    <div className="addToWishlist">
-                        <h2 className="subheading"> Add To Wishlist </h2>
-                        <form onSubmit={this.addToWishlist}>
+                    <div className="noteList">
+                        <div className="closeWishForm">
+                            <h2 className="subheading"> Add Note</h2>
+                            <div className="closeFormX" onClick={this.changeListView}></div>
+                        </div>
+                        <form onSubmit={this.addToWishlist} className="noteList">
                             <input name="wish" className="formitem" value={this.state.wish}
                                    onChange={this.handleChange} type="text" placeholder="Pineapple Please?!"
-                                   maxLength="20" required/>
+                                   maxLength="40" required/>
                             <button id="button" type="submit" className="submitbutton" value="Submit">+ Add</button>
                         </form>
                     </div>
                     }
-                    <div className="back">
-                        <Link to={`/events/${this.props.match.params.eventid}`} >
-                            Back
-                        </Link>
-                    </div>
+                    <Link className="back" to={`/events/${this.props.match.params.eventid}`} >
+                        <img src={backArrow} alt="back" className="backIcon"></img>
+                    </Link>
 			   	</div>
 		    </div>
 		);

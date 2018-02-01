@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ref, firebaseApp } from '../../config/constants'
 import './Guests.css'
 import { Link } from 'react-router-dom'
+import backArrow from '../../images/icons/back.png'
 
 export default class Guests extends Component {
 
@@ -119,11 +120,9 @@ export default class Guests extends Component {
                 <div className="invitationLink">
                 {this.state.invitationLink}
                 </div>
-			   	<div className="back">
-			   		<Link to={`/events/${this.props.match.params.eventid}`} >
-						Back
-					</Link>
-		    	</div>
+				<Link className="back" to={`/events/${this.props.match.params.eventid}`} >
+					<img src={backArrow} alt="back" class="backIcon"></img>
+				</Link>
 		    </div>
 		);
 	}

@@ -84,7 +84,7 @@ export default class CreateEvents extends Component {
 
 					<div className="formelement">
 						<img src={Location} className="formicon" alt="location icon"></img>
-						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputfield" id="newEventLocation" placeholder="location" required/>
+						<input name="location"  value={this.state.location} onChange={this.handleChange} type="text" maxLength="50" className="inputfield" id="newEventLocation" placeholder="location"/>
 					</div>
 
 					<div className="formelement">
@@ -94,7 +94,7 @@ export default class CreateEvents extends Component {
 
 					<div className="formelement">
 						<img src={Time} className="formicon" alt="time icon"></img>
-						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime" required/>
+						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime"/>
 					</div>
 
 					<div className="formelement">
