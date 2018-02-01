@@ -12,11 +12,8 @@
 
 .formitem{
     border-style: none;
-
     border-bottom: solid;
-    width: 10em;
-    margin-bottom: 1em;
-    padding: 0.5em;
+    margin: 0.5em;
 }
 
 .itemform{
@@ -24,6 +21,30 @@
     flex-direction: column;
     align-items: center;
     padding-top: 2em;
+    padding-bottom: 2em;
+    background-color: #789e4f;
+    color: #fefefe;
+    border-radius: 1em;
+}
+
+.formlabel{
+    border-style: none;
+    border-bottom: solid;
+    border-color: #789e4f;
+    margin: 0.5em;
+}
+
+.itemform * {
+    background-color: #789e4f;
+    color: #fefefe;
+
+}
+
+.formentry{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0.5em;
 }
 
 
@@ -66,10 +87,123 @@
 
 .wishlist{
     padding-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.back{
-    border-color: #789e4f;
-    border-style: solid;
+.wishlistnote{
+    width: 15em;
+    height: 3em;
+    margin: 0.5em;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    background-color: #efefef;
+    overflow-wrap: break-word;
+}
 
+.wishlistnote *{
+    background-color: transparent;
+}
+
+.noteEntry{
+    width: 90%;
+}
+
+.noteList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backIcon{
+    width: 5em;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 50%;
+    margin-top: 3em;
+}
+
+
+
+.closeFormX{
+    background-image: url('../../images/icons/greyx.png');
+    background-size: 2em;
+    width: 2em;
+    height: 2em;
+    margin-left: 3em;
+}
+.closeFormX:hover{
+    background-image: url('../../images/icons/redx.png');
+}
+
+.deleteEntryX{
+    background-image: url('../../images/icons/greyx.png');
+    background-size: 1em;
+    width: 1em;
+    height: 1em;
+}
+.deleteEntryX:hover{
+    background-image: url('../../images/icons/redx.png');
+}
+
+.closeItemForm{
+    display: flex;
+}
+
+.closeWishForm{
+    display: flex;
+    padding-bottom: 1em;
+    justify-content: space-between;
+}
+
+.selectstyle{
+    border-bottom: solid;
+    overflow: hidden;
+    background: url('../../images/icons/droparrow.png') no-repeat 90% 50%;
+    background-size: 2em;
+    background-color: #789e4f;
+    border-color: #fefefe;
+    border-width: 3px;
+}
+
+.dropdown{
+    color: #fefefe;
+    display: flex;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.addToInventoryButton{
+    padding: 1em;
+    border-color: #fefefe;
+    border-style: solid;
+    border-radius: 0.5em;
+    align-self: flex-end;
+    border-width: 3px;
+}
+.addToInventoryButton:hover{
+    background-color: #fefefe;
+    border-color: #789e4f;
+    color: #789e4f;
+}
+
+.openInventoryFormButton{
+    padding: 1em;
+    border-color: #557037;
+    border-style: solid;
+    border-radius: 0.5em;
+    align-self: flex-end;
+    border-width: 3px;
+}
+.openInventoryFormButton:hover{
+    background-color: #557037;
+    border-color: #bed09f;
+    color: #bed09f;
 }
