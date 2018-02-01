@@ -89,7 +89,7 @@ export default class Guests extends Component {
 		let guests = this.state.guests;
 		guests.splice(id, 1);
 		this.setState({guests: guests });
-		
+
 		let currentEvent = this.props.match.params.eventid;
 		let GuestListRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/');
 		GuestListRef.child(id).remove();
@@ -197,7 +197,7 @@ export default class Guests extends Component {
                 {this.state.invitationLink}
                 </div>
 				<Link className="back" to={`/events/${this.props.match.params.eventid}`} >
-					<img src={backArrow} alt="back" class="backIcon"></img>
+					<img src={backArrow} alt="back" className="backIcon"></img>
 				</Link>
 		    </div>
 		);

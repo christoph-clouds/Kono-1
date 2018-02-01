@@ -156,7 +156,7 @@ export default class CreateEvents extends Component {
 					</div>
 			  </div>
 				<Link className="back" to={`/events/${this.props.match.params.eventid}`} >
-					<img src={backArrow} alt="back" class="backIcon"></img>
+					<img src={backArrow} alt="back" className="backIcon"></img>
 				</Link>
 			</div>
 	    )
