@@ -180,12 +180,11 @@ input[type=radio]:hover + label:before {
 .clearbutton{
     border-radius: 0.5em;
     font-size: 0.8em;
-    border-color: #bfbfbf;
-    color: #bfbfbf;
+    border-color: #a4a4a4;
+    color: #a4a4a4;
     border-width: 4px;
     padding: 0.5em;
     margin-bottom: 0.5em;
-    color: #efefef;
 }
 
 .clearbutton:hover{

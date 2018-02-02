@@ -168,16 +168,20 @@ export default class CreateEvents extends Component {
 									<button id="button" type="submit" className="submitbutton" value="Submit">Save Changes</button>
 								</div>
 							</form>
-
-							<button className="deletebutton" onClick={this.askdeleteEvent}>Delete Event</button>
+							{!this.state.askIfDelete &&
+							<div className="warningBox">
+								<button className="clearbutton" onClick={this.askdeleteEvent}>Delete Event</button>
+							</div>
+							}
 							{this.state.askIfDelete &&
 								<div className="warningBox">
-									<h1>Are you sure you want to delete this {this.state.title} permanently?</h1>
-									<button className="deletebutton" onClick={this.deleteEvent}>Delete Event</button>
-									<button className="cancelbutton" onClick={this.canceldeleteEvent}>Cancel</button>
+									<h1 className="warningMessage">you are about to delete {this.state.title} </h1>
+									<div>
+										<button className="clearbutton" onClick={this.deleteEvent}>Delete Event</button>
+										<button className="clearbutton cancelbutton" onClick={this.canceldeleteEvent}>Cancel</button>
+									</div>
 								</div>
-							}	
-
+							}
 						</div>
 						}
 						{!this.state.isHost && 
