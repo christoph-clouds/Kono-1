@@ -34,8 +34,15 @@
     color: #fefefe;
     border-color: #fefefe;
     background-color: transparent;
+    text-decoration: none;
 }
 
 .startscreenbutton:hover{
     background-color: #bed09f;
+}
+
+.login{
+    background-color: transparent;
+    width: 15em;
+    height: auto;
 }

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { firebaseApp } from '../../config/constants'
 import { signIn } from '../../helpers/auth'
 import '../Login/Login.css';
+import './Welcome.css'
 import { Redirect, Link} from 'react-router-dom'
-import logo from '../../images/Logo.png'
 import background from '../../images/backgroundLogin.png'
 
 
@@ -19,11 +19,11 @@ export default class Login extends Component {
                 <img src={background} alt="background" className="palmimage"></img>
                 <div className="pagecontent">
                     <div className="absoluteElements">
-                      <h1 className="title noBackground">Aloha</h1>
-                      <Link className="submitbutton startscreenbutton" to={"../events"} >
+                      <h1 className="aloha">Aloha</h1>
+                      <Link className="submitbutton startscreenbutton alohabutton" to={"../events"} >
                         My Events
                       </Link>
-                      <Link className="submitbutton startscreenbutton" to={"../create-event"} >
+                      <Link className="submitbutton startscreenbutton alohabutton" to={"../create-event"} >
                         Create Event
                       </Link>
                     </div>

@@ -5,6 +5,7 @@ import './Login.css';
 import { Redirect } from 'react-router-dom'
 import logo from '../../images/Logo.png'
 import background from '../../images/backgroundLogin.png'
+import login from '../../images/google login.png'
 
 
 export default class Login extends Component {
@@ -37,9 +38,7 @@ export default class Login extends Component {
                 <div className="pagecontent">
                     <div className="absoluteElements">
                         <img src={logo} alt="kono" className="logo"></img>
-                        <button onClick={this.Login} className="submitbutton startscreenbutton">
-                            Sign in with Google
-                        </button>
+                        <img src={login} alt="login" className="login" onClick={this.Login}></img>
                     </div>
                 </div>
             </div>

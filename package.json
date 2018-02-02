@@ -2,7 +2,7 @@
   "name": "Kono",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kono-eb560.firebaseapp.com/",
+  "homepage": "https://lukasseiwald.github.io/Kono",
   "dependencies": {
     "clipboard": "^1.7.1",
     "react": "^16.2.0",

@@ -3,7 +3,10 @@ import { firebaseApp } from '../../config/constants'
 import { signIn, signOut } from '../../helpers/auth'
 import './Logout.css';
 import background from '../../images/backgroundLogin.png'
-import logo from '../../images/Logo.png'
+import login from '../../images/google login.png'
+
+
+
 
 export default class Login extends Component {
   constructor(props) {
@@ -26,9 +29,7 @@ export default class Login extends Component {
             <div className="pagecontent">
                 <div className="absoluteElements">
                     <h1 className="subheading logoutmessage">You have been Logged Out</h1>
-                    <button onClick={this.Login} className="submitbutton startscreenbutton">
-                        Sign Back In with Google
-                    </button>
+                    <img src={login} alt="login" className="login" onClick={this.Login}></img>
                 </div>
             </div>
         </div>
