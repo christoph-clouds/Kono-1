@@ -1,0 +1,17 @@
+.descriptiontext{
+    color: #557037;
+    overflow-wrap: break-word;
+    padding-top: 0.5em;
+}
+
+.descriptiontext *{
+    color: #557037;
+    overflow-wrap: break-word;
+}
+
+.descriptionGuestView{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2em
+}

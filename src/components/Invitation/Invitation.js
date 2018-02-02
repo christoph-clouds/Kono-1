@@ -4,7 +4,8 @@ import { signIn } from '../../helpers/auth'
 import './Invitation.css';
 //import { Redirect } from 'react-router-dom'
 import background from '../../images/backgroundLogin.png'
-import logo from '../../images/Logo.png'
+import login from '../../images/google login.png'
+
 
 
 export default class Invitation extends Component {
@@ -69,7 +70,6 @@ export default class Invitation extends Component {
           else{
             console.log("either host undefinied or, host tries to be guest");
           }
-
       });
     }
     else{
@@ -88,10 +88,8 @@ export default class Invitation extends Component {
                         <h2 className="subheading noBackground">You have been invited to {this.state.title}</h2>
                         
                     </div>
-                    {!this.state.isLogggedIn && 
-                    <button onClick={this.Login} className="submitbutton">
-                        Sign In with Google
-                    </button>
+                    {!this.state.isLogggedIn &&
+                    <img src={login} alt="login" className="login" onClick={this.Login}></img>
                     }
                     {this.state.isLogggedIn &&
                     <button onClick={this.addToEventList} className="submitbutton">

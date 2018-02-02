@@ -102,6 +102,7 @@
     border-radius: 0.8em;
     background-color: #efefef;
     overflow-wrap: break-word;
+    border-radius: 0.5em;
 }
 
 .note{
