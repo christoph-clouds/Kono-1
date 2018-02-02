@@ -76,48 +76,50 @@ export default class Event extends Component {
 
 	render () {
 		return(
-			<div className="eventmenu pagecontent">
-				<h1 className="heading">{this.state.title} </h1>
-				
-				
-				<Link className="menubutton details" to={`/events/${this.props.match.params.eventid}/details`} >
-				          Details
-			   	</Link>
+			<div className="pagecontent">
+				<div className="eventmenu">
+					<h1 className="heading">{this.state.title} </h1>
 
 
-				<Link className="menubutton inventory" to={`/events/${this.props.match.params.eventid}/inventory`} >
-				          Inventory
-			   	</Link>
+					<Link className="menubutton details" to={`/events/${this.props.match.params.eventid}/details`} >
+						Details
+					</Link>
 
-				<Link className="menubutton guests" to={`/events/${this.props.match.params.eventid}/guests`} >
-				          Guests
-			   	</Link>
 
-				<div className="eventmenufooter">
-					{(this.state.isHost && !this.state.editView) &&
-                    	<div>
-	                    	<p className="subheading">{this.state.hostMessage}</p>
-	                    	<div className="edit" onClick={this.editHostMessage}> edit </div>
-                		</div>
-                	}
-                	{!this.state.isHost &&
-	                	<p className="subheading">{this.state.hostMessage}</p>
-                	}
-                	{this.state.editView &&
-                		<div>
-                			<form onSubmit={this.handleSubmit}>
-	                            <input name="hostMessage" className="formitem" value={this.state.hostMessage}
-	                                   onChange={this.handleChange} type="text"
-	                                   maxLength="30" required/>
-	                            <button id="button" type="submit" className="submitbutton" value="Submit">Save</button>
-                        	</form>
-                		</div>
-                	}
+					<Link className="menubutton inventory" to={`/events/${this.props.match.params.eventid}/inventory`} >
+						Inventory
+					</Link>
+
+					<Link className="menubutton guests" to={`/events/${this.props.match.params.eventid}/guests`} >
+						Guests
+					</Link>
+
+					<div className="eventmenufooter">
+                        {(this.state.isHost && !this.state.editView) &&
+						<div>
+							<p className="subheading">{this.state.hostMessage}</p>
+							<div className="edit" onClick={this.editHostMessage}> edit </div>
+						</div>
+                        }
+                        {!this.state.isHost &&
+						<p className="subheading">{this.state.hostMessage}</p>
+                        }
+                        {this.state.editView &&
+						<div>
+							<form onSubmit={this.handleSubmit}>
+								<input name="hostMessage" className="formitem" value={this.state.hostMessage}
+									   onChange={this.handleChange} type="text"
+									   maxLength="30" required/>
+								<button id="button" type="submit" className="submitbutton" value="Submit">Save</button>
+							</form>
+						</div>
+                        }
+					</div>
 				</div>
 				<Link className="back" to={`/events/`} >
-                    <img src={backArrow} alt="back" className="backIcon"></img>
-                </Link>
-		    </div>
+					<img src={backArrow} alt="back" className="backIcon"></img>
+				</Link>
+			</div>
 		);
 	}
 }

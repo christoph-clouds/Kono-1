@@ -196,7 +196,7 @@ export default class Guests extends Component {
 		                    	<div className="hostPart">
 									<div className="horizontallyAligned">
 										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-										<h2 className="heading">{this.state.profileHostName}</h2>
+										<h2 className="heading">The Host {this.state.profileHostName}</h2>
 									</div>
 									<div className="horizontallyAligned">
 										<p className="subheading marginright">"{this.state.hostMessage}"</p>
@@ -208,7 +208,7 @@ export default class Guests extends Component {
 							<div className="hostPart">
 								<div className="horizontallyAligned">
 									<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-									<h2 className="heading">{this.state.profileHostName}</h2>
+									<h2 className="heading">The Host {this.state.profileHostName}</h2>
 								</div>
 								<p className="subheading">"{this.state.hostMessage}"</p>
 							</div>
@@ -224,30 +224,28 @@ export default class Guests extends Component {
 		                		</div>
 		                	}
 						</div>
-						{!this.state.isHost &&
-                            <div className="editEntry"
-							onClick={() => this.switchToEditViewGuests()}>edit</div>
+						{(!this.state.isHost && !this.state.editViewGuests) &&
+                            <button className="submitbutton smallerpadding"
+							onClick={() => this.switchToEditViewGuests()}>Edit my Information</button>
                         }
                         {this.state.editViewGuests &&
                         	<div className="editViewForGuests">
-                        		<h2> here you can change your properties </h2>
                         		<form onSubmit={this.handleSubmitGuests}>
-                        			<CheckboxGroup
-								        name="props"
-								        onChange={this.handleChangeGuests}>
-								 
-								        <label>
-								        	drives
+                        			<CheckboxGroup name="props" onChange={this.handleChangeGuests} className="rightalignedList notreversed">
+										<h2 className="subheading">Edit your Details</h2>
+								        <label className="horizontallyAligned checkoption">
+											<p className="checkboxlabel">I'm driving and can offer a ride</p>
 								        	<input
 									            name="drives"
 									            type="checkbox"
 									            ref="drives"
 									            value={this.state.drives}
 									            checked={this.state.drives}
+												className="guestinformationCheckbox"
 									            onChange={this.handleChangeGuests} />
 										</label>
-								        <label>
-								        	has Bed
+								        <label className="horizontallyAligned checkoption">
+											<p className="checkboxlabel">I can offer a place to sleep</p>
 								        	<input
 									            name="hasbed"
 									            type="checkbox"
@@ -256,8 +254,8 @@ export default class Guests extends Component {
 									            checked={this.state.hasbed}
 									            onChange={this.handleChangeGuests} />
 										</label>
-										<label>
-								        	has Gift
+										<label className="horizontallyAligned checkoption">
+											<p className="checkboxlabel">I have a present others can join in</p>
 								        	<input
 									            name="hasgift"
 									            type="checkbox"
@@ -271,7 +269,7 @@ export default class Guests extends Component {
                         		</form>
                         	</div>
                         }
-	                    <div>
+	                    <div className="guestListArea">
 	                        <ul>
 	                            {this.state.guests.map((prop) => {
 	                                return (
