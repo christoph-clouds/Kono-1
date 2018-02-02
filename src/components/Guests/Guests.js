@@ -32,7 +32,6 @@ export default class Guests extends Component {
     	this.editHostMessage = this.editHostMessage.bind(this);
 		this.handleSubmitHostM = this.handleSubmitHostM.bind(this);
 		this.handleSubmitGuests = this.handleSubmitGuests.bind(this);
-	    this.changeProps = this.changeProps.bind(this);
 	    this.removeGuest = this.removeGuest.bind(this);
 	    this.switchToEditViewGuests = this.switchToEditViewGuests.bind(this);
 	    this.exitEditViewGuests = this.exitEditViewGuests.bind(this);
@@ -124,21 +123,6 @@ export default class Guests extends Component {
 		GuestListRef.child(id).remove();
 	}
 
-	changeProps(event){
-		/*if(sessionStorage.curUser != "null"){
-			event.preventDefault();
-			let currentEvent = this.props.match.params.eventid;
-			let InventoryListRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory');
-			var newItem = InventoryListRef.push();
-			  	newItem.set({
-			    	type: 	event.target.what.value,
-					amount: event.target.amount.value,
-					price: 	event.target.price.value,
-					buyer:  sessionStorage.curUser
-			  	});
-		}*/
-	}
-
 	handleSubmitHostM(event){
 		if(sessionStorage.curUser !== "null"){
 			event.preventDefault();
@@ -156,16 +140,16 @@ export default class Guests extends Component {
 
 	handleSubmitGuests(event) {
 		var user = firebaseApp.auth().currentUser;
-		console.log(user);
+		console.log("user "+ user.uid);
 		if (user != null) {
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
 			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser + '/');
-			console.log(updateGuest)	
+			console.log("drives "+ this.state.drives);	
 			updateGuest.update({
-			    drives: event.target.drives.value,
-			    hasbed: event.target.hasbed.value,
-			    hasgift: event.target.hasgift.value
+			    drives: 	this.state.drives,
+			    hasbed: 	this.state.hasbed,
+			    hasgift: 	this.state.hasgift
   			});	
   			this.exitEditViewGuests();
 		}
@@ -280,8 +264,6 @@ export default class Guests extends Component {
 									            onChange={this.handleChangeGuests} />
 										</label>
 							      	</CheckboxGroup>
-
-
                         			<button id="button" type="submit" className="submitbutton smallerpadding" value="Submit" onClick={this.handleSubmitGuests} >Save Changes</button>
                         		</form>
                         	</div>
@@ -296,9 +278,15 @@ export default class Guests extends Component {
 												<div className="guestProperties">
 													<h3 className="heading">{prop.name} </h3>
 													<ul className="guestAttributeList">
-														<li>drives: {prop.drives}</li>
-														<li>has Bed: {prop.hasbed}</li>
-														<li>has Gift: {prop.hasgift}</li>
+														{this.state.drives && 
+															<li>drives</li>
+														}
+														{this.state.hasbed && 
+															<li>has bed</li>
+														}
+														{this.state.hasgift && 
+															<li>has gift</li>
+														}
 													</ul>
 												</div>
 											</div>

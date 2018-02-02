@@ -60,7 +60,7 @@ export default class Invitation extends Component {
             var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
                 name: firebaseApp.auth().currentUser.displayName,
                 profileImg: firebaseApp.auth().currentUser.photoURL,
-                drives: true,
+                drives: false,
                 hasgift: false,
                 hasbed: false
               });
