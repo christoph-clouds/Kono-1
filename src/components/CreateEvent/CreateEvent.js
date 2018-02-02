@@ -25,9 +25,11 @@ export default class CreateEvents extends Component {
   	}
 
   	handleSubmit(event) {
-  		let currentUser = sessionStorage.curUser;
+
 		event.preventDefault();
-		if(currentUser != "null" && currentUser != null){
+		var user = firebaseApp.auth().currentUser;
+
+		if (user != null) {
 			var newEvent = ref.push();  
 			newEvent.set({
 			    host: sessionStorage.curUser,

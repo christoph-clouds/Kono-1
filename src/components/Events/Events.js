@@ -20,7 +20,6 @@ export default class Events extends Component {
 
     componentDidMount = (events) => {
     	const currentUser = sessionStorage.curUser;
-					    let i = 0;
 
 		ref.on('value', (snapshot) => {
 		    let events = snapshot.val();
@@ -45,22 +44,12 @@ export default class Events extends Component {
 	  					let guests = snapshot.val();
 					    //let newStateGuests = [];
 						for (let guest in guests) {
-							console.log(guest);
+							//console.log(guest);
 		    				if(guest === currentUser){
 		    					console.log("inside if");
 
-		    					let guests = this.state.eventsGuest.slice();
-				    			
-				    			guests.push({
-							        id: 	event,
-							        title: 	events[event].title,
-							        date: 	events[event].date,
-							        host: 	events[event].host
-						    	});
-						    
 						    	this.setState({
-								   eventsGuest: guests
-								});
+									eventsGuest: [...this.state.eventsGuest, {id: event, title: events[event].title, date: events[event].date, host: events[event].host}]								});
 		    				}
 		    			}
 		    		});
@@ -106,10 +95,10 @@ export default class Events extends Component {
 	}
   	
 	render () {
-		const list = this.state.eventsGuest.map((item, i) => {
+		/*const list = this.state.eventsGuest.map((item, i) => {
 		      return <li key={i}>{item}</li>
 		    });
-		       console.log(this.state);
+		       console.log(this.state);*/
 	    return (
 			<section className="display-item pagecontent">
 		 		<div className="eventsHosted">

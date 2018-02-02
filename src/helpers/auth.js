@@ -10,8 +10,6 @@ export function signIn() {
       user = result.user;
       sessionStorage.curUser = user.uid;
       console.log(user.displayName + "logged in");
-      return user;
-
     });
   }
   else{
@@ -24,6 +22,6 @@ export function signOut() {
     console.log("signing out...");
     var errorMessage = error.message;
   });
-  sessionStorage.curUser = null;
-  console.log("logged out");
+  sessionStorage.removeItem('curUser');
+  console.log(sessionStorage.currentUser+ " logged out");
 }
