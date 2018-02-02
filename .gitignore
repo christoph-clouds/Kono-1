@@ -3,4 +3,9 @@ node_modules
 .DS_STORE
 
 .idea/
+
+
 .idea/workspace.xml
+
+
+build/
