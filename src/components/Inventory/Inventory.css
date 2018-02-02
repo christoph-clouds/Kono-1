@@ -205,6 +205,7 @@
 }
 
 .openInventoryFormButton{
+    margin-top: 1em;
     padding: 1em;
     border-color: #557037;
     border-style: solid;
@@ -225,4 +226,16 @@
 .centerpin{
     display: flex;
     justify-content: center;
+}
+
+.Inventory{
+    height: 22.5em;
+    background-color: #bed09f;
+}
+
+.drinklist{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 12em;
+    border-right: solid;
 }

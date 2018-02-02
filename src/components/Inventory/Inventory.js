@@ -193,8 +193,8 @@ export default class Inventory extends Component {
                         <div className="boozeStatus">
                             <img src={bottle} alt="bottle" className="milkbottle"></img>
                             <div className="boozelist">
-                                <h2 className="subheading"> Booze Status: {this.state.boozeStatus} </h2>
-                                <ul className="eventsList">
+                                <h2 className="subheading"> Booze Status:</h2>
+                                <ul className="eventsList drinklist">
                                     {this.state.items.map((item) => {
                                         return (
                                             <li className="inventoryentry" key={item.id}>

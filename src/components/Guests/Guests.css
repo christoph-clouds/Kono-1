@@ -49,3 +49,19 @@
 	width: 2em;
 	height: 2em;
 }
+.notreversed{
+	flex-direction: column;
+	padding-bottom: 1em;
+}
+
+.guestListArea{
+	border-top: solid;
+	margin-top: 1em;
+}
+
+.checkboxlabel{
+	padding-right: 1em;
+}
+.checkoption{
+	padding-top: 0.5em;
+}
