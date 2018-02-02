@@ -4,7 +4,7 @@ import './Guests.css'
 import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
 import Clipboard from 'react-clipboard.js'
-import Checkbox from '../CheckBox/CheckBox'
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
 export default class Guests extends Component {
 
@@ -15,16 +15,17 @@ export default class Guests extends Component {
 	      	currentItem: '',
 	      	username: '',
 	      	guests: [],
-	      	drives: '',
-	      	hasbed: '',
-	      	hasgift: '',
+	      	drives: false,
+	      	hasbed: false,
+	      	hasgift: false,
 	      	invitationLink: '',
 	      	hostMessage: "",
 			isHost: false,
 			editView: false,
 			profileHostImg: '',
 			profileHostName: '',
-			editViewGuests: false
+			editViewGuests: false,
+			props: [false, true, false]
 	    }
 	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
@@ -155,20 +156,21 @@ export default class Guests extends Component {
 
 	handleSubmitGuests(event) {
 		var user = firebaseApp.auth().currentUser;
-
+		console.log(user);
 		if (user != null) {
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
-			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser);	
+			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser + '/');
+			console.log(updateGuest)	
 			updateGuest.update({
-			    hasbed: event.target.title.value,
-			    drives: event.target.description.value,
-			    hasgift: event.target.location.value,
-			    date: event.target.date.value,
-			    time: event.target.time.value,
-			    theme: event.target.theme.value,
+			    drives: event.target.drives.value,
+			    hasbed: event.target.hasbed.value,
+			    hasgift: event.target.hasgift.value
   			});	
-  			this.props.history.push('./')
+  			this.exitEditViewGuests();
+		}
+		else{
+			console.log("user null");
 		}
   	}
 
@@ -180,7 +182,8 @@ export default class Guests extends Component {
   		});
   	}
 
-  	handleChangeGuests(event) {
+
+  	handleChangeGuests = (event) => {
 	    const target = event.target;
 	    const value = target.type === 'checkbox' ? target.checked : target.value;
 	    const name = target.name;
@@ -241,20 +244,45 @@ export default class Guests extends Component {
                         {this.state.editViewGuests &&
                         	<div className="editViewForGuests">
                         		<h2> here you can change your properties </h2>
+                        		<form onSubmit={this.handleSubmitGuests}>
+                        			<CheckboxGroup
+								        name="props"
+								        onChange={this.handleChangeGuests}>
+								 
+								        <label>
+								        	drives
+								        	<input
+									            name="drives"
+									            type="checkbox"
+									            ref="drives"
+									            value={this.state.drives}
+									            checked={this.state.drives}
+									            onChange={this.handleChangeGuests} />
+										</label>
+								        <label>
+								        	has Bed
+								        	<input
+									            name="hasbed"
+									            type="checkbox"
+									            ref="hasbed"
+									            value={this.state.hasbed}
+									            checked={this.state.hasbed}
+									            onChange={this.handleChangeGuests} />
+										</label>
+										<label>
+								        	has Gift
+								        	<input
+									            name="hasgift"
+									            type="checkbox"
+									            ref="hasgift"
+									            value={this.state.hasgift}									          
+									            checked={this.state.hasgift}
+									            onChange={this.handleChangeGuests} />
+										</label>
+							      	</CheckboxGroup>
 
 
-                        		<form>
-                        			<label>
-							          drives:
-							          <input
-							            name="drives"
-							            type="checkbox"
-							            checked={!this.state.drives}
-							            onChange={this.handleChange} />
-							        </label>
-
-
-                        			<button id="button" type="submit" className="submitbutton smallerpadding" value="Submit" onClick={this.exitEditViewGuests} >Save Changes</button>
+                        			<button id="button" type="submit" className="submitbutton smallerpadding" value="Submit" onClick={this.handleSubmitGuests} >Save Changes</button>
                         		</form>
                         	</div>
                         }
