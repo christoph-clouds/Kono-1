@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
 import Clipboard from 'react-clipboard.js'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import drives from '../../images/icons/drives.png'
+import hasgift from '../../images/icons/hasgift.png'
+import hasbed from '../../images/icons/hasbed.png'
 
 export default class Guests extends Component {
 
@@ -279,13 +282,13 @@ export default class Guests extends Component {
 													<h3 className="heading">{prop.name} </h3>
 													<ul className="guestAttributeList">
 														{this.state.drives && 
-															<li>drives</li>
+															<img src={drives} alt="back" className="guestIcon"></img>
 														}
 														{this.state.hasbed && 
-															<li>has bed</li>
+															<img src={hasbed} alt="back" className="guestIcon"></img>														
 														}
 														{this.state.hasgift && 
-															<li>has gift</li>
+															<img src={hasgift} alt="back" className="guestIcon"></img>														
 														}
 													</ul>
 												</div>
