@@ -71,7 +71,7 @@ export default class CreateEvents extends Component {
 
   	render () {
 	    return (
-	      <div className="inputfield formcontent">
+	      <div className="pagecontent formcontent">
 	        <h1 className="subtitle">Create New Event</h1>
 			<div className="heading eventform">
 				<form id="createEventForm" onSubmit={this.handleSubmit} >

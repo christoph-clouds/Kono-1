@@ -103,7 +103,7 @@ export default class CreateEvents extends Component {
   	render () {
 	    return (
 	    	<div className="pagecontent">
-			  <div className="inputfield formcontent">
+			  <div className="formcontent">
 				  <h1 className="title">Event Details</h1>
 					<div className="heading eventform">
 						{this.state.isHost &&
