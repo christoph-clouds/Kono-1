@@ -21,12 +21,24 @@ import {
 const RouterNav = () => (
   <Router>
     <div>
-      <ul>
-        <li><Link to="/create-event">Create Event</Link></li>
-        <li><Link to="/events">Events</Link></li>
-        <li><Link to="/logout" onClick={signOut}>Logout</Link></li>
-      </ul>
-
+      <header class="header">
+        <div class="burger-wrapper" onclick="dropDown()">
+          <div class="burger" id="burgerDrop"></div>
+        </div>
+          <nav id="navDrop">
+            <ul>
+              <li>
+                <Link to="/create-event">Create Event</Link>
+              </li>
+              <li>
+                <Link to="/events">Events</Link>
+              </li>
+              <li>
+                <Link to="/logout" onClick={signOut}>Logout</Link>
+              </li>
+            </ul>
+          </nav>
+      </header>
       <hr/>
       <Switch>
         <Route exact path="/" component={Login} />
