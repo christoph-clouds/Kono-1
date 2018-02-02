@@ -99,6 +99,7 @@
     list-style: none;
     padding: 0.5em;
     padding-top: 0em;
+    border-radius: 0.8em;
     background-color: #efefef;
     overflow-wrap: break-word;
 }
@@ -115,6 +116,7 @@
 
 .noteEntry{
     width: 90%;
+    color: #333;
 }
 
 .noteList{

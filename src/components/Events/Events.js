@@ -24,6 +24,7 @@ export default class Events extends Component {
 		ref.on('value', (snapshot) => {
 		    let events = snapshot.val();
 		    let newStateHost = [];
+		    let newStateGuests = [];
 		    for (let event in events) {
 		    	if(events[event].host === currentUser){
 		    		newStateHost.push({
@@ -32,9 +33,7 @@ export default class Events extends Component {
 				        date: 	events[event].date,
 				        host: 	events[event].host
 			    	});
-			    	this.setState({
-					   eventsHosted: newStateHost
-					});
+			    	
 			    }
 			    else{	
 		    		console.log("inside else");
@@ -42,20 +41,26 @@ export default class Events extends Component {
 		    		guestListRef.on('value', (snapshot) => {
 	  					
 	  					let guests = snapshot.val();
-					    //let newStateGuests = [];
+					    
 						for (let guest in guests) {
 							//console.log(guest);
 		    				if(guest === currentUser){
-		    					console.log("inside if");
-
-						    	this.setState({
-									eventsGuest: [...this.state.eventsGuest, {id: event, title: events[event].title, date: events[event].date, host: events[event].host}]								});
+		    					newStateGuests.push({
+						        id: 	event,
+						        title: 	events[event].title,
+						        date: 	events[event].date,
+						        host: 	events[event].host
+					    		});
 		    				}
 		    			}
 		    		});
 					    	
 			    }	
 			}
+			this.setState({
+				eventsHosted: newStateHost,
+				eventsGuest: newStateGuests
+			});
 		});
 
 		//iterate through events

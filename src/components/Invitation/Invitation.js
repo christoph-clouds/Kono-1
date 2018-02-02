@@ -14,7 +14,8 @@ export default class Invitation extends Component {
     this.addToEventList = this.addToEventList.bind(this)
 
     this.state = {
-      isLogggedIn: false
+      isLogggedIn: false,
+      title: 'an Event'
     }
   }
 
@@ -28,12 +29,23 @@ export default class Invitation extends Component {
   }
 
   componentDidMount(props) {
+    /*let ref = firebaseApp.database().ref('events/' + this.props.match.params.eventid);
+      let title;
+      ref.on('value', (snapshot) => {
+        title = snapshot.val().title;
+        this.setState({
+          title: title
+        })
+      });*/
+
     if(sessionStorage.curUser){
-      this.setState({
-        isLogggedIn: true
-      })
+      
+        this.setState({
+          isLogggedIn: true,
+        });
     }
     else{
+      //this.Login();
       this.setState({
         isLogggedIn: false
       })
@@ -46,6 +58,7 @@ export default class Invitation extends Component {
 
       let currentEvent = this.props.match.params.eventid;
       let ref = firebaseApp.database().ref('events/' + currentEvent);
+
       let host;
 
       ref.on('value', (snapshot) => {
@@ -82,8 +95,8 @@ export default class Invitation extends Component {
                 <div className="absoluteElements">
                     <h1 className="title noBackground">Aloha</h1>
                     <div className="logoutmessage">
-                        <h2 className="subheading noBackground">my dude</h2>
-                        <h1 className="heading noBackground">an Event</h1>
+                        <h2 className="subheading noBackground">You have been invited to {this.state.title}</h2>
+                        
                     </div>
                     {!this.state.isLogggedIn && 
                     <button onClick={this.Login} className="submitbutton">

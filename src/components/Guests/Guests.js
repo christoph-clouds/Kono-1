@@ -4,6 +4,7 @@ import './Guests.css'
 import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
 import Clipboard from 'react-clipboard.js'
+import Checkbox from '../CheckBox/CheckBox'
 
 export default class Guests extends Component {
 
@@ -22,14 +23,18 @@ export default class Guests extends Component {
 			isHost: false,
 			editView: false,
 			profileHostImg: '',
-			profileHostName: ''
+			profileHostName: '',
+			editViewGuests: false
 	    }
 	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
     	this.editHostMessage = this.editHostMessage.bind(this);
 		this.handleSubmitHostM = this.handleSubmitHostM.bind(this);
+		this.handleSubmitGuests = this.handleSubmitGuests.bind(this);
 	    this.changeProps = this.changeProps.bind(this);
 	    this.removeGuest = this.removeGuest.bind(this);
+	    this.switchToEditViewGuests = this.switchToEditViewGuests.bind(this);
+	    this.exitEditViewGuests = this.exitEditViewGuests.bind(this);
   	}
 
   	componentDidMount() {
@@ -81,9 +86,31 @@ export default class Guests extends Component {
 			    	this.setState({
 						guests: GuestList
 					});
+					if(prop === sessionStorage.curUser){
+						console.log("match guestlist and currentUser");
+						this.setState({
+							drives: 	guests[prop].drives,
+							hasbed: 	guests[prop].hasbed,
+				        	hasgift: 	guests[prop].hasgift,
+						});
+					}
 			    }   
 		    }
 		});
+	}
+
+	switchToEditViewGuests(){
+		this.setState({
+			editViewGuests: true
+		})
+		console.log("edit Guest View");
+	}
+
+	exitEditViewGuests(){
+		this.setState({
+			editViewGuests: false
+		})
+		console.log("exit Guest View");
 	}
 
 	removeGuest(id){
@@ -126,12 +153,41 @@ export default class Guests extends Component {
         });
 	}
 
+	handleSubmitGuests(event) {
+		var user = firebaseApp.auth().currentUser;
+
+		if (user != null) {
+			event.preventDefault();
+			let currentEvent = this.props.match.params.eventid;
+			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser);	
+			updateGuest.update({
+			    hasbed: event.target.title.value,
+			    drives: event.target.description.value,
+			    hasgift: event.target.location.value,
+			    date: event.target.date.value,
+			    time: event.target.time.value,
+			    theme: event.target.theme.value,
+  			});	
+  			this.props.history.push('./')
+		}
+  	}
+
 	handleChange(event){
   		const name = event.target.name;
   		const value = event.target.value;
   		this.setState({
   			[name]: value
   		});
+  	}
+
+  	handleChangeGuests(event) {
+	    const target = event.target;
+	    const value = target.type === 'checkbox' ? target.checked : target.value;
+	    const name = target.name;
+
+	    this.setState({
+	      [name]: value
+	    });
   	}
 
   	editHostMessage(){
@@ -178,9 +234,33 @@ export default class Guests extends Component {
 		                		</div>
 		                	}
 						</div>
+						{!this.state.isHost &&
+                            <div className="editEntry"
+							onClick={() => this.switchToEditViewGuests()}>edit</div>
+                        }
+                        {this.state.editViewGuests &&
+                        	<div className="editViewForGuests">
+                        		<h2> here you can change your properties </h2>
+
+
+                        		<form>
+                        			<label>
+							          drives:
+							          <input
+							            name="drives"
+							            type="checkbox"
+							            checked={!this.state.drives}
+							            onChange={this.handleChange} />
+							        </label>
+
+
+                        			<button id="button" type="submit" className="submitbutton smallerpadding" value="Submit" onClick={this.exitEditViewGuests} >Save Changes</button>
+                        		</form>
+                        	</div>
+                        }
 	                    <div>
 	                        <ul>
-	                              {this.state.guests.map((prop) => {
+	                            {this.state.guests.map((prop) => {
 	                                return (
 	                                    <li className="guestListEntry" key={prop.id}>
 											<div className="guestInfo">
@@ -200,7 +280,7 @@ export default class Guests extends Component {
                                             }
 	                                    </li>
 	                                )
-	                              })}
+	                            })}
 	                        </ul>
 	                    </div>
                     </div>
