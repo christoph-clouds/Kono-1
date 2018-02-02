@@ -44,7 +44,6 @@ export default class CreateEvents extends Component {
 			    location: event.target.location.value,
 			    date: event.target.date.value,
 			    time: event.target.time.value,
-			    theme: event.target.theme.value,
 			    inventory: [""],
 			    wishlist: [""],
 			    boozeStatus: '0%'

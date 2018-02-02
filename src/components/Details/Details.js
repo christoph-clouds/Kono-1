@@ -95,6 +95,7 @@ export default class CreateEvents extends Component {
 		this.props.history.push('../')
 		let currentEvent = this.props.match.params.eventid;
 		ref.child(currentEvent).remove();
+		window.location.reload(); 
 	}
 
 

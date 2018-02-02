@@ -30,15 +30,6 @@ export default class Invitation extends Component {
   }
 
   componentDidMount(props) {
-    /*let ref = firebaseApp.database().ref('events/' + this.props.match.params.eventid);
-      let title;
-      ref.on('value', (snapshot) => {
-        title = snapshot.val().title;
-        this.setState({
-          title: title
-        })
-      });*/
-
     if(sessionStorage.curUser){
       
         this.setState({
@@ -69,10 +60,9 @@ export default class Invitation extends Component {
             var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
                 name: firebaseApp.auth().currentUser.displayName,
                 profileImg: firebaseApp.auth().currentUser.photoURL,
-                drives: "n",
-                hasgift: "n",
-                hasbed: "n",
-                host: "n"
+                drives: false,
+                hasgift: false,
+                hasbed: false
               });
               console.log("adding new guest" + currentUser);
               this.props.history.push('./')

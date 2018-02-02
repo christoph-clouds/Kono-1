@@ -4,7 +4,7 @@ import './Guests.css'
 import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
 import Clipboard from 'react-clipboard.js'
-import Checkbox from '../CheckBox/CheckBox'
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
 export default class Guests extends Component {
 
@@ -15,23 +15,23 @@ export default class Guests extends Component {
 	      	currentItem: '',
 	      	username: '',
 	      	guests: [],
-	      	drives: '',
-	      	hasbed: '',
-	      	hasgift: '',
+	      	drives: false,
+	      	hasbed: false,
+	      	hasgift: false,
 	      	invitationLink: '',
 	      	hostMessage: "",
 			isHost: false,
 			editView: false,
 			profileHostImg: '',
 			profileHostName: '',
-			editViewGuests: false
+			editViewGuests: false,
+			props: [false, true, false]
 	    }
 	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
     	this.editHostMessage = this.editHostMessage.bind(this);
 		this.handleSubmitHostM = this.handleSubmitHostM.bind(this);
 		this.handleSubmitGuests = this.handleSubmitGuests.bind(this);
-	    this.changeProps = this.changeProps.bind(this);
 	    this.removeGuest = this.removeGuest.bind(this);
 	    this.switchToEditViewGuests = this.switchToEditViewGuests.bind(this);
 	    this.exitEditViewGuests = this.exitEditViewGuests.bind(this);
@@ -123,21 +123,6 @@ export default class Guests extends Component {
 		GuestListRef.child(id).remove();
 	}
 
-	changeProps(event){
-		/*if(sessionStorage.curUser != "null"){
-			event.preventDefault();
-			let currentEvent = this.props.match.params.eventid;
-			let InventoryListRef = firebaseApp.database().ref('events/' + currentEvent + '/inventory');
-			var newItem = InventoryListRef.push();
-			  	newItem.set({
-			    	type: 	event.target.what.value,
-					amount: event.target.amount.value,
-					price: 	event.target.price.value,
-					buyer:  sessionStorage.curUser
-			  	});
-		}*/
-	}
-
 	handleSubmitHostM(event){
 		if(sessionStorage.curUser !== "null"){
 			event.preventDefault();
@@ -155,20 +140,21 @@ export default class Guests extends Component {
 
 	handleSubmitGuests(event) {
 		var user = firebaseApp.auth().currentUser;
-
+		console.log("user "+ user.uid);
 		if (user != null) {
 			event.preventDefault();
 			let currentEvent = this.props.match.params.eventid;
-			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser);	
+			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser + '/');
+			console.log("drives "+ this.state.drives);	
 			updateGuest.update({
-			    hasbed: event.target.title.value,
-			    drives: event.target.description.value,
-			    hasgift: event.target.location.value,
-			    date: event.target.date.value,
-			    time: event.target.time.value,
-			    theme: event.target.theme.value,
+			    drives: 	this.state.drives,
+			    hasbed: 	this.state.hasbed,
+			    hasgift: 	this.state.hasgift
   			});	
-  			this.props.history.push('./')
+  			this.exitEditViewGuests();
+		}
+		else{
+			console.log("user null");
 		}
   	}
 
@@ -180,7 +166,8 @@ export default class Guests extends Component {
   		});
   	}
 
-  	handleChangeGuests(event) {
+
+  	handleChangeGuests = (event) => {
 	    const target = event.target;
 	    const value = target.type === 'checkbox' ? target.checked : target.value;
 	    const name = target.name;
@@ -241,20 +228,43 @@ export default class Guests extends Component {
                         {this.state.editViewGuests &&
                         	<div className="editViewForGuests">
                         		<h2> here you can change your properties </h2>
-
-
-                        		<form>
-                        			<label>
-							          drives:
-							          <input
-							            name="drives"
-							            type="checkbox"
-							            checked={!this.state.drives}
-							            onChange={this.handleChange} />
-							        </label>
-
-
-                        			<button id="button" type="submit" className="submitbutton smallerpadding" value="Submit" onClick={this.exitEditViewGuests} >Save Changes</button>
+                        		<form onSubmit={this.handleSubmitGuests}>
+                        			<CheckboxGroup
+								        name="props"
+								        onChange={this.handleChangeGuests}>
+								 
+								        <label>
+								        	drives
+								        	<input
+									            name="drives"
+									            type="checkbox"
+									            ref="drives"
+									            value={this.state.drives}
+									            checked={this.state.drives}
+									            onChange={this.handleChangeGuests} />
+										</label>
+								        <label>
+								        	has Bed
+								        	<input
+									            name="hasbed"
+									            type="checkbox"
+									            ref="hasbed"
+									            value={this.state.hasbed}
+									            checked={this.state.hasbed}
+									            onChange={this.handleChangeGuests} />
+										</label>
+										<label>
+								        	has Gift
+								        	<input
+									            name="hasgift"
+									            type="checkbox"
+									            ref="hasgift"
+									            value={this.state.hasgift}									          
+									            checked={this.state.hasgift}
+									            onChange={this.handleChangeGuests} />
+										</label>
+							      	</CheckboxGroup>
+                        			<button id="button" type="submit" className="submitbutton smallerpadding" value="Submit" onClick={this.handleSubmitGuests} >Save Changes</button>
                         		</form>
                         	</div>
                         }
@@ -268,9 +278,15 @@ export default class Guests extends Component {
 												<div className="guestProperties">
 													<h3 className="heading">{prop.name} </h3>
 													<ul className="guestAttributeList">
-														<li>drives: {prop.drives}</li>
-														<li>has Bed: {prop.hasbed}</li>
-														<li>has Gift: {prop.hasgift}</li>
+														{this.state.drives && 
+															<li>drives</li>
+														}
+														{this.state.hasbed && 
+															<li>has bed</li>
+														}
+														{this.state.hasgift && 
+															<li>has gift</li>
+														}
 													</ul>
 												</div>
 											</div>
