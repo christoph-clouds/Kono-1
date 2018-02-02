@@ -14,10 +14,19 @@ export default class Login extends Component {
     this.Login = this.Login.bind(this)
   }
 
-  Login(){
-    signIn()
-    if(firebaseApp.auth().currentUser){
-      this.props.history.push('../events')
+  Login(props){
+    if(!sessionStorage.curUser){
+      signIn()
+      
+      firebaseApp.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.props.history.push('./welcome')
+        }
+      });
+      
+    }
+    else{
+      this.props.history.push('../welcome')
     }
   }
 

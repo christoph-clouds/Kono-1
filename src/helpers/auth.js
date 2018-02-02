@@ -10,6 +10,7 @@ export function signIn() {
       user = result.user;
       sessionStorage.curUser = user.uid;
       console.log(user.displayName + "logged in");
+      window.location.reload(); 
     });
   }
   else{
