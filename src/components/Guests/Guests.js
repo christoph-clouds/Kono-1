@@ -90,7 +90,7 @@ export default class Guests extends Component {
 		let guests = this.state.guests;
 		guests.splice(id, 1);
 		this.setState({guests: guests });
-		
+
 		let currentEvent = this.props.match.params.eventid;
 		let GuestListRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/');
 		GuestListRef.child(id).remove();

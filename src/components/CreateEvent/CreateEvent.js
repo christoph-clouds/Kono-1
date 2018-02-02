@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ref, firebaseApp} from '../../config/constants'
-import { Redirect } from 'react-router-dom'
+import { Redirect,  } from 'react-router-dom'
 import './CreateEvent.css';
 import Location from '../../images/icons/location.png';
 import Calendar from '../../images/icons/calendar.png';
@@ -20,18 +20,16 @@ export default class CreateEvents extends Component {
 	    	location: "",
   			date: "",
   			time: "",
-  			fireRedirectEvents: false,
-  			fireRedirectLogin: false
 	    }
 	    this.baseState = this.state;
   	}
 
   	handleSubmit(event) {
-  		let currentUser = sessionStorage.curUser;
-  		console.log("currentUser :   " +currentUser);
-		
-		if(currentUser != "null"){
-			event.preventDefault();
+
+		event.preventDefault();
+		var user = firebaseApp.auth().currentUser;
+
+		if (user != null) {
 			var newEvent = ref.push();  
 			newEvent.set({
 			    host: sessionStorage.curUser,
@@ -51,12 +49,12 @@ export default class CreateEvents extends Component {
 			    wishlist: [""],
 			    boozeStatus: '0%'
   			});	
-  			this.setState({ fireRedirectEvents: true })
+ 			this.props.history.push('/events')
   			this.resetForm()
 		}
 		else{
 			console.log("user isnt logged in");
-			this.setState({ fireRedirectLogin: true })
+ 			this.props.history.push('/login')
 		}
   	}
 
@@ -73,10 +71,6 @@ export default class CreateEvents extends Component {
   	}
 
   	render () {
-  		const { from } = this.props.location.state || '/'
-    	const { fireRedirectEvents } = this.state
-    	const { fireRedirectLogin } = this.state
-
 	    return (
 	      <div className="inputfield formcontent">
 	        <h1 className="subtitle">Create New Event</h1>
@@ -143,12 +137,6 @@ export default class CreateEvents extends Component {
 						<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
 					</div>
 				</form>
-				{fireRedirectEvents && (
-          		<Redirect to={from || '/events'}/>
-        	)}
-    		{fireRedirectLogin && (
-      			<Redirect to={from || '/login'}/>
-    		)}
 			</div>
 	      </div>
 	    )

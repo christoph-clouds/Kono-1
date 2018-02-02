@@ -27,7 +27,6 @@ export default class Inventory extends Component {
             listView: true,
             wishView: false
 	    }
-	    this.baseState = this.state;
     	this.handleChange = this.handleChange.bind(this);
 	    this.deleteItem = this.deleteItem.bind(this);
 	    this.deleteWish = this.deleteWish.bind(this);
@@ -97,7 +96,19 @@ export default class Inventory extends Component {
 		InventoryListRef.child(id).remove();
 	}
 
-	
+	resetItemForm = () => {
+  		this.setState({
+  			amount: '',
+	      	what: '',
+	      	price: ''
+  		})
+  	}
+
+  	resetWishForm = () => {
+  		this.setState({
+  			wish: ''
+  		})
+  	}
 
 	deleteWish(id){
 		let wishes = this.state.wishes;
@@ -127,6 +138,7 @@ export default class Inventory extends Component {
             standardView: !(this.state.standardView),
             formView: !(this.state.formView)
         });
+        this.resetItemForm();
 	}
 
 	handleChange(event){
@@ -152,6 +164,7 @@ export default class Inventory extends Component {
             listView: !(this.state.listView),
             wishView: !(this.state.wishView)
         })
+        this.resetWishForm();
 	}
 
     changeInventoryView(){
