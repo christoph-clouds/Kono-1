@@ -5,9 +5,6 @@ import './Logout.css';
 import background from '../../images/backgroundLogin.png'
 import login from '../../images/google login.png'
 
-
-
-
 export default class Login extends Component {
   constructor(props) {
     super(props)
