@@ -103,7 +103,7 @@ export default class CreateEvents extends Component {
 	    return (
 	    	<div className="pagecontent">
 			  <div className="inputfield formcontent">
-				  <h1 className="subtitle">Event Details</h1>
+				  <h1 className="title">Event Details</h1>
 					<div className="heading eventform">
 						{this.state.isHost &&
 						<div>
@@ -180,12 +180,21 @@ export default class CreateEvents extends Component {
 						</div>
 						}
 						{!this.state.isHost && 
-							<div>
-								<h3>{this.state.title} </h3>
-								<h3>{this.state.description}</h3>
-								<h3>{this.state.location} </h3>
-								<h3>{this.state.date}</h3>
-								<h3>{this.state.time} </h3>
+							<div className="descriptionGuestView">
+								<h3 className="subheading">{this.state.title} </h3>
+								<h3 className="descriptiontext">{this.state.desc}</h3>
+								<div className="horizontallyAligned descriptiontext">
+									<img src={Location} className="formicon" alt="location icon"></img>
+									<h3 className="">{this.state.location} </h3>
+								</div>
+								<div className="horizontallyAligned descriptiontext">
+									<img src={Calendar} className="formicon" alt="calendar icon"></img>
+									<h3>{this.state.date} </h3>
+								</div>
+								<div className="horizontallyAligned descriptiontext">
+									<img src={Time} className="formicon" alt="time icon"></img>
+									<h3>{this.state.time} </h3>
+								</div>
 							</div>
 						}
 					</div>
