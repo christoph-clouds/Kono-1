@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { firebaseApp } from '../../config/constants'
 import './Event.css'
+import backArrow from '../../images/icons/back.png'
 import { Link } from 'react-router-dom'
 
 export default class Event extends Component {
@@ -113,7 +114,9 @@ export default class Event extends Component {
                 		</div>
                 	}
 				</div>
-
+				<Link className="back" to={`/events/`} >
+                    <img src={backArrow} alt="back" className="backIcon"></img>
+                </Link>
 		    </div>
 		);
 	}
