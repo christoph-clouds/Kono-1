@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ref, firebaseApp} from '../../config/constants'
-import { Redirect,  } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import './CreateEvent.css';
 import Location from '../../images/icons/location.png';
 import Calendar from '../../images/icons/calendar.png';
@@ -19,7 +19,7 @@ export default class CreateEvents extends Component {
 	    	description: '',
 	    	location: "",
   			date: "",
-  			time: "",
+  			time: ""
 	    }
 	    this.baseState = this.state;
   	}
@@ -38,7 +38,7 @@ export default class CreateEvents extends Component {
 	          		profileImg: firebaseApp.auth().currentUser.photoURL
 			    },
 			   	mainMessage: "Aloha my friends",
-	          	guestMessage: "Feel free to invite others with the invitation Link",
+	          	guestMessage: "invite others :)",
 			    title: event.target.title.value,
 			    desc: event.target.description.value,
 			    location: event.target.location.value,
@@ -100,40 +100,15 @@ export default class CreateEvents extends Component {
 						<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime"/>
 					</div>
 
-					<div className="formelement">
-						<div>
-							<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" defaultChecked="true" id="pineapple"/>
-							<label htmlFor="pineapple">Pineapple</label>
-							<div className="theme">
-								<div className="p1 themecolors"></div>
-								<div className="p2 themecolors"></div>
-								<div className="p3 themecolors"></div>
-								<div className="p4 themecolors"></div>
-								<div className="p5 themecolors"></div>
-							</div>
-							<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" id="beach"/>
-							<label htmlFor="beach">Beach</label>
-							<div className="theme">
-								<div className="b1 themecolors"></div>
-								<div className="b2 themecolors"></div>
-								<div className="b3 themecolors"></div>
-								<div className="b4 themecolors"></div>
-								<div className="b5 themecolors"></div>
-							</div>
-							<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" id="tropic"/>
-							<label htmlFor="tropic">Tropic</label>
-							<div className="theme">
-								<div className="t1 themecolors"></div>
-								<div className="t2 themecolors"></div>
-								<div className="t3 themecolors"></div>
-								<div className="t4 themecolors"></div>
-								<div className="t5 themecolors"></div>
-							</div>
-						</div>
-					</div>
+					
 					<div className="buttonsWrapper">
-						<button onClick={this.resetForm} type="button" className="clearbutton">clear form</button>
 						<button id="button" type="submit" className="submitbutton" value="Submit">Create Event</button>
+						<div className="buttonsWrapper2">
+							<button onClick={this.resetForm} type="button" className="clearbutton">clear form</button>
+							<Link to={`/events`} >
+								<button  type="button" className="clearbutton">cancel</button>
+							</Link>
+						</div>
 					</div>
 				</form>
 			</div>

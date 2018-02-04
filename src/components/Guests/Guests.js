@@ -43,7 +43,7 @@ export default class Guests extends Component {
   	componentDidMount() {
     	const currentUser = firebaseApp.auth().currentUser;
     	let currentEvent = this.props.match.params.eventid;
-    	let invitationLink = "localhost:3000/events/"+currentEvent+"/invitation";
+    	let invitationLink = "https://kono-eb560.firebaseapp.com/events/"+currentEvent+"/invitation";
     	this.setState({
 			invitationLink: invitationLink
 		});

@@ -24,7 +24,7 @@ const RouterNav = () => (
   <Router>
     <div>
       <div className="container-fluid">
-          <SideBar />
+          
       </div>
       <hr/>
       <Switch>

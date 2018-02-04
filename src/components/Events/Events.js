@@ -32,8 +32,7 @@ export default class Events extends Component {
 				        title: 	events[event].title,
 				        date: 	events[event].date,
 				        host: 	events[event].host
-			    	});
-			    	
+			    	});  	
 			    }
 			    else{	
 		    		console.log("inside else");
@@ -142,6 +141,9 @@ export default class Events extends Component {
 				      	})}
 				    </ul>
 		  		</div>
+		  		<Link className="LinktoCE" to={`/create-event`} >
+					<button className="openInventoryFormButton" id="addItemButton">Create New Event</button>
+				</Link>
 			</section> 
     	); 
 	}
