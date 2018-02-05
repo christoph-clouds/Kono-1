@@ -45,9 +45,12 @@
 .margintop{
 	margin-top: 1em;
 }
+.hostPartMain{
+	padding-bottom: 2em;
+}
 .hostPart{
 	padding-top: 1.5em;
-	padding-bottom: 2em;
+	padding-bottom: 1em;
 }
 .guestIcon{
 	width: 2em;
@@ -80,4 +83,10 @@
 
 .guestMessage{
 	margin-top: 1.5em;
+}
+.editGuest{
+	margin-top: 2em;
+}
+.editViewForGuests{
+	margin-top: 2em;
 }

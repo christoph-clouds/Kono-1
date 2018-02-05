@@ -192,26 +192,20 @@ export default class Guests extends Component {
 				<div className="Guests">
                     <div>
 	                    <div>
-							{(this.state.isHost && !this.state.editView) &&
-		                    	<div className="hostPart">
-									<div className="horizontallyAligned">
-										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-										<h2 className="heading">{this.state.profileHostName}</h2>
-									</div>
-									<div className="horizontallyAligned">
-										<p className="subheading marginright">"{this.state.hostMessage}"</p>
-										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
-									</div>
-		                		</div>
-		                	}
-		                	{!this.state.isHost &&
-							<div className="hostPart">
+	                    	<div className="hostPart">
 								<div className="horizontallyAligned">
 									<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-									<h2 className="heading">{this.state.profileHostName}</h2>
+									<h2 className="heading">The Host {this.state.profileHostName}</h2>
 								</div>
+	                		</div>
+		                	{!this.state.isHost &&
 								<p className="subheading">"{this.state.hostMessage}"</p>
-							</div>
+		                	}
+		                	{(this.state.isHost && !this.state.editView) &&
+		                		<div className="horizontallyAligned">
+										<p className="subheading marginright">"{this.state.hostMessage}"</p>
+										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
+								</div>
 		                	}
 		                	{this.state.editView &&
 		                		<div>
@@ -225,7 +219,7 @@ export default class Guests extends Component {
 		                	}
 						</div>
 						{(!this.state.isHost && !this.state.editViewGuests) &&
-                            <button className="submitbutton smallerpadding"
+                            <button className="submitbutton smallerpadding editGuest"
 							onClick={() => this.switchToEditViewGuests()}>Edit my Information</button>
                         }
                         {this.state.editViewGuests &&

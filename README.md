@@ -1,3 +1,3 @@
 Kono
 
-by Lukas Seiwald & Christoph Mayer
+by Lukas Seiwald & Christoph Mayr
