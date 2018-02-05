@@ -43,7 +43,7 @@ export default class Guests extends Component {
   	componentDidMount() {
     	const currentUser = firebaseApp.auth().currentUser;
     	let currentEvent = this.props.match.params.eventid;
-    	let invitationLink = "https://kono-eb560.firebaseapp.com/events/"+currentEvent+"/invitation";
+    	let invitationLink = "localhost:3000/events/"+currentEvent+"/invitation";
     	this.setState({
 			invitationLink: invitationLink
 		});
@@ -196,9 +196,9 @@ export default class Guests extends Component {
 		                    	<div className="hostPart">
 									<div className="horizontallyAligned">
 										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-										<h2 className="heading">The Host {this.state.profileHostName}</h2>
+										<h2 className="heading">{this.state.profileHostName}</h2>
 									</div>
-									<div className="horizontallyAligned guestMessage">
+									<div className="horizontallyAligned">
 										<p className="subheading marginright">"{this.state.hostMessage}"</p>
 										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
 									</div>
@@ -208,18 +208,14 @@ export default class Guests extends Component {
 							<div className="hostPart">
 								<div className="horizontallyAligned">
 									<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-									<h2 className="heading">The Host {this.state.profileHostName}</h2>
+									<h2 className="heading">{this.state.profileHostName}</h2>
 								</div>
 								<p className="subheading">"{this.state.hostMessage}"</p>
 							</div>
 		                	}
 		                	{this.state.editView &&
-		                		<div className="hostPart">
-									<div className="horizontallyAligned">
-										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-										<h2 className="heading">The Host {this.state.profileHostName}</h2>
-									</div>
-		                			<form onSubmit={this.handleSubmitHostM} className="guestMessage">
+		                		<div>
+		                			<form onSubmit={this.handleSubmitHostM}>
 			                            <input name="hostMessage" className="formitem" value={this.state.hostMessage}
 			                                   onChange={this.handleChange} type="text"
 			                                   maxLength="70" required/>
@@ -238,17 +234,17 @@ export default class Guests extends Component {
                         			<CheckboxGroup name="props" onChange={this.handleChangeGuests} className="rightalignedList notreversed">
 										<h2 className="subheading">Edit your Details</h2>
 								        <label className="horizontallyAligned checkoption">
-											<p className="checkboxlabel">I'm driving and can offer a ride</p>
-								        	<input
+								 			<p className="checkboxlabel">I'm driving and can offer a ride</p>
+											<input
 									            name="drives"
 									            type="checkbox"
 									            ref="drives"
 									            value={this.state.drives}
 									            checked={this.state.drives}
-												className="guestinformationCheckbox"
 									            onChange={this.handleChangeGuests} />
-								
-											<p className="checkboxlabel">I can offer a place to sleep</p>
+										</label>
+								        <label className="horizontallyAligned checkoption">
+								        	<p className="checkboxlabel">I can offer a place to sleep</p>
 								        	<input
 									            name="hasbed"
 									            type="checkbox"
@@ -256,8 +252,9 @@ export default class Guests extends Component {
 									            value={this.state.hasbed}
 									            checked={this.state.hasbed}
 									            onChange={this.handleChangeGuests} />
-										
-											<p className="checkboxlabel">I have a present others can join in</p>
+										</label>
+										<label className="horizontallyAligned checkoption">
+								        	<p className="checkboxlabel">I have a present others can join in</p>
 								        	<input
 									            name="hasgift"
 									            type="checkbox"
