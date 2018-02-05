@@ -9,24 +9,15 @@ import Details from './components/Details/Details'
 import Inventory from './components/Inventory/Inventory'
 import Guests from './components/Guests/Guests'
 import Invitation from './components/Invitation/Invitation'
-import { signOut } from './helpers/auth'
-import SideBar from './helpers/navigation';
-
 import './App.css';
 import {
   BrowserRouter as Router,
   Route, 
-  Link,
   Switch
 } from 'react-router-dom'
 
 const RouterNav = () => (
   <Router>
-    <div>
-      <div className="container-fluid">
-          
-      </div>
-      <hr/>
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/create-event" component={CreateEvent} />
@@ -40,7 +31,6 @@ const RouterNav = () => (
         <Route exact path="/events/:eventid/guests" component={Guests} />
         <Route exact path="/events/:eventid/invitation" component={Invitation} />
       </Switch>   
-    </div>
   </Router>
 )
 

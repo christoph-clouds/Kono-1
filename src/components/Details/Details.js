@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ref, firebaseApp } from '../../config/constants'
-import { Redirect, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import './Details.css';
 import Location from '../../images/icons/location.png';
 import Calendar from '../../images/icons/calendar.png';

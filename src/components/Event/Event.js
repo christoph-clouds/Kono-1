@@ -31,7 +31,6 @@ export default class Event extends Component {
 						let eventTitle = snapshot.val().title;
 						let hostMessage = snapshot.val().mainMessage;
 						let host = snapshot.val().host;
-						console.log(host + "host und user: "+ user.uid);
 						if(host === user.uid){
 							this.setState({isHost: true});
 						}

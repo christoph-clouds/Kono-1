@@ -47,7 +47,7 @@ export default class Invitation extends Component {
           host = snapshot.val().host;
           
           if(user.uid !== host && host != null){
-            var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + user.uid).set({
+            firebaseApp.database().ref('events/' + currentEvent + '/guests/' + user.uid).set({
                 name: user.displayName,
                 profileImg: user.photoURL,
                 drives: false,

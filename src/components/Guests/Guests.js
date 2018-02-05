@@ -4,7 +4,7 @@ import './Guests.css'
 import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
 import Clipboard from 'react-clipboard.js'
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import {CheckboxGroup} from 'react-checkbox-group';
 import drives from '../../images/icons/drives.png'
 import hasgift from '../../images/icons/hasgift.png'
 import hasbed from '../../images/icons/hasbed.png'
@@ -41,9 +41,8 @@ export default class Guests extends Component {
   	}
 
   	componentDidMount() {
-    	const currentUser = firebaseApp.auth().currentUser;
     	let currentEvent = this.props.match.params.eventid;
-    	let invitationLink = "localhost:3000/events/"+currentEvent+"/invitation";
+    	let invitationLink = "https://kono-eb560.firebaseapp.com/events/"+currentEvent+"/invitation";
     	this.setState({
 			invitationLink: invitationLink
 		});
@@ -68,7 +67,7 @@ export default class Guests extends Component {
 			let profileImg = snapshot.val().profileImg;
 			this.setState({
 				profileHostName: name,
-				profileHostImg :profileImg
+				profileHostImg: profileImg
 			});
 		});	
 

@@ -14,13 +14,21 @@ export default class Events extends Component {
 	      currentItem: '',
 	      username: '',
 	      eventsHosted: [],
-	      eventsGuest: []
+	      eventsGuest: [],
+	      isLoggedIn: false,
+	      tryingLogout: false,
+	      profileImg: ''
 	    }
+	    this.tryingLogout = this.tryingLogout.bind(this);
 	}
 
     componentDidMount = (events) => {
     	firebaseApp.auth().onAuthStateChanged((user) => {
 		  	if (user) {
+		  		this.setState({
+		  			isLoggedIn: true,
+		  			profileImg: user.photoURL
+		  		});
 				ref.on('value', (snapshot) => {
 				    let events = snapshot.val();
 				    let newStateHost = [];
@@ -59,14 +67,34 @@ export default class Events extends Component {
 				});
 			}
 			else{
-				this.props.history.push('/login');
+				if(!(this.state.tryingLogout)){
+					this.props.history.push('/login');	
+				}
 			}
+		});
+	}
+
+	tryingLogout(){
+		this.setState({
+			tryingLogout: !(this.state.tryingLogout)
 		});
 	}
   	
 	render () {
 	    return (
 			<section className="display-item pagecontent">
+				<div className="logoutWrapper">
+				{this.state.tryingLogout &&
+					<Link className="LinktoLogout" to={`/logout`} >
+						<button className="clearbutton">Logout</button>
+					</Link>
+				}
+				{this.state.isLoggedIn &&
+					<div onClick={this.tryingLogout}>
+						<img className="profileImg" src={this.state.profileImg} alt="Profile Pic of the current logged in User"/>
+					</div>
+				}			
+				</div>
 		 		<div className="eventsHosted">
 		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
