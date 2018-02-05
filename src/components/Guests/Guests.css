@@ -82,7 +82,7 @@
 	margin-top: 1.5em;
 }
 
-input[type=checkbox] {
+/*input[type=checkbox] {
     display: none;
 }
 
@@ -108,4 +108,4 @@ input[type=checkbox]:checked:hover + label:before {
 }
 input[type=checkbox]:hover + label:before {
     background-color: #dedede;
-}
+}*/

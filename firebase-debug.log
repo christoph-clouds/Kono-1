@@ -1,48 +1,23 @@
-[debug] [2018-02-05T01:08:08.584Z] ----------------------------------------------------------------------
-[debug] [2018-02-05T01:08:08.586Z] Command:       /Users/nakama/.nvm/versions/node/v8.6.0/bin/node /Users/nakama/.nvm/versions/node/v8.6.0/bin/firebase deploy
-[debug] [2018-02-05T01:08:08.586Z] CLI Version:   3.17.4
-[debug] [2018-02-05T01:08:08.586Z] Platform:      darwin
-[debug] [2018-02-05T01:08:08.587Z] Node Version:  v8.6.0
-[debug] [2018-02-05T01:08:08.587Z] Time:          Mon Feb 05 2018 02:08:08 GMT+0100 (CET)
-[debug] [2018-02-05T01:08:08.587Z] ----------------------------------------------------------------------
+[debug] [2018-02-05T01:10:45.135Z] ----------------------------------------------------------------------
+[debug] [2018-02-05T01:10:45.137Z] Command:       /Users/nakama/.nvm/versions/node/v8.6.0/bin/node /Users/nakama/.nvm/versions/node/v8.6.0/bin/firebase deploy
+[debug] [2018-02-05T01:10:45.137Z] CLI Version:   3.17.4
+[debug] [2018-02-05T01:10:45.137Z] Platform:      darwin
+[debug] [2018-02-05T01:10:45.137Z] Node Version:  v8.6.0
+[debug] [2018-02-05T01:10:45.138Z] Time:          Mon Feb 05 2018 02:10:45 GMT+0100 (CET)
+[debug] [2018-02-05T01:10:45.138Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2018-02-05T01:08:08.600Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-02-05T01:08:08.600Z] > authorizing via signed-in user
-[debug] [2018-02-05T01:08:08.602Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2018-02-05T01:08:08.602Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- { refresh_token: '1/17S-9ujC82L6nUdCVg2zS7f09IH4PaaB9T680Ui8izw',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Mon Feb 05 2018 02:08:08 GMT+0100 (CET)
-[debug] [2018-02-05T01:08:08.797Z] <<< HTTP RESPONSE 200
-[debug] [2018-02-05T01:08:08.806Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/kono-eb560  
+[debug] [2018-02-05T01:10:45.149Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-05T01:10:45.149Z] > authorizing via signed-in user
+[debug] [2018-02-05T01:10:45.151Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/kono-eb560  
   
- Mon Feb 05 2018 02:08:08 GMT+0100 (CET)
-[debug] [2018-02-05T01:08:09.679Z] <<< HTTP RESPONSE 200
-[debug] [2018-02-05T01:08:09.680Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/kono-eb560/tokens  
+ Mon Feb 05 2018 02:10:45 GMT+0100 (CET)
+[debug] [2018-02-05T01:10:46.304Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-05T01:10:46.305Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/kono-eb560/tokens  
   
- Mon Feb 05 2018 02:08:09 GMT+0100 (CET)
-[debug] [2018-02-05T01:08:10.345Z] <<< HTTP RESPONSE 200
+ Mon Feb 05 2018 02:10:46 GMT+0100 (CET)
+[debug] [2018-02-05T01:10:47.130Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Deploying to 'kono-eb560'...
 [info] 
 [info] i  deploying database, storage, firestore, functions, hosting
 [info] Running command: npm --prefix $RESOURCE_DIR run lint
-[info] ✔  functions: Finished running predeploy script.
-[info] i  database: checking rules syntax...
-[debug] [2018-02-05T01:08:12.288Z] >>> HTTP REQUEST PUT https://kono-eb560.firebaseio.com/.settings/rules.json?dryRun=true  
- {
-  "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
-  }
-}
- 
- Mon Feb 05 2018 02:08:12 GMT+0100 (CET)
-[debug] [2018-02-05T01:08:13.157Z] <<< HTTP RESPONSE 200
-[info] ✔  database: rules syntax for database kono-eb560 is valid
-[debug] [2018-02-05T01:08:13.159Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/kono-eb560  
-  
- Mon Feb 05 2018 02:08:13 GMT+0100 (CET)
