@@ -22,23 +22,30 @@ export default class Event extends Component {
 
   	componentDidMount() {
   		let eventID = this.props.match.params.eventid;
-  		var user = firebaseApp.auth().currentUser;
-  		
-  		let eventRef = firebaseApp.database().ref('events/' + eventID ); 
-  		if(eventRef){
-  			eventRef.on("value", (snapshot)=>{
-				let eventTitle = snapshot.val().title;
-				let hostMessage = snapshot.val().mainMessage;
-				let host = snapshot.val().host;
-				if(host === sessionStorage.curUser){
-					this.setState({isHost: true});
-				}
-				this.setState({
-					title: eventTitle,
-					hostMessage: hostMessage
-				});
-			});	
-  		}
+
+  		firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+			  	let eventRef = firebaseApp.database().ref('events/' + eventID ); 
+		  		if(eventRef){
+		  			eventRef.on("value", (snapshot)=>{
+						let eventTitle = snapshot.val().title;
+						let hostMessage = snapshot.val().mainMessage;
+						let host = snapshot.val().host;
+						console.log(host + "host und user: "+ user.uid);
+						if(host === user.uid){
+							this.setState({isHost: true});
+						}
+						this.setState({
+							title: eventTitle,
+							hostMessage: hostMessage
+						});
+					});	
+		  		}
+			} 
+			else {
+		    this.props.history.push('/login')
+		  }
+		});
   	}
 
   	handleSubmit(event){

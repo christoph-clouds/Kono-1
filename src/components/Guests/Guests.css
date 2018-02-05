@@ -19,7 +19,11 @@
 }
 
 .guestProperties{
-	padding: 2em;
+	padding: 1em;
+}
+
+.guestName{
+	display:inline-block; 
 }
 
 .guestAttributeList{
@@ -64,4 +68,44 @@
 }
 .checkoption{
 	padding-top: 0.5em;
+}
+
+.copyclipboard{
+	float: right;
+}
+
+.guestDelete{
+	margin-right: 1em;
+}
+
+.guestMessage{
+	margin-top: 1.5em;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.checkoption input + label:before {
+    background-color: #fefefe;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #557037;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    content: "";
+    margin-top: -0.2em;
+    margin-right: 0.4em;
+    display: inline-block;
+    vertical-align: middle;
+}
+input[type=checkbox]:checked + label:before {
+    background-color: #789e4f;
+}
+input[type=checkbox]:checked:hover + label:before {
+    background-color: #789e4f;
+}
+input[type=checkbox]:hover + label:before {
+    background-color: #dedede;
 }

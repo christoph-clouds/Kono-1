@@ -17,44 +17,44 @@ export default class CreateEvents extends Component {
     	this.state = {
 	    	title: '',
 	    	description: '',
-	    	location: "",
-  			date: "",
-  			time: ""
+	    	location: '',
+  			date: '',
+  			time: ''
 	    }
 	    this.baseState = this.state;
   	}
 
   	handleSubmit(event) {
-
 		event.preventDefault();
-		var user = firebaseApp.auth().currentUser;
-
-		if (user != null) {
-			var newEvent = ref.push();  
-			newEvent.set({
-			    host: sessionStorage.curUser,
-			  	hostSpecial: {
-			  		name: firebaseApp.auth().currentUser.displayName,
-	          		profileImg: firebaseApp.auth().currentUser.photoURL
-			    },
-			   	mainMessage: "Aloha my friends",
-	          	guestMessage: "invite others :)",
-			    title: event.target.title.value,
-			    desc: event.target.description.value,
-			    location: event.target.location.value,
-			    date: event.target.date.value,
-			    time: event.target.time.value,
-			    inventory: [""],
-			    wishlist: [""],
-			    boozeStatus: '0%'
-  			});	
- 			this.props.history.push('/events')
-  			this.resetForm()
-		}
-		else{
-			console.log("user isnt logged in");
- 			this.props.history.push('/login')
-		}
+		firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+		  		console.log("title" + this.state.title);
+				var newEvent = ref.push();  
+				newEvent.set({
+				    host: user.uid,
+				  	hostSpecial: {
+				  		name: user.displayName,
+		          		profileImg: user.photoURL
+				    },
+				   	mainMessage: "Aloha",
+		          	guestMessage: "invite others :)",
+				    title: this.state.title,
+				    desc: this.state.description,
+				    location: this.state.location,
+				    date: this.state.date,
+				    time: this.state.time,
+				    inventory: [""],
+				    wishlist: [""],
+				    boozeStatus: '0%'
+	  			});	
+	 			this.props.history.push('/events')
+	  			this.resetForm()
+			}
+			else{
+				console.log("user isnt logged in");
+	 			this.props.history.push('/login')
+			}
+		});
   	}
 
   	handleChange(event){

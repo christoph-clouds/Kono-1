@@ -198,7 +198,7 @@ export default class Guests extends Component {
 										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
 										<h2 className="heading">The Host {this.state.profileHostName}</h2>
 									</div>
-									<div className="horizontallyAligned">
+									<div className="horizontallyAligned guestMessage">
 										<p className="subheading marginright">"{this.state.hostMessage}"</p>
 										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
 									</div>
@@ -214,8 +214,12 @@ export default class Guests extends Component {
 							</div>
 		                	}
 		                	{this.state.editView &&
-		                		<div>
-		                			<form onSubmit={this.handleSubmitHostM}>
+		                		<div className="hostPart">
+									<div className="horizontallyAligned">
+										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
+										<h2 className="heading">The Host {this.state.profileHostName}</h2>
+									</div>
+		                			<form onSubmit={this.handleSubmitHostM} className="guestMessage">
 			                            <input name="hostMessage" className="formitem" value={this.state.hostMessage}
 			                                   onChange={this.handleChange} type="text"
 			                                   maxLength="70" required/>
@@ -243,8 +247,7 @@ export default class Guests extends Component {
 									            checked={this.state.drives}
 												className="guestinformationCheckbox"
 									            onChange={this.handleChangeGuests} />
-										</label>
-								        <label className="horizontallyAligned checkoption">
+								
 											<p className="checkboxlabel">I can offer a place to sleep</p>
 								        	<input
 									            name="hasbed"
@@ -253,8 +256,7 @@ export default class Guests extends Component {
 									            value={this.state.hasbed}
 									            checked={this.state.hasbed}
 									            onChange={this.handleChangeGuests} />
-										</label>
-										<label className="horizontallyAligned checkoption">
+										
 											<p className="checkboxlabel">I have a present others can join in</p>
 								        	<input
 									            name="hasgift"
@@ -277,7 +279,7 @@ export default class Guests extends Component {
 											<div className="guestInfo">
 												<img className="profileImg" src={prop.profileImg} alt="profilepic"/>
 												<div className="guestProperties">
-													<h3 className="heading">{prop.name} </h3>
+													<h4 className="heading guestName">{prop.name} </h4>
 													<ul className="guestAttributeList">
 														{this.state.drives && 
 															<img src={drives} alt="back" className="guestIcon"></img>
@@ -292,7 +294,7 @@ export default class Guests extends Component {
 												</div>
 											</div>
                                             {this.state.isHost &&
-											<div className="deleteEntryX"
+											<div className="deleteEntryX guestDelete"
 												 onClick={() => this.removeGuest(prop.id)}></div>
                                             }
 	                                    </li>
@@ -302,7 +304,7 @@ export default class Guests extends Component {
 	                    </div>
                     </div>
 
-					<Clipboard className="submitbutton margintop" data-clipboard-text={this.state.invitationLink}>Copy Invitation Link</Clipboard>
+					<Clipboard className="submitbutton margintop copyclipboard" data-clipboard-text={this.state.invitationLink}>Copy Invitation Link</Clipboard>
                 </div>
 				<Link className="back" to={`/events/${this.props.match.params.eventid}`} >
 					<img src={backArrow} alt="back" className="backIcon"></img>

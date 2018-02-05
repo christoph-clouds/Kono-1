@@ -39,7 +39,7 @@ class Example extends React.Component {
       </div>
     );
   }
-}
+
  
   render () {
     return (

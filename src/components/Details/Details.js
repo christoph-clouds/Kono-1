@@ -57,25 +57,30 @@ export default class CreateEvents extends Component {
   	}
 
   	componentDidMount(props) {
-    	const currentUser = sessionStorage.curUser;
     	let currentEvent = this.props.match.params.eventid;
     	let detailsRef = firebaseApp.database().ref('events/' + currentEvent);
 
-		detailsRef.on('value', (snapshot) => {
-		    let information = snapshot.val();
+		firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+				detailsRef.on('value', (snapshot) => {
+				    let information = snapshot.val();
 
-		    if(information.host === sessionStorage.curUser){
-				this.setState({isHost: true});
+				    if(information.host === user.uid){
+						this.setState({isHost: true});
+					}
+			    	this.setState({
+						title: 		information.title,
+				        description:information.desc,
+				        location:	information.location,
+				        date: 		information.date,
+				        time: 		information.time,
+					}); 
+				});	
 			}
-	    	this.setState({
-				title: 		information.title,
-		        description: 		information.desc,
-		        location:	information.location,
-		        date: 		information.date,
-		        time: 		information.time,
-		        //theme:		information.theme,
-			}); 
-		});		
+			else{
+				this.props.history.push('../../login')
+			}
+		});	
 	}
 
 	askdeleteEvent(){
@@ -134,16 +139,14 @@ export default class CreateEvents extends Component {
 								
 								<div className="buttonsWrapper">
 									<button id="button" type="submit" className="submitbutton" value="Submit">Save Changes</button>
+									{!this.state.askIfDelete &&
+										<button className="clearbutton" onClick={this.askdeleteEvent}>Delete Event</button>
+									}
 								</div>
 							</form>
-							{!this.state.askIfDelete &&
-							<div className="warningBox">
-								<button className="clearbutton" onClick={this.askdeleteEvent}>Delete Event</button>
-							</div>
-							}
 							{this.state.askIfDelete &&
 								<div className="warningBox">
-									<h1 className="warningMessage">you are about to delete {this.state.title} </h1>
+									<h1 className="warningMessage">Are you sure you want to delete: {this.state.title} ?</h1>
 									<div>
 										<button className="clearbutton" onClick={this.deleteEvent}>Delete Event</button>
 										<button className="clearbutton cancelbutton" onClick={this.canceldeleteEvent}>Cancel</button>
