@@ -84,3 +84,27 @@
     border-bottom: solid;
     padding-top: 2em;
 }
+
+.LinktoCE{
+    float: right;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.logoutWrapper{
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.logoutWrapper div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logoutWrapper h1{
+    color: #333;
+}
+.LinktoLogout{
+    margin-top: 0.5em;
+    margin-right: 0.6em;
+}

@@ -14,98 +14,87 @@ export default class Events extends Component {
 	      currentItem: '',
 	      username: '',
 	      eventsHosted: [],
-	      eventsGuest: []
+	      eventsGuest: [],
+	      isLoggedIn: false,
+	      tryingLogout: false,
+	      profileImg: ''
 	    }
+	    this.tryingLogout = this.tryingLogout.bind(this);
 	}
 
     componentDidMount = (events) => {
-    	const currentUser = sessionStorage.curUser;
-
-		ref.on('value', (snapshot) => {
-		    let events = snapshot.val();
-		    let newStateHost = [];
-		    let newStateGuests = [];
-		    for (let event in events) {
-		    	if(events[event].host === currentUser){
-		    		newStateHost.push({
-				        id: 	event,
-				        title: 	events[event].title,
-				        date: 	events[event].date,
-				        host: 	events[event].host
-			    	});
-			    	
-			    }
-			    else{	
-		    		console.log("inside else");
-		    		let guestListRef = firebaseApp.database().ref('events/' + event + '/guests/');
-		    		guestListRef.on('value', (snapshot) => {
-	  					
-	  					let guests = snapshot.val();
-					    
-						for (let guest in guests) {
-							//console.log(guest);
-		    				if(guest === currentUser){
-		    					newStateGuests.push({
+    	firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+		  		this.setState({
+		  			isLoggedIn: true,
+		  			profileImg: user.photoURL
+		  		});
+				ref.on('value', (snapshot) => {
+				    let events = snapshot.val();
+				    let newStateHost = [];
+				    let newStateGuests = [];
+				    for (let event in events) {
+				    	if(events[event].host === user.uid){
+				    		newStateHost.push({
 						        id: 	event,
 						        title: 	events[event].title,
 						        date: 	events[event].date,
 						        host: 	events[event].host
-					    		});
-		    				}
-		    			}
-		    		});
-					    	
-			    }	
+					    	});  	
+					    }
+					    else{	
+				    		let guestListRef = firebaseApp.database().ref('events/' + event + '/guests/');
+				    		guestListRef.on('value', (snapshot) => {
+			  					let guests = snapshot.val();
+								for (let guest in guests) {
+				    				if(guest === user.uid){
+				    					newStateGuests.push({
+								        id: 	event,
+								        title: 	events[event].title,
+								        date: 	events[event].date,
+								        host: 	events[event].host
+							    		});
+				    				}
+				    			}
+				    		});
+							    	
+					    }	
+					}
+					this.setState({
+						eventsHosted: newStateHost,
+						eventsGuest: newStateGuests
+					});
+				});
 			}
-			this.setState({
-				eventsHosted: newStateHost,
-				eventsGuest: newStateGuests
-			});
+			else{
+				if(!(this.state.tryingLogout)){
+					this.props.history.push('/login');	
+				}
+			}
 		});
+	}
 
-		//iterate through events
-		/*ref.on('value', (snapshot) => {
-		  	snapshot.forEach((childSnapshot) =>{
-			    var childKeyEvent = childSnapshot.key;
-			    var childDataEventTitle = childSnapshot.val().title;
-			    var childDataEventDate = childSnapshot.val().date;
-
-			    let guestListRef = firebaseApp.database().ref('events/' + childKeyEvent + '/guests/');
-
-			    //iterate thorugh guests in event
-			    guestListRef.on('value', (snapshot) => {
-		  			snapshot.forEach((childSnapshot) => {
-		  			let eventsGuest = [];
-		  			var childKey = childSnapshot.key;
-			    	var childData = childSnapshot.val();
-
-			    	console.log(childKey+ "    event: "+ childKeyEvent + "   "+ childDataEventTitle + "   "+ childDataEventDate);
-			    	console.log("user brah: "+ currentUser);
-				    	if(childKey == currentUser){
-				    		console.log("ich kam rein");
-				    		eventsGuest.push({
-				    			id: 	childKeyEvent,
-				        		title: 	childDataEventTitle,
-				        		date: 	childDataEventDate
-					    	});
-					    	console.log(eventsGuest[0].id);
-				    	}
-				    	var arrayvar = this.state.eventsGuest.slice()
-						arrayvar.push(eventsGuest)
-						this.setState({ eventsGuest: arrayvar })
-		  			});
-		  		});
-		  	});
-		});*/
+	tryingLogout(){
+		this.setState({
+			tryingLogout: !(this.state.tryingLogout)
+		});
 	}
   	
 	render () {
-		/*const list = this.state.eventsGuest.map((item, i) => {
-		      return <li key={i}>{item}</li>
-		    });
-		       console.log(this.state);*/
 	    return (
 			<section className="display-item pagecontent">
+				<div className="logoutWrapper">
+				{this.state.tryingLogout &&
+					<Link className="LinktoLogout" to={`/logout`} >
+						<button className="clearbutton">Logout</button>
+					</Link>
+				}
+				{this.state.isLoggedIn &&
+					<div onClick={this.tryingLogout}>
+						<img className="profileImg" src={this.state.profileImg} alt="Profile Pic of the current logged in User"/>
+					</div>
+				}			
+				</div>
 		 		<div className="eventsHosted">
 		 			<h1 className="heading listtitle"> Events As Host </h1>
 				    <ul className="eventsList">
@@ -142,6 +131,9 @@ export default class Events extends Component {
 				      	})}
 				    </ul>
 		  		</div>
+		  		<Link className="LinktoCE" to={`/create-event`} >
+					<button className="openInventoryFormButton" id="addItemButton">Create New Event</button>
+				</Link>
 			</section> 
     	); 
 	}

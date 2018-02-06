@@ -33,4 +33,19 @@
   to { transform: rotate(360deg); }
 }
 
+#app {
+    font: 14px 'Roboto-Slab', Arial, sans-serif;
+    color: #4d4d4d;
+    min-width: 550px;
+    max-width: 850px;
+    margin: 0 auto;
+}
 
+a.active {
+    color: #bed09f;
+}
+
+nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

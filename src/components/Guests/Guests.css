@@ -19,7 +19,11 @@
 }
 
 .guestProperties{
-	padding: 2em;
+	padding: 1em;
+}
+
+.guestName{
+	display:inline-block; 
 }
 
 .guestAttributeList{
@@ -41,9 +45,12 @@
 .margintop{
 	margin-top: 1em;
 }
+.hostPartMain{
+	padding-bottom: 2em;
+}
 .hostPart{
 	padding-top: 1.5em;
-	padding-bottom: 2em;
+	padding-bottom: 1em;
 }
 .guestIcon{
 	width: 2em;
@@ -64,4 +71,22 @@
 }
 .checkoption{
 	padding-top: 0.5em;
+}
+
+.copyclipboard{
+	float: right;
+}
+
+.guestDelete{
+	margin-right: 1em;
+}
+
+.guestMessage{
+	margin-top: 1.5em;
+}
+.editGuest{
+	margin-top: 2em;
+}
+.editViewForGuests{
+	margin-top: 2em;
 }

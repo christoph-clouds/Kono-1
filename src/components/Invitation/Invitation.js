@@ -11,7 +11,6 @@ import login from '../../images/google login.png'
 export default class Invitation extends Component {
   constructor(props) {
     super(props)
-    this.Login = this.Login.bind(this)
     this.addToEventList = this.addToEventList.bind(this)
 
     this.state = {
@@ -20,34 +19,25 @@ export default class Invitation extends Component {
     }
   }
 
-  Login(){
-    if(!firebaseApp.auth().currentUser){
-      signIn()
-    }
-    else{
-      console.log("already logged in ready to add event");
-    }
-  }
-
   componentDidMount(props) {
-    if(sessionStorage.curUser){
-      
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if (user) {
         this.setState({
-          isLogggedIn: true,
+          isLogggedIn: true
         });
-    }
-    else{
-      //this.Login();
-      this.setState({
-        isLogggedIn: false
-      })
-    }
+      }
+      else{
+        this.setState({
+          isLogggedIn: false
+        });
+        signIn()
+      }
+    });
   }
 
   addToEventList(){
-    if(sessionStorage.curUser != null && sessionStorage.curUser != "null"){
-      let currentUser = sessionStorage.curUser;
-
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if (user) {
       let currentEvent = this.props.match.params.eventid;
       let ref = firebaseApp.database().ref('events/' + currentEvent);
 
@@ -56,25 +46,25 @@ export default class Invitation extends Component {
       ref.on('value', (snapshot) => {
           host = snapshot.val().host;
           
-          if(currentUser !== host && host != null){
-            var eventRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + currentUser).set({
-                name: firebaseApp.auth().currentUser.displayName,
-                profileImg: firebaseApp.auth().currentUser.photoURL,
+          if(user.uid !== host && host != null){
+            firebaseApp.database().ref('events/' + currentEvent + '/guests/' + user.uid).set({
+                name: user.displayName,
+                profileImg: user.photoURL,
                 drives: false,
                 hasgift: false,
                 hasbed: false
               });
-              console.log("adding new guest" + currentUser);
               this.props.history.push('./')
           }
           else{
             console.log("either host undefinied or, host tries to be guest");
           }
-      });
-    }
-    else{
-      console.log("user need to login first");
-    } 
+        });
+      }
+      else{
+        console.log("user need to login first");
+      } 
+    });
   }
 
   render () {

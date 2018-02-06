@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ref, firebaseApp } from '../../config/constants'
-import { Redirect, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import './Details.css';
 import Location from '../../images/icons/location.png';
 import Calendar from '../../images/icons/calendar.png';
@@ -42,9 +42,8 @@ export default class CreateEvents extends Component {
 			    desc: event.target.description.value,
 			    location: event.target.location.value,
 			    date: event.target.date.value,
-			    time: event.target.time.value,
-			    theme: event.target.theme.value,
-  			});	
+			    time: event.target.time.value
+			    });	
   			this.props.history.push('./')
 		}
   	}
@@ -58,25 +57,30 @@ export default class CreateEvents extends Component {
   	}
 
   	componentDidMount(props) {
-    	const currentUser = sessionStorage.curUser;
     	let currentEvent = this.props.match.params.eventid;
     	let detailsRef = firebaseApp.database().ref('events/' + currentEvent);
 
-		detailsRef.on('value', (snapshot) => {
-		    let information = snapshot.val();
+		firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+				detailsRef.on('value', (snapshot) => {
+				    let information = snapshot.val();
 
-		    if(information.host === sessionStorage.curUser){
-				this.setState({isHost: true});
+				    if(information.host === user.uid){
+						this.setState({isHost: true});
+					}
+			    	this.setState({
+						title: 		information.title,
+				        description:information.desc,
+				        location:	information.location,
+				        date: 		information.date,
+				        time: 		information.time,
+					}); 
+				});	
 			}
-	    	this.setState({
-				title: 		information.title,
-		        desc: 		information.desc,
-		        location:	information.location,
-		        date: 		information.date,
-		        time: 		information.time,
-		        //theme:		information.theme,
-			}); 
-		});		
+			else{
+				this.props.history.push('../../login')
+			}
+		});	
 	}
 
 	askdeleteEvent(){
@@ -132,50 +136,17 @@ export default class CreateEvents extends Component {
 									<img src={Time} className="formicon" alt="time icon"></img>
 									<input name="time" value={this.state.time} onChange={this.handleChange} type="time" className="inputfield" id="newEventTime"/>
 								</div>
-
-								<div className="formelement">
-									<div>
-										<input name="theme" value={this.state.pTheme} onChange={this.handleChange} type="radio" defaultChecked="true" id="pineapple"/>
-										<label htmlFor="pineapple">Pineapple</label>
-										<div className="theme">
-											<div className="p1 themecolors"></div>
-											<div className="p2 themecolors"></div>
-											<div className="p3 themecolors"></div>
-											<div className="p4 themecolors"></div>
-											<div className="p5 themecolors"></div>
-										</div>
-										<input name="theme" value={this.state.bTheme} onChange={this.handleChange} type="radio" id="beach"/>
-										<label htmlFor="beach">Beach</label>
-										<div className="theme">
-											<div className="b1 themecolors"></div>
-											<div className="b2 themecolors"></div>
-											<div className="b3 themecolors"></div>
-											<div className="b4 themecolors"></div>
-											<div className="b5 themecolors"></div>
-										</div>
-										<input name="theme" value={this.state.tTheme} onChange={this.handleChange} type="radio" id="tropic"/>
-										<label htmlFor="tropic">Tropic</label>
-										<div className="theme">
-											<div className="t1 themecolors"></div>
-											<div className="t2 themecolors"></div>
-											<div className="t3 themecolors"></div>
-											<div className="t4 themecolors"></div>
-											<div className="t5 themecolors"></div>
-										</div>
-									</div>
-								</div>
+								
 								<div className="buttonsWrapper">
 									<button id="button" type="submit" className="submitbutton" value="Submit">Save Changes</button>
+									{!this.state.askIfDelete &&
+										<button className="clearbutton" onClick={this.askdeleteEvent}>Delete Event</button>
+									}
 								</div>
 							</form>
-							{!this.state.askIfDelete &&
-							<div className="warningBox">
-								<button className="clearbutton" onClick={this.askdeleteEvent}>Delete Event</button>
-							</div>
-							}
 							{this.state.askIfDelete &&
 								<div className="warningBox">
-									<h1 className="warningMessage">you are about to delete {this.state.title} </h1>
+									<h1 className="warningMessage">Are you sure you want to delete: {this.state.title} ?</h1>
 									<div>
 										<button className="clearbutton" onClick={this.deleteEvent}>Delete Event</button>
 										<button className="clearbutton cancelbutton" onClick={this.canceldeleteEvent}>Cancel</button>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { firebaseApp } from '../../config/constants'
 import { signIn } from '../../helpers/auth'
 import './Login.css';
-import { Redirect } from 'react-router-dom'
 import logo from '../../images/Logo.png'
 import background from '../../images/backgroundLogin.png'
 import login from '../../images/google login.png'

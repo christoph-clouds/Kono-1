@@ -9,7 +9,6 @@ export function signIn() {
 
       user = result.user;
       sessionStorage.curUser = user.uid;
-      console.log(user.displayName + "logged in");
       window.location.reload(); 
     });
   }
@@ -21,8 +20,6 @@ export function signIn() {
 export function signOut() {
   firebaseApp.auth().signOut().then(function(){}).catch(function(error) {
     console.log("signing out...");
-    var errorMessage = error.message;
   });
   sessionStorage.removeItem('curUser');
-  console.log(sessionStorage.currentUser+ " logged out");
 }

@@ -4,7 +4,7 @@ import './Guests.css'
 import { Link } from 'react-router-dom'
 import backArrow from '../../images/icons/back.png'
 import Clipboard from 'react-clipboard.js'
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import {CheckboxGroup} from 'react-checkbox-group';
 import drives from '../../images/icons/drives.png'
 import hasgift from '../../images/icons/hasgift.png'
 import hasbed from '../../images/icons/hasbed.png'
@@ -41,9 +41,8 @@ export default class Guests extends Component {
   	}
 
   	componentDidMount() {
-    	const currentUser = firebaseApp.auth().currentUser;
     	let currentEvent = this.props.match.params.eventid;
-    	let invitationLink = "localhost:3000/events/"+currentEvent+"/invitation";
+    	let invitationLink = "https://kono-eb560.firebaseapp.com/events/"+currentEvent+"/invitation";
     	this.setState({
 			invitationLink: invitationLink
 		});
@@ -68,7 +67,7 @@ export default class Guests extends Component {
 			let profileImg = snapshot.val().profileImg;
 			this.setState({
 				profileHostName: name,
-				profileHostImg :profileImg
+				profileHostImg: profileImg
 			});
 		});	
 
@@ -192,26 +191,20 @@ export default class Guests extends Component {
 				<div className="Guests">
                     <div>
 	                    <div>
-							{(this.state.isHost && !this.state.editView) &&
-		                    	<div className="hostPart">
-									<div className="horizontallyAligned">
-										<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
-										<h2 className="heading">The Host {this.state.profileHostName}</h2>
-									</div>
-									<div className="horizontallyAligned">
-										<p className="subheading marginright">"{this.state.hostMessage}"</p>
-										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
-									</div>
-		                		</div>
-		                	}
-		                	{!this.state.isHost &&
-							<div className="hostPart">
+	                    	<div className="hostPart">
 								<div className="horizontallyAligned">
 									<img className="profileImg marginright" src={this.state.profileHostImg} alt="profilepic"/>
 									<h2 className="heading">The Host {this.state.profileHostName}</h2>
 								</div>
+	                		</div>
+		                	{!this.state.isHost &&
 								<p className="subheading">"{this.state.hostMessage}"</p>
-							</div>
+		                	}
+		                	{(this.state.isHost && !this.state.editView) &&
+		                		<div className="horizontallyAligned">
+										<p className="subheading marginright">"{this.state.hostMessage}"</p>
+										<button className="submitbutton smallerpadding" onClick={this.editHostMessage}> edit </button>
+								</div>
 		                	}
 		                	{this.state.editView &&
 		                		<div>
@@ -225,7 +218,7 @@ export default class Guests extends Component {
 		                	}
 						</div>
 						{(!this.state.isHost && !this.state.editViewGuests) &&
-                            <button className="submitbutton smallerpadding"
+                            <button className="submitbutton smallerpadding editGuest"
 							onClick={() => this.switchToEditViewGuests()}>Edit my Information</button>
                         }
                         {this.state.editViewGuests &&
@@ -234,18 +227,17 @@ export default class Guests extends Component {
                         			<CheckboxGroup name="props" onChange={this.handleChangeGuests} className="rightalignedList notreversed">
 										<h2 className="subheading">Edit your Details</h2>
 								        <label className="horizontallyAligned checkoption">
-											<p className="checkboxlabel">I'm driving and can offer a ride</p>
-								        	<input
+								 			<p className="checkboxlabel">I'm driving and can offer a ride</p>
+											<input
 									            name="drives"
 									            type="checkbox"
 									            ref="drives"
 									            value={this.state.drives}
 									            checked={this.state.drives}
-												className="guestinformationCheckbox"
 									            onChange={this.handleChangeGuests} />
 										</label>
 								        <label className="horizontallyAligned checkoption">
-											<p className="checkboxlabel">I can offer a place to sleep</p>
+								        	<p className="checkboxlabel">I can offer a place to sleep</p>
 								        	<input
 									            name="hasbed"
 									            type="checkbox"
@@ -255,7 +247,7 @@ export default class Guests extends Component {
 									            onChange={this.handleChangeGuests} />
 										</label>
 										<label className="horizontallyAligned checkoption">
-											<p className="checkboxlabel">I have a present others can join in</p>
+								        	<p className="checkboxlabel">I have a present others can join in</p>
 								        	<input
 									            name="hasgift"
 									            type="checkbox"
@@ -277,7 +269,7 @@ export default class Guests extends Component {
 											<div className="guestInfo">
 												<img className="profileImg" src={prop.profileImg} alt="profilepic"/>
 												<div className="guestProperties">
-													<h3 className="heading">{prop.name} </h3>
+													<h4 className="heading guestName">{prop.name} </h4>
 													<ul className="guestAttributeList">
 														{this.state.drives && 
 															<img src={drives} alt="back" className="guestIcon"></img>
@@ -292,7 +284,7 @@ export default class Guests extends Component {
 												</div>
 											</div>
                                             {this.state.isHost &&
-											<div className="deleteEntryX"
+											<div className="deleteEntryX guestDelete"
 												 onClick={() => this.removeGuest(prop.id)}></div>
                                             }
 	                                    </li>
@@ -302,7 +294,7 @@ export default class Guests extends Component {
 	                    </div>
                     </div>
 
-					<Clipboard className="submitbutton margintop" data-clipboard-text={this.state.invitationLink}>Copy Invitation Link</Clipboard>
+					<Clipboard className="submitbutton margintop copyclipboard" data-clipboard-text={this.state.invitationLink}>Copy Invitation Link</Clipboard>
                 </div>
 				<Link className="back" to={`/events/${this.props.match.params.eventid}`} >
 					<img src={backArrow} alt="back" className="backIcon"></img>
