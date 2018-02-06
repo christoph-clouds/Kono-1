@@ -17,7 +17,7 @@ export default class Login extends Component {
         <div>
             <div className="backgroundimage">
                 <img src={background} alt="background" className="palmimage"></img>
-                <div className="pagecontent">
+                <div>
                     <div className="absoluteElements">
                       <h1 className="aloha">Aloha</h1>
                       <Link className="submitbutton startscreenbutton alohabutton" to={"../events"} >
