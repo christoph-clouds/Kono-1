@@ -74,7 +74,7 @@ export default class Invitation extends Component {
                 <h1 className="title noBackground">Aloha</h1>
                 <h2 className="subheading noBackground logoutmessage">You have been invited to {this.state.title}</h2>
                 {!this.state.isLogggedIn &&
-                <img src={login} alt="login" className="login" onClick={this.Login}></img>
+                <img src={login} alt="loginbutton" className="login" onClick={this.Login}></img>
                 }
                 {this.state.isLogggedIn &&
                 <button onClick={this.addToEventList} className="submitbutton startscreenbutton">
