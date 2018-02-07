@@ -12,20 +12,27 @@ body {
 }
 
 
-.logo{
+.konologo{
     width: 15em;
     height: 15em;
     background-color: transparent;
     margin-bottom: 10em;
+    margin-top: 2em;
 }
-.absoluteElements{
+.centeredElements{
+    background-image: url('../../images/backgroundLogin.png');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
     position: absolute;
     display: flex;
     align-items: center;
     flex-direction: column;
-    top: 10%;
-    left: 10%;
-    right: 10%;
     background-color: transparent;
 }
 
@@ -35,8 +42,8 @@ body {
     width: 100%;
     height: 100%;
 }
-.palmimage{
-    width: 100%;
+.palmimage * {
+    background-color: transparent;
 }
 
 .startscreenbutton{
@@ -50,7 +57,7 @@ body {
     background-color: #bed09f;
 }
 
-.login{
+.loginbutton{
     background-color: transparent;
     width: 15em;
     height: auto;

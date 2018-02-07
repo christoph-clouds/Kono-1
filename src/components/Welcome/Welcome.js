@@ -2,17 +2,15 @@ import React, { Component } from 'react'
 import '../Login/Login.css';
 import './Welcome.css'
 import { Link} from 'react-router-dom'
-import background from '../../images/backgroundLogin.png'
 
 
 export default class Login extends Component {
   render () {
     return (
         <div>
-            <div className="backgroundimage">
-                <img src={background} alt="background" className="palmimage"></img>
+            <div>
                 <div>
-                    <div className="absoluteElements">
+                    <div className="centeredElements">
                       <h1 className="aloha">Aloha</h1>
                       <Link className="submitbutton startscreenbutton alohabutton" to={"../events"} >
                         My Events

@@ -30,12 +30,11 @@ export default class Login extends Component {
   render () {
     signOut();
     return (
-        <div className="backgroundimage">
-            <img src={background} alt="background" className="palmimage"></img>
-            <div className="pagecontent">
-                <div className="absoluteElements">
+        <div>
+            <div>
+                <div className="centeredElements">
                     <h1 className="subheading logoutmessage">You have been Logged Out</h1>
-                    <img src={login} alt="login" className="login" onClick={this.Login}></img>
+                    <img src={login} alt="login" className="loginbutton" onClick={this.Login}></img>
                 </div>
             </div>
         </div>

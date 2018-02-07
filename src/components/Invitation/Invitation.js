@@ -69,23 +69,18 @@ export default class Invitation extends Component {
 
   render () {
     return (
-        <div className="backgroundimage">
-            <img src={background} alt="background" className="palmimage"></img>
-            <div className="pagecontent">
-                <div className="absoluteElements">
-                    <h1 className="title noBackground">Aloha</h1>
-                    <div className="logoutmessage">
-                        <h2 className="subheading noBackground">You have been invited to {this.state.title}</h2>
-                    </div>
-                    {!this.state.isLogggedIn &&
-                    <img src={login} alt="login" className="login" onClick={this.Login}></img>
-                    }
-                    {this.state.isLogggedIn &&
-                    <button onClick={this.addToEventList} className="submitbutton startscreenbutton">
-                        Add Event to Your Event list
-                    </button>
-                    }
-                </div>
+        <div>
+            <div className="centeredElements">
+                <h1 className="title noBackground">Aloha</h1>
+                <h2 className="subheading noBackground logoutmessage">You have been invited to {this.state.title}</h2>
+                {!this.state.isLogggedIn &&
+                <img src={login} alt="login" className="login" onClick={this.Login}></img>
+                }
+                {this.state.isLogggedIn &&
+                <button onClick={this.addToEventList} className="submitbutton startscreenbutton">
+                    Add Event to Your Event list
+                </button>
+                }
             </div>
         </div>
     )
