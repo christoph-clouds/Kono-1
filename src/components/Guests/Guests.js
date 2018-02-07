@@ -41,63 +41,70 @@ export default class Guests extends Component {
   	}
 
   	componentDidMount() {
-    	let currentEvent = this.props.match.params.eventid;
-    	let invitationLink = "https://kono-eb560.firebaseapp.com/events/"+currentEvent+"/invitation";
-    	this.setState({
-			invitationLink: invitationLink
-		});
-    	let guestListRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/');
-    	let eventRef = firebaseApp.database().ref('events/' + currentEvent ); 
-    	let hostSpecialRef = firebaseApp.database().ref('events/' + currentEvent + '/hostSpecial' ); 
+  		firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+		    	let currentEvent = this.props.match.params.eventid;
+		    	let invitationLink = "https://kono-eb560.firebaseapp.com/events/"+currentEvent+"/invitation";
+		    	this.setState({
+					invitationLink: invitationLink
+				});
+		    	let guestListRef = firebaseApp.database().ref('events/' + currentEvent + '/guests/');
+		    	let eventRef = firebaseApp.database().ref('events/' + currentEvent ); 
+		    	let hostSpecialRef = firebaseApp.database().ref('events/' + currentEvent + '/hostSpecial' ); 
 
-		eventRef.on("value", (snapshot)=>{
-			let hostMessage = snapshot.val().guestMessage;
-			let host = snapshot.val().host;
+				eventRef.on("value", (snapshot)=>{
+					let hostMessage = snapshot.val().guestMessage;
+					let host = snapshot.val().host;
 
-			if(host === sessionStorage.curUser){
-				this.setState({isHost: true});
-			}
-			this.setState({
-				hostMessage: hostMessage
-			});
-		});	
-
-		hostSpecialRef.on("value", (snapshot)=>{
-			let name = snapshot.val().name;
-			let profileImg = snapshot.val().profileImg;
-			this.setState({
-				profileHostName: name,
-				profileHostImg: profileImg
-			});
-		});	
-
-		guestListRef.on('value', (snapshot) => {
-		    let guests = snapshot.val();
-		    let GuestList = [];
-		    for (let prop in guests) {
-		    	if(guests[prop]){
-		    		GuestList.push({
-		    			id: 		prop, 
-				        name: 		guests[prop].name,
-				        drives: 	guests[prop].drives,
-				        hasbed: 	guests[prop].hasbed,
-				        hasgift: 	guests[prop].hasgift,
-				        profileImg: guests[prop].profileImg,
-				        host: 		guests[prop].host
-			    	});
-			    	this.setState({
-						guests: GuestList
-					});
-					if(prop === sessionStorage.curUser){
-						console.log("match guestlist and currentUser");
-						this.setState({
-							drives: 	guests[prop].drives,
-							hasbed: 	guests[prop].hasbed,
-				        	hasgift: 	guests[prop].hasgift,
-						});
+					if(host === user.uid){
+						this.setState({isHost: true});
 					}
-			    }   
-		    }
+					this.setState({
+						hostMessage: hostMessage
+					});
+				});	
+
+				hostSpecialRef.on("value", (snapshot)=>{
+					let name = snapshot.val().name;
+					let profileImg = snapshot.val().profileImg;
+					this.setState({
+						profileHostName: name,
+						profileHostImg: profileImg
+					});
+				});	
+
+				guestListRef.on('value', (snapshot) => {
+				    let guests = snapshot.val();
+				    let GuestList = [];
+				    for (let prop in guests) {
+				    	if(guests[prop]){
+				    		GuestList.push({
+				    			id: 		prop, 
+						        name: 		guests[prop].name,
+						        drives: 	guests[prop].drives,
+						        hasbed: 	guests[prop].hasbed,
+						        hasgift: 	guests[prop].hasgift,
+						        profileImg: guests[prop].profileImg,
+						        host: 		guests[prop].host
+					    	});
+					    	this.setState({
+								guests: GuestList
+							});
+							if(prop === user.uid){
+								console.log("match guestlist and currentUser");
+								this.setState({
+									drives: 	guests[prop].drives,
+									hasbed: 	guests[prop].hasbed,
+						        	hasgift: 	guests[prop].hasgift,
+								});
+							}
+					    }   
+				    }
+				});
+			}
+			else{
+				console.log("not logged in");
+			}
 		});
 	}
 
@@ -141,23 +148,23 @@ export default class Guests extends Component {
 	}
 
 	handleSubmitGuests(event) {
-		var user = firebaseApp.auth().currentUser;
-		console.log("user "+ user.uid);
-		if (user != null) {
-			event.preventDefault();
-			let currentEvent = this.props.match.params.eventid;
-			var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + sessionStorage.curUser + '/');
-			console.log("drives "+ this.state.drives);	
-			updateGuest.update({
-			    drives: 	this.state.drives,
-			    hasbed: 	this.state.hasbed,
-			    hasgift: 	this.state.hasgift
-  			});	
-  			this.exitEditViewGuests();
-		}
-		else{
-			console.log("user null");
-		}
+		firebaseApp.auth().onAuthStateChanged((user) => {
+		  	if (user) {
+				event.preventDefault();
+				let currentEvent = this.props.match.params.eventid;
+				var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + user.uid + '/');
+				console.log("drives "+ this.state.drives);	
+				updateGuest.update({
+				    drives: 	this.state.drives,
+				    hasbed: 	this.state.hasbed,
+				    hasgift: 	this.state.hasgift
+	  			});	
+	  			this.exitEditViewGuests();
+			}
+			else{
+				console.log("user null");
+			}
+		});
   	}
 
 	handleChange(event){
