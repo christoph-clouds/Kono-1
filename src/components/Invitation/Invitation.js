@@ -3,7 +3,6 @@ import { firebaseApp } from '../../config/constants'
 import { signIn } from '../../helpers/auth'
 import './Invitation.css';
 //import { Redirect } from 'react-router-dom'
-import background from '../../images/backgroundLogin.png'
 import login from '../../images/google login.png'
 
 
@@ -12,6 +11,7 @@ export default class Invitation extends Component {
   constructor(props) {
     super(props)
     this.addToEventList = this.addToEventList.bind(this)
+    this.login = this.login.bind(this);
 
     this.state = {
       isLogggedIn: false,
@@ -67,6 +67,10 @@ export default class Invitation extends Component {
     });
   }
 
+  login(){
+    signIn();
+  }
+
   render () {
     return (
         <div>
@@ -74,12 +78,12 @@ export default class Invitation extends Component {
                 <h1 className="title noBackground">Aloha</h1>
                 <h2 className="subheading noBackground logoutmessage">You have been invited to {this.state.title}</h2>
                 {!this.state.isLogggedIn &&
-                <img src={login} alt="loginbutton" className="login" onClick={this.Login}></img>
+                  <img src={login} alt="login" className="loginbutton" onClick={this.login}></img>
                 }
                 {this.state.isLogggedIn &&
-                <button onClick={this.addToEventList} className="submitbutton startscreenbutton">
-                    Add Event to Your Event list
-                </button>
+                  <button onClick={this.addToEventList} className="submitbutton startscreenbutton">
+                      Add Event to Your Event list
+                  </button>
                 }
             </div>
         </div>

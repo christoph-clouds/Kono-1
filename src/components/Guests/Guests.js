@@ -150,7 +150,7 @@ export default class Guests extends Component {
 	handleSubmitGuests(event) {
 		firebaseApp.auth().onAuthStateChanged((user) => {
 		  	if (user) {
-				event.preventDefault();
+				//event.preventDefault();
 				let currentEvent = this.props.match.params.eventid;
 				var updateGuest = firebaseApp.database().ref('events/' + currentEvent + '/guests/' + user.uid + '/');
 				console.log("drives "+ this.state.drives);	
